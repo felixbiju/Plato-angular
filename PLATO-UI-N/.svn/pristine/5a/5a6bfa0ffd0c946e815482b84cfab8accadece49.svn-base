@@ -1,0 +1,174 @@
+{  
+"Viacom_jobkeys":  {
+"build_status":{
+    "graph_detail":[
+        {"data": [65, 59, 80, 81, 56, 55, 40,48, 40, 19, 86, 27, 90,65, 59], "label": "buildpassed"},
+      
+        {"data": [40,48, 40, 19, 86, 27, 40,86,18, 48, 77, 9, 100, 27, 40], "label": "buildnot_executed"}
+      ],
+      "graph_name":"buildsummery"
+},
+"dtf_status":{
+    "graph_detail":[
+  {"data": [65,59,80,40,12,45,30,48,40,90,10,89,42,78,15], "label": "duplicate"},
+  {"data": [28,48,40,45,30,48,40,90,10,89,42, 90,24,80,62], "label": "mismatched"},
+  {"data": [59, 80, 40,  80,62,85,62, 9, 100, 27, 40,55,18, 48, 77], "label": "error"} 
+],
+"graph_name":"dtfsummery"
+} ,
+
+ "fast_status":{
+    "graph_detail":[
+  {"data": [65, 59, 80, 81, 56, 55, 40,28, 48, 40, 19, 86, 27, 90,83], "label": "passed"},
+  {"data": [28, 48, 40, 19, 86, 27, 90,65, 59, 80, 81, 56, 55, 40,75], "label": "failed"},
+  {"data": [18, 48, 77, 9, 100, 27, 40,55,18, 48, 77, 9, 100, 27, 40], "label": "not_executed"}
+],
+"graph_name":"fastsummery"
+} ,
+"sonar_status":{
+    "graph_detail":[
+        {"data": [65, 59, 80, 81, 56, 55, 40,86, 27, 90,65, 59, 80, 81, 56], "label": "sonarpassed"},
+        {"data": [48,40,90,10,89,42,78,15,28, 48, 40, 19, 86, 27, 90], "label": "sonarfailed"}
+      
+      ],
+      "graph_name":"sonarsummery"
+}       
+
+},
+
+ "Viacom_job":[ 
+  {
+  "Build_no":"1",    
+  "build_status":"pass",
+  "dtf_status":"",
+  "fast_status":"pass",
+  "sonar_status":""
+
+   },
+  {
+  "Build_no":"2",
+ 
+  "build_status":"pass",
+  "dtf_status":"",
+  "fast_status":"pass",
+  "sonar_status":""
+
+      },
+  {
+      "Build_no":"3",
+   
+      "build_status":"pass",
+      "dtf_status":"",
+      "fast_status":"pass",
+      "sonar_status":""
+  
+      },
+  {
+  "Build_no":"4",
+
+  "build_status":"fail",
+  "dtf_status":"fail",
+  "fast_status":"pass",
+  "sonar_status":""
+
+   },
+  {
+  "Build_no":"5",
+  
+  "build_status":"fail",
+  "dtf_status":"fail",
+  "fast_status":"pass",
+  "sonar_status":""
+
+      },
+  {
+      "Build_no":"6",
+    
+      "build_status":"fail",
+      "dtf_status":"fail",
+      "fast_status":"pass",
+      "sonar_status":""
+   
+          },
+  {
+      "Build_no":"7",
+
+      "build_status":"fail",
+      "dtf_status":"fail",
+      "fast_status":"pass",
+      "sonar_status":""
+     
+          },
+  {
+  "Build_no":"8",
+
+  "build_status":"fail",
+  "dtf_status":"fail",
+  "fast_status":"pass",
+  "sonar_status":""
+
+      },
+  {
+  "Build_no":"9",
+ 
+  "build_status":"fail",
+  "dtf_status":"fail",
+  "fast_status":"pass",
+  "sonar_status":""
+
+      },
+  {
+  "Build_no":"10",
+
+  "build_status":"fail",
+  "dtf_status":"fail",
+  "fast_status":"pass",
+  "sonar_status":""
+
+      },
+  {
+      "Build_no":"11",
+    
+      "build_status":"pass",
+      "dtf_status":"",
+      "fast_status":"pass",
+      "sonar_status":""
+ 
+      },
+  {
+      "Build_no":"12",
+     
+      "build_status":"pass",
+      "dtf_status":"",
+      "fast_status":"pass",
+      "sonar_status":""
+  
+      },
+  {
+      "Build_no":"13",
+ 
+      "build_status":"pass",
+      "dtf_status":"pass",
+      "fast_status":"pass",
+      "sonar_status":"fail"
+   
+          },
+  {
+      "Build_no":"14",
+     
+      "build_status":"pass",
+      "dtf_status":"pass",
+      "fast_status":"pass",
+      "sonar_status":"fail"
+   
+          },
+  {
+  "Build_no":"15",
+
+  "build_status":"pass",
+  "dtf_status":"pass",
+  "fast_status":"pass",
+  "sonar_status":"fail"
+  
+   }
+  ]}

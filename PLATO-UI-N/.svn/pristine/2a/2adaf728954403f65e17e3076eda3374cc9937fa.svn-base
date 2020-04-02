@@ -1,0 +1,21 @@
+<div class="trend-report">
+  <div class="row">
+      <div class="col-md-12">
+          <mat-card class="card-table">
+              <table>
+                <tr>
+                  <th> </th>
+                  <th *ngFor="let label of trendChartLabels">{{label}}</th>
+                </tr>
+                <tr *ngFor="let rowData of tableTrend">
+                  <td>{{ rowData.scenario }}</td>  
+                  <td class="tableTD" *ngFor="let check of rowData.data">
+                    <div *ngIf="check == 'p'" style="margin: 0px auto; width: 10px; height: 10px; border-radius: 50%; background-color: #00C851;"></div>
+                    <div *ngIf="check == 'f'" style="margin: 0px auto; width: 10px; height: 10px; border-radius: 50%; background-color: #ff4444;"></div>
+                  </td>
+                </tr>
+              </table>  
+          </mat-card>
+      </div>
+    </div>
+</div>

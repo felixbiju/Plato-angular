@@ -1,0 +1,49 @@
+#modalContainer {
+    width: 30%;
+}
+
+.example-form {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+}
+
+.example-full-width {
+    width: 100%;
+}
+
+.checkboxAlign {
+    text-align: center;
+}
+
+.headerAlign {
+    text-align: left;
+}
+
+.plato_table td {
+    padding: 4px;
+    font-size: 12px !important;
+}
+
+.plato_table th {
+    padding: 4px;
+    font-size: 14px !important;
+}
+
+.top_bar_button /deep/ .mat-icon-button {
+    width: 28px !important;
+}
+
+.portfoliooptions {
+    width: 100%;
+    text-align: left;
+    color: #656363;
+    font-size: 13px !important;
+    font-family: "Segoe UI light", Verdana, sans-serif, Arial !important;
+    height: 40px;
+}
+
+.plato_table {
+  margin-top: 70px;
+  margin-left: 5px;
+}

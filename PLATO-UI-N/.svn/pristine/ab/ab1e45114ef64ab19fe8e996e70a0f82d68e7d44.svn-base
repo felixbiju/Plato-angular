@@ -1,0 +1,20 @@
+::ng-deep .mat-progress-bar-buffer {
+    background-color: rgb(169, 218, 191);
+}
+
+::ng-deep .mat-progress-bar-fill::after {
+    background-color: #183005;
+}
+.progress {
+    width: 50%;
+    height: 20px;
+    /* float: right; */
+    margin-top: 0.5%;
+    margin-right: 36px;
+    border: 1px solid #fff;
+    border-radius: 100px;
+    margin-bottom: 0 !important;
+}
+/* .taskmanager{
+    border:1px solid black;
+} */

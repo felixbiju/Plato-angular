@@ -1,0 +1,71 @@
+<div style="height: 90vh; margin-top: 5px;">
+    <div class="container-fluid">
+        <div class="col-md-12">
+            <div class="myheading">
+                <span class="mytitle">Applications</span>
+                <img class="min-max_button" (click)="hideandshowreport('apps')" src="../../assets/genral_icons/minus_sm.png"/>
+            </div>
+        </div>
+
+        <div class="row appRow" id="apps" style="display: block;">
+            <div class="col-md-12" style="padding-left: 45px;">
+                <div class="col-md-4" *ngFor="let application of applications">
+                    <mat-card class="example-card">
+                        <mat-card-header>
+                            <div mat-card-avatar style="margin-top: 6px;">
+                                <div class="dot-green" *ngIf="(application.status | lowercase) === 'running'"></div>
+                                <div class="dot-red" *ngIf="(application.status | lowercase) === 'stopped' || (application.status | lowercase) === null"></div>
+                            </div>
+                            <mat-card-title>{{ (application.name.length>40)? (application.name | slice:0:40)+'..':(application.name) }}</mat-card-title>
+                            <mat-card-subtitle>{{ (application.url.length>40)? (application.url | slice:0:40)+'..':(application.url) }}</mat-card-subtitle>
+                        </mat-card-header>
+                    </mat-card>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="myheading">
+                <span class="mytitle">Servers</span>
+                <img class="min-max_button" (click)="hideandshowreport('serv')" src="../../assets/genral_icons/minus_sm.png"/>
+            </div>
+        </div>
+        <div class="row appRow" id="serv" style="display: block;">
+            <div class="col-md-12" style="padding-left: 45px;">
+                <div class="col-md-4" *ngFor="let server of servers">
+                    <mat-card class="example-card">
+                    <mat-card-header>
+                        <div mat-card-avatar style="margin-top: 8px;">
+                            <div class="dot-green" *ngIf="(server.status | lowercase) === 'running'"></div>
+                            <div class="dot-red" *ngIf="(server.status | lowercase) === 'stopped' || (server.status | lowercase) === null"></div>
+                        </div>
+                        <mat-card-title>{{ (server.name.length>40)? (server.name | slice:0:40)+'..':(server.name) }}</mat-card-title>
+                        <mat-card-subtitle>{{ (server.ip.length>40)? (server.ip | slice:0:40)+'..':(server.ip) }} </mat-card-subtitle>
+                        </mat-card-header>
+                    </mat-card>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="myheading">
+                <span class="mytitle">Databases</span>
+                <img class="min-max_button" (click)="hideandshowreport('dbs')" src="../../assets/genral_icons/minus_sm.png"/>
+            </div>
+        </div>
+        <div class="row appRow" id="dbs" style="display: block;">
+            <div class="col-md-12" style="padding-left: 45px;">
+                <div class="col-md-4" *ngFor="let datbase of databases">
+                    <mat-card class="example-card">
+                        <mat-card-header>
+                            <div mat-card-avatar style="margin-top: 8px;">
+                                <div class="dot-green" *ngIf="(datbase.status | lowercase) === 'running'"></div>
+                                <div class="dot-red" *ngIf="(datbase.status | lowercase) === 'stopped' || (datbase.status | lowercase) === null"></div>
+                            </div>
+                            <mat-card-title>{{ (datbase.name.length>40)? (datbase.name | slice:0:40)+'..':(datbase.name) }}</mat-card-title>
+                            <mat-card-subtitle>{{ (datbase.url.length>40)? (datbase.url | slice:0:40)+'..':(datbase.url) }}</mat-card-subtitle>
+                        </mat-card-header>
+                    </mat-card>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

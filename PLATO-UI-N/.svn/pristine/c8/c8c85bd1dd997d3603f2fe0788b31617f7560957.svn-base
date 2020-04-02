@@ -1,0 +1,204 @@
+<div id="reportpopup" class="w3-modal modal-lg">
+  <div class="w3-modal-content w3-animate-zoom" id="modalContainer">
+    <header class="w3-container">
+      <a (click)="closeTableAndModal()" class="modal-close closebutton">
+        <svg viewBox="0 0 24 24">
+          <path d="M19 6.41l-1.41-1.41-5.59 5.59-5.59-5.59-1.41 1.41 5.59 5.59-5.59 5.59 1.41 1.41 5.59-5.59 5.59 5.59 1.41-1.41-5.59-5.59z"
+          />
+          <path d="M0 0h24v24h-24z" fill="none" />
+        </svg>
+      </a>
+      <h2 class="headingfont">{{'performance testing report'|uppercase}}</h2>
+    </header>
+    <div class="w3-container modal-content customScroll">
+      <div style="background: whitesmoke" >
+        <div style="margin:0% auto;border-bottom:1px solid #ccc;font-weight:500;">
+          <div style="padding: 2px 10px;margin: 1% auto;margin-left: 10px;font-size: 22px;font-weight: 500;background-color: transparent;display: inline-block;">{{tool_name |uppercase}}</div>
+          <div class="mychip"
+          *ngFor="let obj of newObj">
+              {{obj.label |titlecase }} : {{obj.value}}
+          </div>
+        </div>
+      </div>
+
+
+      <ng-container *ngFor="let eachtooldata of ToolData">
+        <ng-container *ngFor="let endtoends of eachtooldata.ToolReport ">
+          <ng-container *ngFor="let endtoend of endtoends | tool">
+            <ng-container *ngIf="endtoend.key === 'tabular_data'">
+              <table class="plato_table" id="{{endtoends.chart_name}}" style="display: none;">
+                <tr>
+                  <th  *ngFor="let endtoendth of endtoend.value[0] |tool; let i=index; ">
+                    <ng-container *ngFor="let endtoendth of endtoend.value[0][i] |tool ">
+                      <!-- {{endtoendth.key}} -->
+                      <div *ngIf="(endtoendth.key |lowercase) !== 'status'">{{endtoendth.key | uppercase}}</div>
+                      <div *ngIf="(endtoendth.key |lowercase) === 'status'" style="text-align: center;justify-content: center;">{{endtoendth.key | uppercase}}</div>
+                    </ng-container>
+                  </th>
+                </tr>
+                <tr *ngFor="let data of endtoend.value; let j = index"  >
+                  <td *ngFor="let endtoendtdhead of endtoend.value[0] |tool; let k=index; " width="10%">
+                    <ng-container *ngFor="let endtoendth of endtoend.value[j][k] |tool ">
+                      <ng-container *ngIf="(endtoendth.key| lowercase) !== 'status'">
+                        {{endtoendth.value}}
+                      </ng-container>
+                      <ng-container *ngIf="(endtoendth.key| lowercase) === 'status'">
+                        <div style="font-weight: bold;text-align: center;justify-content: center;color:green;"
+                        *ngIf="(endtoendth.value| lowercase) === 'true'">
+                          {{endtoendth.value | titlecase}}
+                        </div>
+                      </ng-container>
+                      <ng-container *ngIf="(endtoendth.key| lowercase) === 'status'">
+                        <div style="background-color: red;color: white;font-weight: bold;border-radius: 30px;text-align: center;justify-content: center;border: 1px solid #0000ff6b;"
+                        *ngIf="(endtoendth.value| lowercase) === 'false'">
+                            {{endtoendth.value | titlecase}}
+                        </div>
+                      </ng-container>
+                    </ng-container>
+                  </td>
+                </tr>
+            </table>
+          </ng-container>
+        </ng-container>
+      </ng-container>
+    </ng-container>
+  </div>
+  <footer class="w3-container">
+    <button class="btn mat-raised-button mat-primary" color="primary" mat-raised-button
+    onclick="document.getElementById('reportpopup').style.display='none'" (click)="hidetable()">
+      Close
+    </button>
+  </footer>
+  </div>
+</div>
+
+<!-- stacktrace popup -->
+<div id="stacktraceModal" class="w3-modal modal-lg myE2EModal">
+  <div class="w3-modal-content w3-animate-zoom" id="modalContainer">
+    <header class="w3-container">
+      <a (click)="closeModal('stacktraceModal')" class="modal-close closebutton">
+        <svg viewBox="0 0 24 24">
+          <path d="M19 6.41l-1.41-1.41-5.59 5.59-5.59-5.59-1.41 1.41 5.59 5.59-5.59 5.59 1.41 1.41 5.59-5.59 5.59 5.59 1.41-1.41-5.59-5.59z" />
+          <path d="M0 0h24v24h-24z" fill="none" />
+        </svg>
+      </a>
+      <h2 class="headingfont">{{error_details.tool_name |uppercase}} - StcakTrace</h2>
+    </header>
+    <div class="w3-container modal-content customScroll">
+      <div class="mySatckTraceDiv">
+        <p> <strong>Error Name: </strong> {{error_details?.name}}</p>
+        <p> <strong>Error Type: </strong>
+          {{error_details?.type}}
+          <span *ngIf="error_details?.type === null">null</span>
+        </p>
+        <p> <strong>Error Code: </strong> {{error_details?.code}}</p>
+        <p> <strong>Error Message: </strong> {{error_details?.msg}}</p>
+        <p> <strong>StackTrace: </strong> {{error_details?.stackTrace}}</p>
+      </div>
+    </div>
+    <footer class="w3-container">
+      <button class="btn mat-raised-button mat-primary" color="primary" mat-raised-button onclick="document.getElementById('reportpopup').style.display='none'"
+        (click)="closeModal('stacktraceModal')">
+        Close
+      </button>
+    </footer>
+  </div>
+</div>
+<!-- word cloud -->
+<!-- <div class="col-md-12 my-tool-card">
+    <div class="myheading">
+      <span class="mytitle"> Log Analyzer </span>
+      <img class="min-max_button" src="../../assets/genral_icons/minus_sm.png"/>
+      <a [href]="vykon_url" target="_blank" style="float: right;color: white !important;">Performance Monitoring</a>
+    </div>
+    <div class="col-md-12">
+      <div class="col-md-4">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Server Log</h5>
+            <hr>
+          </div>
+          <div id="chartIssues" ></div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Error Log</h5>
+            <hr>
+          </div>
+          <div id="chartError" ></div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">DB Log</h5>
+            <hr>
+          </div>
+          <div id="chartWarning" ></div>
+        </div>
+      </div>
+    </div>
+</div> -->
+
+
+<!-- GRAPH -->
+<div class="col-md-12 my-tool-card" *ngFor="let eachtooldata of ToolData">
+  <div class="myheading">
+    <span class="mytitle"> {{eachtooldata.tool_name}}</span>
+    <!-- <mat-icon class="min-max_button" (click)="hideandshowreport(eachtooldata.tool_name)">
+      list
+    </mat-icon> -->
+    <img class="min-max_button"
+    (click)="hideandshowreport(eachtooldata.tool_name)"
+    src="../../assets/genral_icons/minus_sm.png"
+     />
+     <a [href]="vykon_url" target="_blank" style="float: right;color: white !important;">Performance Monitoring</a>
+  </div>
+  <mat-card *ngIf="eachtooldata?.error_body" class="error-card">
+    <mat-card-header>
+      <mat-card-title>
+        <img alt="error" src="../../../../assets/genral_icons/error.png" class="img-responsive" />
+        Errors during the execution
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <p *ngIf="eachtooldata.error_body?.code !== null"><strong>Error Code:</strong> {{eachtooldata.error_body?.code}}</p>
+      <p *ngIf="eachtooldata.error_body?.name !== null"><strong>Error Name:</strong> {{eachtooldata.error_body?.name}}</p>
+      <p *ngIf="eachtooldata.error_body?.type !== null"><strong>Error Type:</strong> {{eachtooldata.error_body?.type}}</p>
+      <p *ngIf="eachtooldata.error_body?.type === null"><strong>Error Type:</strong> {{'null'}}</p>
+      <p *ngIf="eachtooldata.error_body?.message !== null"><strong>Message:</strong> {{eachtooldata.error_body?.error_message}}</p>
+      <!-- <p *ngIf="eachtooldata?.stackTrace"><strong>StackTrace:</strong></p> -->
+      <p class="note-para" (click)="openModal('stacktraceModal', eachtooldata)">
+        Click here for complete error details or goto log files / console.
+      </p>
+    </mat-card-content>
+  </mat-card>
+
+  <div id="{{eachtooldata.tool_name}}" style="display:block">
+    <ng-container *ngFor="let endtoends of eachtooldata.ToolReport ">
+        <mat-card *ngIf="endtoends?.report_url">
+            <iframe [src]="endtoends?.report_url | safe" width="100%" height="350" allowfullscreen frameBorder="0">Browser not compatible.</iframe>
+        </mat-card>
+        <mat-card *ngIf="!endtoends?.report_url"
+        class="row performancecard"
+        (click)="showtable(endtoends.chart_name,endtoends.chart_values,endtoends.chart_labels,endtoends)">
+          <h6 class="graphfont"> {{endtoends.chart_name | titlecase}}</h6>
+          <canvas
+          baseChart
+          [data]="endtoends.chart_values"
+          [labels]="endtoends.chart_labels"
+          [chartType]="pieChartType"
+          [colors]="pieChartColors"
+          [legend]="piechartlegend"
+          [options]="piechartoptions"
+          (chartHover)="chartHovered($event)"
+          (chartClick)="chartClicked($event)">
+          </canvas>
+        </mat-card>
+    </ng-container>
+
+  </div>
+</div>
+

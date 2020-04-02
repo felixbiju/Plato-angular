@@ -1,0 +1,37 @@
+<div class="myheading">
+  Impact Change
+</div>
+
+<div class="customScroll">
+  <mat-card class="myInputCard">
+    <mat-card-content class="myInputCardContent">
+        <mat-input-container class="input-full-width">
+          <textarea matInput placeholder="Commands to execute"
+          matTextareaAutosize matAutosizeMinRows="1" matAutosizeMaxRows="10"
+          [(ngModel)]="diatcommand"></textarea>
+        </mat-input-container>
+        <ng-container *ngFor="let component of screenPermission">
+          <ng-container *ngIf="component.name === 'Compare'">
+            <!-- <button mat-raised-button class="btn mat-raised-button mat-primary pull-right"
+            onclick="document.getElementById('abcd').style.display='block'"
+            (click)="getComparison()"
+            [ngStyle]="{'opacity':component.checked ? '0.5' : '1' }" [disabled]="component.checked">
+              Compare
+            </button> -->
+            <button mat-raised-button class="btn mat-raised-button mat-primary pull-right"
+            onclick="document.getElementById('abcd').style.display='block'"
+            (click)="getDIATForRSA(diatcommand)"
+            [ngStyle]="{'opacity':component.checked ? '0.5' : '1' }" [disabled]="component.checked">
+              Compare
+            </button>
+          </ng-container>
+        </ng-container>
+    </mat-card-content>
+  </mat-card>
+
+  <div *ngIf="(!compareddata && !showdata)">
+    <mat-spinner class="loaderdiv"></mat-spinner>
+  </div>
+
+  <div class="text-center" id="mydiv"></div>
+</div>

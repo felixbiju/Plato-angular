@@ -1,0 +1,350 @@
+{
+  "permissionData": [
+    {
+      "moduleName": "Dashboard Module",
+      "checked": false,
+      "screens": [
+        {
+          "screenName": "Dashboard Screen",
+          "checked": false,
+          "components": [
+            {
+              "name": "Full Page",
+              "checked": false
+            },
+            {
+              "name": "Create Build",
+              "checked": false
+            },
+            {
+              "name": "Delete Build",
+              "checked": false
+            },
+            {
+              "name": "Show Report",
+              "checked": false
+            }
+          ]
+        },
+        {
+          "screenName": "user details screen",
+          "checked": false,
+          "components": [
+            {
+              "name": "full page",
+              "checked": false
+            },
+            {
+              "name": "edit profile",
+              "checked": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "moduleName": "Project Module",
+      "checked": false,
+      "screens": [
+        {
+          "screenName": "Project Screen",
+          "checked": false,
+          "components": [
+            {
+              "name": "Full Page",
+              "checked": false
+            },
+            {
+              "name": "Create Build",
+              "checked": false
+            },
+            {
+              "name": "Build Configuration",
+              "checked": false
+            },
+            {
+              "name": "Environment Readiness",
+              "checked": false
+            },
+            {
+              "name": "Impact Change",
+              "checked": false
+            },
+            {
+              "name": "Execute Build",
+              "checked": false
+            },
+            {
+              "name": "Delete Build",
+              "checked": false
+            }
+          ]
+        },
+        {
+          "screenName": "Build Configuration Screen",
+          "checked": false,
+          "components": [
+            {
+              "name": "View Page",
+              "checked": false
+            },
+            {
+              "name": "Create Jobs",
+              "checked": false
+            },
+            {
+              "name": "Cancel All Changes",
+              "checked": false
+            },
+            {
+              "name": "Minimize Job Card",
+              "checked": false
+            },
+            {
+              "name": "Delete Job",
+              "checked": false
+            },
+            {
+              "name": "Report Configuration",
+              "checked": false
+            },
+            {
+              "name": "Tool Box",
+              "checked": false
+            }
+          ]
+        },
+        {
+          "screenName": "Environment Readiness Screen",
+          "checked": false,
+          "components": [
+            {
+              "name": "Full Page",
+              "checked": false
+            }
+          ]
+        },
+        {
+          "screenName": "Impact Change Screen",
+          "checked": false,
+          "components": [
+            {
+              "name": "Full Page",
+              "checked": false
+            },
+            {
+              "name": "compare",
+              "checked": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "moduleName": "Configuration Module",
+      "checked": true,
+      "screens": [
+        {
+          "screenName": "Portfolio Screen",
+          "checked": true,
+          "components": [
+            {
+              "name": "View Page",
+              "checked": false
+            },
+            {
+              "name": "Create Portfolio",
+              "checked": true
+            },
+            {
+              "name": "Edit Portfolio",
+              "checked": false
+            },
+            {
+              "name": "Delete Portfolio",
+              "checked": false
+            }
+          ]
+        },
+        {
+          "screenName": "Account Screen",
+          "checked": true,
+          "components": [
+            {
+              "name": "View Page",
+              "checked": false
+            },
+            {
+              "name": "Create Account",
+              "checked": false
+            },
+            {
+              "name": "Edit Account",
+              "checked": false
+            },
+            {
+              "name": "Delete Account",
+              "checked": false
+            },
+            {
+              "name": "Select Portfolio",
+              "checked": false
+            }
+          ]
+        },
+        {
+          "screenName": "Project Screen",
+          "checked": true,
+          "components": [
+            {
+              "name": "Full Page",
+              "checked": false
+            },
+            {
+              "name": "Select Portfolio",
+              "checked": false
+            },
+            {
+              "name": "Select Account",
+              "checked": false
+            },
+            {
+              "name": "Create Project",
+              "checked": false
+            },
+            {
+              "name": "Edit Project",
+              "checked": false
+            },
+            {
+              "name": "Delete Project",
+              "checked": false
+            }
+          ]
+        },
+        {
+          "screenName": "Users Screen",
+          "checked": true,
+          "components": [
+            {
+              "name": "View Page",
+              "checked": false
+            },
+            {
+              "name": "Select Portfolio",
+              "checked": false
+            },
+            {
+              "name": "Select Account",
+              "checked": false
+            },
+            {
+              "name": "Select Project",
+              "checked": false
+            },
+            {
+              "name": "Create User",
+              "checked": false
+            },
+            {
+              "name": "Edit User",
+              "checked": false
+            },
+            {
+              "name": "Delete User",
+              "checked": false
+            },
+            {
+              "name": "Show All User",
+              "checked": false
+            },
+            {
+              "name": "Allocate",
+              "checked": false
+            },
+            {
+              "name": "Multiple Allocation",
+              "checked": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "moduleName": "Report Module",
+      "checked": true,
+      "screens": [
+        {
+          "screenName": "Pre Build Screen",
+          "checked": true,
+          "components": [
+            {
+              "name": "Full Page",
+              "checked": false
+            }
+          ]
+        },
+        {
+          "screenName": "Live Build Console Screen",
+          "checked": true,
+          "components": [
+            {
+              "name": "Full Page",
+              "checked": false
+            },
+            {
+              "name": "abort execution",
+              "checked": true
+            },
+            {
+              "name": "minmize report",
+              "checked": false
+            }
+          ]
+        },
+        {
+          "screenName": "Build Screen",
+          "checked": true,
+          "components": [
+            {
+              "name": "Full Page",
+              "checked": false
+            },
+            {
+              "name": "minmize report",
+              "checked": true
+            }
+          ]
+        },
+        {
+          "screenName": "Automation Testing Screen",
+          "checked": true,
+          "components": [
+            {
+              "name": "Full Page",
+              "checked": false
+            },
+            {
+              "name": "minmize report",
+              "checked": true
+            }
+          ]
+        },
+        {
+          "screenName": "Data Testing Screen",
+          "checked": true,
+          "components": [
+            {
+              "name": "Full Page",
+              "checked": false
+            },
+            {
+              "name": "minmize report",
+              "checked": true
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

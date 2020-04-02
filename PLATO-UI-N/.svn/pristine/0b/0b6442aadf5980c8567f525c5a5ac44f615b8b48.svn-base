@@ -1,0 +1,541 @@
+#sidenav {
+    width: 290px !important;
+}
+
+#sidenav1 {
+    padding: 0;
+    padding-bottom: 1%;
+    width: 240px;
+    z-index: 1;
+    border: 1px solid #ccc;
+    background-color: #f3f3f3;
+}
+
+#sidenav-container {
+    position: relative;
+    z-index: 1;
+    box-sizing: border-box;
+    -webkit-overflow-scrolling: touch;
+    width: 100%;
+    display: block;
+    overflow: hidden;
+}
+
+.myExpansionpanel {
+    display: unset;
+    width: 100%;
+    margin: 2px auto;
+}
+
+.myExpansionpanelHeader {
+    display: contents !important;
+    height: 40px !important;
+    border-bottom: 1px solid #b5b3b3;
+    padding: 0px !important;
+    padding-left: 6% !important;
+    font-family: "Lato", Verdana, sans-serif, Arial !important;
+    background-color: #f3f3f3 !important;
+    color: #103E5F !important;
+}
+
+.myExpansionpanelHeader /deep/.mat-content {
+    display: flex;
+    flex: 1;
+    flex-direction: row;
+    overflow: hidden;
+    border-bottom: 1px solid #b5b3b3;
+}
+
+.myExpansionpanelHeader /deep/.mat-expansion-panel-header-title {
+    display: flex;
+    flex-grow: 1;
+    height: 30px;
+    margin-right: 16px;
+    padding-top: 10px;
+    padding-left: 10px;
+    font-size: 14px;
+}
+
+#sidenav1 /deep/.mat-expansion-panel-header-title {
+    height: 30px !important;
+    color: #103E5F !important;
+    background-color: whitesmoke !important;
+}
+
+.myExpansionpanel /deep/.mat-expansion-panel-content {
+    border-bottom: 1px solid #b5b3b3;
+    font: 400 13px/20px "Lato", Verdana, sans-serif, Arial !important;
+    background-color: transparent;
+}
+
+#sidenav1 .myExpansionpanel /deep/.mat-expansion-panel-content {
+    border-bottom: 1px solid #b5b3b3;
+    font: 400 13px/20px "Lato", Verdana, sans-serif, Arial !important;
+    background-color: white !important;
+}
+
+.example-headers-align .myExpansionpanel /deep/.mat-expansion-panel-content {
+    border-bottom: 1px solid #b5b3b3;
+    font: 400 13px/20px "Lato", Verdana, sans-serif, Arial !important;
+    background-color: transparent;
+}
+
+#sidenav .myExpansionpanel .myExpansionpanelDescription {
+    display: block !important;
+    padding-top: 3% !important;
+}
+
+.myExpansionpanel /deep/.mat-expansion-panel-body {
+    margin: 0px !important;
+}
+
+.myExpandIcon {
+    float: right;
+    margin-right: -10px;
+}
+
+.myDeleteIcon {
+    float: right;
+    height: 15px !important;
+    width: 15px !important;
+    margin-right: 25px !important;
+    font-size: 19px !important;
+}
+
+.myCreateBtn {
+    float: right;
+}
+
+.myList {
+    margin: 0px;
+}
+
+.myList li {
+    cursor: pointer;
+    padding: 2px;
+    margin: 2px auto;
+    font-size: 12px;
+}
+
+.myList li:active {
+    border: 2px solid #1094d5 !important;
+}
+
+.modal-content /deep/.mat-tab-header {
+    display: flex;
+    overflow: hidden;
+    position: relative;
+    flex-shrink: 0;
+    margin: 0px auto;
+    width: 100%;
+}
+
+.modal-content /deep/.mat-tab-label {
+    height: 40px;
+    padding: 0 24px;
+    cursor: pointer;
+    box-sizing: border-box;
+    opacity: .6;
+    min-width: 160px;
+    text-align: center;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    white-space: nowrap;
+    position: relative;
+    width: 50%;
+}
+
+.form-full-width {
+    width: 100%;
+    padding: 0px 15px 0px 15px;
+}
+
+.comp-list {
+    padding-top: 0%;
+    padding-bottom: 0%;
+    width: 100%;
+    text-align: left;
+    color: #656363;
+    margin-bottom: 1px;
+    border-bottom: 1px solid #b5b3b3;
+    font-size: 13px;
+    font-weight: 400;
+    font-family: "Lato", Verdana, sans-serif, Arial !important;
+    height: 40px;
+    padding: 0px 16px 0px 16px;
+}
+
+.comp-list:hover {
+    color: #000;
+    background: none !important;
+}
+
+/deep/.mat-card {
+    font-family: "Lato", Verdana, sans-serif, Arial !important;
+}
+
+mat-card.myReleaseCard.mat-card {
+    margin: 1.5% auto;
+    padding: 20px 20px 0px 20px;
+    width: 90%;
+    border: 1px solid #e4e4e4;
+}
+
+mat-card.myReleaseCard.mat-card:hover {
+    background-color: whitesmoke;
+}
+
+mat-card-title.myReleaseCardTitle.mat-card-title {
+    font-size: 15px !important;
+    font-weight: bold;
+}
+
+mat-card-content.myReleaseCardContent.mat-card-content {
+    margin-bottom: 4%;
+    margin-top: 2%;
+}
+
+#reportConfigCard {
+    display: inline-block;
+    margin: 1% 1%;
+    height: 280px;
+    overflow: auto;
+    min-width: 100%;
+    border: 1px solid #ccc;
+    font-family: "Segoe UI Light", Verdana, sans-serif, Arial;
+    padding: 7%;
+    background: url('../../../assets/genral_icons/card_bg.png') no-repeat center center;
+}
+
+#reportConfigCard:hover {
+    border: 1px solid #333;
+}
+
+.myReleaseCardContent .list-group {
+    display: inline-grid;
+    width: 100%;
+}
+
+.myReleaseCardContent .list-group .list-group-item {
+    padding: 0px 9px !important;
+    line-height: 35px;
+    height: 35px;
+}
+
+.list-group-item {
+    position: relative;
+    display: block;
+    margin: 1px;
+    background-color: transparent;
+    border: none !important;
+    margin-left: -18px;
+    margin-right: -18px;
+    border-radius: 5px;
+}
+
+#reportConfigCard mat-card-title {
+    padding-bottom: 5px;
+    border-bottom: 1px solid #dddddd;
+    margin: 0px;
+    font-size: 10px;
+}
+
+#myTransactionRow {
+    padding: 2px 10px 2px 10px;
+    margin: 0px 2px 0px 2px;
+}
+
+#myTransactionBtn {
+    padding: 0;
+    width: 70%;
+    float: right;
+    color: #103E5F !important;
+}
+
+.myReleaseCardContent.row {
+    margin: 0px auto !important;
+}
+
+.myCol {
+    margin: 0px !important;
+    padding: 0px !important;
+}
+
+.myTransactionFieldSm {
+    width: 95%;
+    font-family: "Lato", Verdana, sans-serif, Arial !important;
+}
+
+.myReleaseCardExpansion mat-expansion-panel.mat-expansion-panel {
+    margin: 0px auto !important;
+}
+
+.myReleaseCardExpansion mat-expansion-panel /deep/.mat-expansion-panel-body {
+    margin: 5px 20px !important;
+    overflow: auto;
+}
+
+.myReleaseCardExpansion .mat-action-row {
+    border-top: 1px solid #ccc;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    padding: 5px;
+}
+
+.myReleaseCardExpansion mat-expansion-panel-header.mat-expansion-panel-header {
+    display: contents !important;
+    height: 35px !important;
+    border: 1px solid #ccc;
+    background-color: whitesmoke;
+    font-family: "Lato", Verdana, sans-serif, Arial !important;
+}
+
+.myReleaseCardExpansion mat-expansion-panel-header.mat-expansion-panel-header /deep/.mat-content {
+    display: flex;
+    flex: 1;
+    flex-direction: row;
+    overflow: hidden;
+    border-bottom: 1px solid #b5b3b3;
+}
+
+.myReleaseCardExpansion mat-expansion-panel-header.mat-expansion-panel-header /deep/.mat-expansion-panel-header-title {
+    display: flex;
+    flex-grow: 1;
+    margin-right: 16px;
+    padding: 1% !important;
+}
+
+.myReleaseCardExpansion .mat-checkbox {
+    transition: background .4s cubic-bezier(.25, .8, .25, 1), box-shadow 280ms cubic-bezier(.4, 0, .2, 1);
+    cursor: pointer;
+    /* margin: 0px 30px !important; */
+}
+
+#right_menu {
+    right: 4px;
+    top: 240px;
+    border: none;
+    background-color: transparent;
+    position: fixed;
+    z-index: 1;
+    float: right;
+    outline: none !important;
+}
+
+#sidenav-content #right_menu .right_img {
+    height: 150px !important;
+    margin: 20px 0px 0px 0px;
+    outline: none;
+    vertical-align: middle;
+    border-style: none;
+    border: 0;
+}
+
+div.myWorkflowSpace {
+    background-color: #d3d3d338;
+    border: 1px solid #ccc;
+    border-right: none;
+    padding: 0px;
+    margin: 0px auto;
+    text-align: center;
+    min-height: 100px;
+    color: #103E5F !important;
+}
+
+div.myWorkflowSpace p {
+    margin: 0px auto;
+    padding-bottom: 10px;
+    font-size: 20px;
+    border-bottom: 1px solid #ccc;
+}
+
+.myWorkflowSpace div.myWorkflowDiv {
+    display: inline-block;
+    margin: 20px auto;
+}
+
+.myWorkflowSpace .myWorkflowBtn {
+    border: 5px double #ccc;
+    width: 60px !important;
+    height: 60px !important;
+    line-height: 50px !important;
+    border-radius: 50%;
+    margin: 20px auto;
+    background-color: #00ffff4a;
+    font-weight: bold;
+    font-size: 14px;
+    display: inline-block;
+}
+
+div.myWorkflowSpan {
+    display: inline-block;
+    border: 1px solid #660085;
+    background-color: #ffffff;
+    color: #660085;
+    margin: 0px 5px;
+    width: 125px;
+    height: 35px;
+    line-height: 32px;
+    cursor: pointer;
+    box-shadow: 6px 2px 1px 0px #ccc;
+}
+
+div.myWorkflowSpan:hover+div.myWorkflowSpan button {
+    display: block;
+}
+
+div.myWorkflowArrow {
+    display: inline-block;
+    margin-right: -3px;
+    margin-left: -6px;
+}
+
+div.myWorkflowArrow .line {
+    height: 1px;
+    background-color: black;
+    display: inline-block;
+    width: 40px;
+    margin-bottom: 4px;
+    margin-right: -8px;
+}
+
+i {
+    border: solid black;
+    border-width: 0 1px 1px 0;
+    display: inline-block;
+    padding: 4px;
+}
+
+.right {
+    transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+}
+
+#myBtnRow {
+    cursor: pointer;
+}
+
+mat-radio-group#myBtnRow {
+    text-align: center;
+}
+
+#myBtnRow ul {
+    list-style-type: none;
+    margin: 0px auto;
+    padding-bottom: 2px;
+    padding-top: 2px;
+}
+
+div#myToolBtn {
+    width: 200px;
+    float: left !important;
+    white-space: normal;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    color: #103E5F !important;
+    background-color: #ffdead8a;
+    text-align: left;
+    justify-content: left;
+    padding: 1px 5px 1px 10px;
+    margin: 4px auto;
+}
+
+.myExpansionpanel mat-action-row#myBtnRow {
+    display: -webkit-box !important;
+    padding: 0px !important;
+    margin: 0px !important;
+    margin-left: -35px !important;
+}
+
+mat-radio-group#myBtnRow /deep/.mat-radio-label-content {
+    display: inline-block;
+    order: 0;
+    line-height: inherit;
+    padding-left: 8px;
+    padding-right: 0;
+    font-weight: normal !important;
+}
+
+input.form-control.form-control-sm.search_input {
+    background-color: #094c80;
+    border: none;
+    color: white;
+    font-family: "Lato", Verdana, sans-serif, Arial !important;
+    height: 10px;
+    padding: 5px 12px;
+    font-size: 15px;
+    line-height: 1.5;
+    border-radius: 10px;
+    margin: 0px -10px;
+}
+
+#sidenav .myExpansionpanelDescription div {
+    float: right;
+    text-align: center;
+    justify-content: center;
+    font-weight: bold;
+    color: #103E5F !important;
+    border-radius: 5px;
+    background-color: whitesmoke;
+    width: 135px;
+    border-color: #ccc !important;
+    font-size: 12px;
+    margin: 2px auto;
+    word-wrap: break-word;
+}
+
+.myTable th {
+    background-color: rgb(9, 76, 128);
+    color: rgb(255, 255, 255);
+    text-align: left;
+    justify-content: left;
+    width: max-content;
+    height: min-content;
+    text-shadow: none;
+    font-weight: 400;
+    white-space: nowrap;
+    font-size: 15px !important;
+    border-width: initial;
+    border-style: none;
+    border-color: initial;
+    border-image: initial;
+}
+
+.myTable td {
+    padding: 5px;
+    line-height: 1.42857143;
+    vertical-align: top;
+    border-top: 1px solid #dddddd;
+    font-size: 13px;
+}
+
+.myModal .w3-modal-content {
+    width: 70% !important;
+    border-top-right-radius: 25px;
+    border-bottom-left-radius: 25px;
+    box-shadow: 0px 0px 44px 5px rgba(0, 0, 0, 0.37);
+    border: 1px solid #7d7d7d;
+}
+
+.myModal .modal-content {
+    border-radius: 0px;
+    border-left: none;
+    border-right: none;
+    box-shadow: none;
+    overflow-y: auto;
+    height: 500px;
+}
+
+#createScenarioModal .modal-content {
+    border-bottom-left-radius: 25px !important;
+    padding: 0px;
+}
+
+.polo_link {
+    text-decoration: none;
+    width: 100%;
+    background-color: #85339d;
+    color: white;
+}

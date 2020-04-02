@@ -1,0 +1,1519 @@
+[
+    {
+        "components": [
+            {
+                "componentid": "C1:yourQuoteCheckoutAnnualButton1",
+                "componentsArray": [
+                    [
+                        {
+                            "Web Component": "Button"
+                        },
+                        {
+                            "Properties": "Height"
+                        },
+                        {
+                            "Chrome": "30"
+                        },
+                        {
+                            "IE": "30"
+                        },
+                        {
+                            "Status": "Pass"
+                        },
+                        {
+                            "Firefox": "30"
+                        },
+                        {
+                            "Status": "Pass"
+                        }
+                    ],
+                    [
+                        {
+                            "Web Component": "Button"
+                        },
+                        {
+                            "Properties": "Width"
+                        },
+                        {
+                            "Chrome": "180"
+                        },
+                        {
+                            "IE": "180"
+                        },
+                        {
+                            "Status": "Pass"
+                        },
+                        {
+                            "Firefox": "180"
+                        },
+                        {
+                            "Status": "Pass"
+                        }
+                    ],
+                    [
+                        {
+                            "Web Component": "Button"
+                        },
+                        {
+                            "Properties": "Left"
+                        },
+                        {
+                            "Chrome": "606"
+                        },
+                        {
+                            "IE": "606"
+                        },
+                        {
+                            "Status": "Pass"
+                        },
+                        {
+                            "Firefox": "428"
+                        },
+                        {
+                            "Status": "Fail"
+                        }
+                    ],
+                    [
+                        {
+                            "Web Component": "Button"
+                        },
+                        {
+                            "Properties": "Top"
+                        },
+                        {
+                            "Chrome": "744"
+                        },
+                        {
+                            "IE": "752"
+                        },
+                        {
+                            "Status": "Pass"
+                        },
+                        {
+                            "Firefox": "755"
+                        },
+                        {
+                            "Status": "Pass"
+                        }
+                    ],
+                    [
+                        {
+                            "Web Component": "Button"
+                        },
+                        {
+                            "Properties": "Text"
+                        },
+                        {
+                            "Chrome": "Buy now"
+                        },
+                        {
+                            "IE": "Buy now"
+                        },
+                        {
+                            "Status": "Pass"
+                        },
+                        {
+                            "Firefox": "Buy now"
+                        },
+                        {
+                            "Status": "Pass"
+                        }
+                    ],
+                    [
+                        {
+                            "Web Component": "Button"
+                        },
+                        {
+                            "Properties": "INNERTEXT"
+                        },
+                        {
+                            "Chrome": ""
+                        },
+                        {
+                            "IE": ""
+                        },
+                        {
+                            "Status": ""
+                        },
+                        {
+                            "Firefox": ""
+                        },
+                        {
+                            "Status": ""
+                        }
+                    ],
+                    [
+                        {
+                            "Web Component": "Button"
+                        },
+                        {
+                            "Properties": "font-size"
+                        },
+                        {
+                            "Chrome": "0px"
+                        },
+                        {
+                            "IE": "0px"
+                        },
+                        {
+                            "Status": "Pass"
+                        },
+                        {
+                            "Firefox": "0px"
+                        },
+                        {
+                            "Status": "Pass"
+                        }
+                    ],
+                    [
+                        {
+                            "Web Component": "Button"
+                        },
+                        {
+                            "Properties": "color"
+                        },
+                        {
+                            "Chrome": "#000000"
+                        },
+                        {
+                            "IE": "#000000"
+                        },
+                        {
+                            "Status": "Pass"
+                        },
+                        {
+                            "Firefox": "#000000"
+                        },
+                        {
+                            "Status": "Pass"
+                        }
+                    ],
+                    [
+                        {
+                            "Web Component": "Button"
+                        },
+                        {
+                            "Properties": "font-family"
+                        },
+                        {
+                            "Chrome": "arial, sans-serif"
+                        },
+                        {
+                            "IE": "arial,sans-serif"
+                        },
+                        {
+                            "Status": "Fail"
+                        },
+                        {
+                            "Firefox": "arial,sans-serif"
+                        },
+                        {
+                            "Status": "Fail"
+                        }
+                    ]
+                ],
+                "componentIdentifier": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[1]/form[1]/div[2]/div[2]/div[3]/div[2]/div[2]/div[1]/div[1]/div[1]/input[1],yourQuoteCheckoutAnnualButton1,Buy now",
+                "overallStatus": "fail"
+            }
+        ],
+        "pageTitle": "Choose a level | John Lewis Event Insurance"
+    },
+    {
+        "components": [
+            {
+                "componentid": "C1:yourDetailsFindAddressButton",
+                "componentsArray": [
+                    [
+                        {
+                            "Web Component": "Button"
+                        },
+                        {
+                            "Properties": "Height"
+                        },
+                        {
+                            "Chrome": "30"
+                        },
+                        {
+                            "IE": "30"
+                        },
+                        {
+                            "Status": "Pass"
+                        },
+                        {
+                            "Firefox": "30"
+                        },
+                        {
+                            "Status": "Pass"
+                        }
+                    ],
+                    [
+                        {
+                            "Web Component": "Button"
+                        },
+                        {
+                            "Properties": "Width"
+                        },
+                        {
+                            "Chrome": "128"
+                        },
+                        {
+                            "IE": "128"
+                        },
+                        {
+                            "Status": "Pass"
+                        },
+                        {
+                            "Firefox": "133"
+                        },
+                        {
+                            "Status": "Pass"
+                        }
+                    ],
+                    [
+                        {
+                            "Web Component": "Button"
+                        },
+                        {
+                            "Properties": "Left"
+                        },
+                        {
+                            "Chrome": "595"
+                        },
+                        {
+                            "IE": "595"
+                        },
+                        {
+                            "Status": "Pass"
+                        },
+                        {
+                            "Firefox": "412"
+                        },
+                        {
+                            "Status": "Fail"
+                        }
+                    ],
+                    [
+                        {
+                            "Web Component": "Button"
+                        },
+                        {
+                            "Properties": "Top"
+                        },
+                        {
+                            "Chrome": "1137"
+                        },
+                        {
+                            "IE": "1154"
+                        },
+                        {
+                            "Status": "Pass"
+                        },
+                        {
+                            "Firefox": "1159"
+                        },
+                        {
+                            "Status": "Pass"
+                        }
+                    ],
+                    [
+                        {
+                            "Web Component": "Button"
+                        },
+                        {
+                            "Properties": "Text"
+                        },
+                        {
+                            "Chrome": "Find address"
+                        },
+                        {
+                            "IE": "Find address"
+                        },
+                        {
+                            "Status": "Pass"
+                        },
+                        {
+                            "Firefox": "Find address"
+                        },
+                        {
+                            "Status": "Pass"
+                        }
+                    ],
+                    [
+                        {
+                            "Web Component": "Button"
+                        },
+                        {
+                            "Properties": "INNERTEXT"
+                        },
+                        {
+                            "Chrome": ""
+                        },
+                        {
+                            "IE": ""
+                        },
+                        {
+                            "Status": "Pass"
+                        },
+                        {
+                            "Firefox": ""
+                        },
+                        {
+                            "Status": "Pass"
+                        }
+                    ],
+                    [
+                        {
+                            "Web Component": "Button"
+                        },
+                        {
+                            "Properties": "font-size"
+                        },
+                        {
+                            "Chrome": "0px"
+                        },
+                        {
+                            "IE": "0px"
+                        },
+                        {
+                            "Status": "Pass"
+                        },
+                        {
+                            "Firefox": "0px"
+                        },
+                        {
+                            "Status": "Pass"
+                        }
+                    ],
+                    [
+                        {
+                            "Web Component": "Button"
+                        },
+                        {
+                            "Properties": "color"
+                        },
+                        {
+                            "Chrome": "#000000"
+                        },
+                        {
+                            "IE": "#000000"
+                        },
+                        {
+                            "Status": "Pass"
+                        },
+                        {
+                            "Firefox": "#000000"
+                        },
+                        {
+                            "Status": "Pass"
+                        }
+                    ],
+                    [
+                        {
+                            "Web Component": "Button"
+                        },
+                        {
+                            "Properties": "font-family"
+                        },
+                        {
+                            "Chrome": "arial, sans-serif"
+                        },
+                        {
+                            "IE": "arial,sans-serif"
+                        },
+                        {
+                            "Status": "Pass"
+                        },
+                        {
+                            "Firefox": "arial,sans-serif"
+                        },
+                        {
+                            "Status": "Pass"
+                        }
+                    ]
+                ],
+                "componentIdentifier": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[1]/form[1]/div[1]/div[2]/div[1]/div[4]/ul[1]/li[9]/div[1]/div[2]/div[1]/div[1]/div[1]/input[1],yourDetailsFindAddressButton,Find address",
+                "overallStatus": "fail"
+            },
+            {
+                "componentid": "C2:yourDetailsGetYourQuoteButton",
+                "componentsArray": [
+                    [
+                        {
+                            "Web Component": "Button"
+                        },
+                        {
+                            "Properties": "Height"
+                        },
+                        {
+                            "Chrome": "30"
+                        },
+                        {
+                            "IE": "30"
+                        },
+                        {
+                            "Status": "Pass"
+                        },
+                        {
+                            "Firefox": "30"
+                        },
+                        {
+                            "Status": "Pass"
+                        }
+                    ],
+                    [
+                        {
+                            "Web Component": "Button"
+                        },
+                        {
+                            "Properties": "Width"
+                        },
+                        {
+                            "Chrome": "180"
+                        },
+                        {
+                            "IE": "180"
+                        },
+                        {
+                            "Status": "Pass"
+                        },
+                        {
+                            "Firefox": "180"
+                        },
+                        {
+                            "Status": "Pass"
+                        }
+                    ],
+                    [
+                        {
+                            "Web Component": "Button"
+                        },
+                        {
+                            "Properties": "Left"
+                        },
+                        {
+                            "Chrome": "607"
+                        },
+                        {
+                            "IE": "607"
+                        },
+                        {
+                            "Status": "Pass"
+                        },
+                        {
+                            "Firefox": "428"
+                        },
+                        {
+                            "Status": "Fail"
+                        }
+                    ],
+                    [
+                        {
+                            "Web Component": "Button"
+                        },
+                        {
+                            "Properties": "Top"
+                        },
+                        {
+                            "Chrome": "1385"
+                        },
+                        {
+                            "IE": "1406"
+                        },
+                        {
+                            "Status": "Pass"
+                        },
+                        {
+                            "Firefox": "1411"
+                        },
+                        {
+                            "Status": "Pass"
+                        }
+                    ],
+                    [
+                        {
+                            "Web Component": "Button"
+                        },
+                        {
+                            "Properties": "Text"
+                        },
+                        {
+                            "Chrome": "Continue"
+                        },
+                        {
+                            "IE": "Continue"
+                        },
+                        {
+                            "Status": "Pass"
+                        },
+                        {
+                            "Firefox": "Continue"
+                        },
+                        {
+                            "Status": "Pass"
+                        }
+                    ],
+                    [
+                        {
+                            "Web Component": "Button"
+                        },
+                        {
+                            "Properties": "INNERTEXT"
+                        },
+                        {
+                            "Chrome": ""
+                        },
+                        {
+                            "IE": ""
+                        },
+                        {
+                            "Status": "Pass"
+                        },
+                        {
+                            "Firefox": ""
+                        },
+                        {
+                            "Status": "Pass"
+                        }
+                    ],
+                    [
+                        {
+                            "Web Component": "Button"
+                        },
+                        {
+                            "Properties": "font-size"
+                        },
+                        {
+                            "Chrome": "0px"
+                        },
+                        {
+                            "IE": "0px"
+                        },
+                        {
+                            "Status": "Pass"
+                        },
+                        {
+                            "Firefox": "0px"
+                        },
+                        {
+                            "Status": "Pass"
+                        }
+                    ],
+                    [
+                        {
+                            "Web Component": "Button"
+                        },
+                        {
+                            "Properties": "color"
+                        },
+                        {
+                            "Chrome": "#000000"
+                        },
+                        {
+                            "IE": "#000000"
+                        },
+                        {
+                            "Status": "Pass"
+                        },
+                        {
+                            "Firefox": "#000000"
+                        },
+                        {
+                            "Status": "Pass"
+                        }
+                    ],
+                    [
+                        {
+                            "Web Component": "Button"
+                        },
+                        {
+                            "Properties": "font-family"
+                        },
+                        {
+                            "Chrome": "arial, sans-serif"
+                        },
+                        {
+                            "IE": "arial,sans-serif"
+                        },
+                        {
+                            "Status": "Pass"
+                        },
+                        {
+                            "Firefox": "arial,sans-serif"
+                        },
+                        {
+                            "Status": "Pass"
+                        }
+                    ]
+                ],
+                "componentIdentifier": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[1]/form[1]/div[1]/div[2]/div[1]/div[6]/div[1]/div[2]/div[1]/div[1]/input[1],yourDetailsGetYourQuoteButton,Continue",
+                "overallStatus": "fail"
+            },
+            {
+                "componentid": "C3:backButton",
+                "componentsArray": [
+                    [
+                        {
+                            "Web Component": "Button"
+                        },
+                        {
+                            "Properties": "Height"
+                        },
+                        {
+                            "Chrome": "15"
+                        },
+                        {
+                            "IE": "15"
+                        },
+                        {
+                            "Status": "Pass"
+                        },
+                        {
+                            "Firefox": "15"
+                        },
+                        {
+                            "Status": "Pass"
+                        }
+                    ],
+                    [
+                        {
+                            "Web Component": "Button"
+                        },
+                        {
+                            "Properties": "Width"
+                        },
+                        {
+                            "Chrome": "42"
+                        },
+                        {
+                            "IE": "41"
+                        },
+                        {
+                            "Status": "Pass"
+                        },
+                        {
+                            "Firefox": "42"
+                        },
+                        {
+                            "Status": "Pass"
+                        }
+                    ],
+                    [
+                        {
+                            "Web Component": "Button"
+                        },
+                        {
+                            "Properties": "Left"
+                        },
+                        {
+                            "Chrome": "217"
+                        },
+                        {
+                            "IE": "217"
+                        },
+                        {
+                            "Status": "Pass"
+                        },
+                        {
+                            "Firefox": "38"
+                        },
+                        {
+                            "Status": "Fail"
+                        }
+                    ],
+                    [
+                        {
+                            "Web Component": "Button"
+                        },
+                        {
+                            "Properties": "Top"
+                        },
+                        {
+                            "Chrome": "1438"
+                        },
+                        {
+                            "IE": "1457"
+                        },
+                        {
+                            "Status": "Pass"
+                        },
+                        {
+                            "Firefox": "1463"
+                        },
+                        {
+                            "Status": "Pass"
+                        }
+                    ],
+                    [
+                        {
+                            "Web Component": "Button"
+                        },
+                        {
+                            "Properties": "Text"
+                        },
+                        {
+                            "Chrome": "Back"
+                        },
+                        {
+                            "IE": "Back"
+                        },
+                        {
+                            "Status": "Pass"
+                        },
+                        {
+                            "Firefox": "Back"
+                        },
+                        {
+                            "Status": "Pass"
+                        }
+                    ],
+                    [
+                        {
+                            "Web Component": "Button"
+                        },
+                        {
+                            "Properties": "INNERTEXT"
+                        },
+                        {
+                            "Chrome": ""
+                        },
+                        {
+                            "IE": ""
+                        },
+                        {
+                            "Status": "Pass"
+                        },
+                        {
+                            "Firefox": ""
+                        },
+                        {
+                            "Status": "Pass"
+                        }
+                    ],
+                    [
+                        {
+                            "Web Component": "Button"
+                        },
+                        {
+                            "Properties": "font-size"
+                        },
+                        {
+                            "Chrome": "11.9994px"
+                        },
+                        {
+                            "IE": "11.86px"
+                        },
+                        {
+                            "Status": "Pass"
+                        },
+                        {
+                            "Firefox": "12px"
+                        },
+                        {
+                            "Status": "Pass"
+                        }
+                    ],
+                    [
+                        {
+                            "Web Component": "Button"
+                        },
+                        {
+                            "Properties": "color"
+                        },
+                        {
+                            "Chrome": "#668002"
+                        },
+                        {
+                            "IE": "#668002"
+                        },
+                        {
+                            "Status": "Pass"
+                        },
+                        {
+                            "Firefox": "#668002"
+                        },
+                        {
+                            "Status": "Pass"
+                        }
+                    ],
+                    [
+                        {
+                            "Web Component": "Button"
+                        },
+                        {
+                            "Properties": "font-family"
+                        },
+                        {
+                            "Chrome": "arial, sans-serif"
+                        },
+                        {
+                            "IE": "arial,sans-serif"
+                        },
+                        {
+                            "Status": "Pass"
+                        },
+                        {
+                            "Firefox": "arial,sans-serif"
+                        },
+                        {
+                            "Status": "Pass"
+                        }
+                    ]
+                ],
+                "componentIdentifier": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[1]/form[1]/div[1]/div[2]/div[1]/div[6]/span[1]/input[1],backButton,Back",
+                "overallStatus": "fail"
+            }
+        ],
+        "pageTitle": "You and your event | John Lewis Event Insurance"
+    },
+    {
+        "components": [
+            {
+                "componentid": "C1:backButton",
+                "componentsArray": [
+                    [
+                        {
+                            "Web Component": "Button"
+                        },
+                        {
+                            "Properties": "Height"
+                        },
+                        {
+                            "Chrome": "15"
+                        },
+                        {
+                            "IE": "15"
+                        },
+                        {
+                            "Status": "Pass"
+                        },
+                        {
+                            "Firefox": "15"
+                        },
+                        {
+                            "Status": "Pass"
+                        }
+                    ],
+                    [
+                        {
+                            "Web Component": "Button"
+                        },
+                        {
+                            "Properties": "Width"
+                        },
+                        {
+                            "Chrome": "42"
+                        },
+                        {
+                            "IE": "41"
+                        },
+                        {
+                            "Status": "Pass"
+                        },
+                        {
+                            "Firefox": "42"
+                        },
+                        {
+                            "Status": "Pass"
+                        }
+                    ],
+                    [
+                        {
+                            "Web Component": "Button"
+                        },
+                        {
+                            "Properties": "Left"
+                        },
+                        {
+                            "Chrome": "217"
+                        },
+                        {
+                            "IE": "217"
+                        },
+                        {
+                            "Status": "Pass"
+                        },
+                        {
+                            "Firefox": "38"
+                        },
+                        {
+                            "Status": "Fail"
+                        }
+                    ],
+                    [
+                        {
+                            "Web Component": "Button"
+                        },
+                        {
+                            "Properties": "Top"
+                        },
+                        {
+                            "Chrome": "1358"
+                        },
+                        {
+                            "IE": "1374"
+                        },
+                        {
+                            "Status": "Pass"
+                        },
+                        {
+                            "Firefox": "1399"
+                        },
+                        {
+                            "Status": "Pass"
+                        }
+                    ],
+                    [
+                        {
+                            "Web Component": "Button"
+                        },
+                        {
+                            "Properties": "Text"
+                        },
+                        {
+                            "Chrome": "Back"
+                        },
+                        {
+                            "IE": "Back"
+                        },
+                        {
+                            "Status": "Pass"
+                        },
+                        {
+                            "Firefox": "Back"
+                        },
+                        {
+                            "Status": "Pass"
+                        }
+                    ],
+                    [
+                        {
+                            "Web Component": "Button"
+                        },
+                        {
+                            "Properties": "INNERTEXT"
+                        },
+                        {
+                            "Chrome": ""
+                        },
+                        {
+                            "IE": ""
+                        },
+                        {
+                            "Status": "Pass"
+                        },
+                        {
+                            "Firefox": ""
+                        },
+                        {
+                            "Status": "Pass"
+                        }
+                    ],
+                    [
+                        {
+                            "Web Component": "Button"
+                        },
+                        {
+                            "Properties": "font-size"
+                        },
+                        {
+                            "Chrome": "11.9994px"
+                        },
+                        {
+                            "IE": "11.86px"
+                        },
+                        {
+                            "Status": "Pass"
+                        },
+                        {
+                            "Firefox": "12px"
+                        },
+                        {
+                            "Status": "Pass"
+                        }
+                    ],
+                    [
+                        {
+                            "Web Component": "Button"
+                        },
+                        {
+                            "Properties": "color"
+                        },
+                        {
+                            "Chrome": "#668002"
+                        },
+                        {
+                            "IE": "#668002"
+                        },
+                        {
+                            "Status": "Pass"
+                        },
+                        {
+                            "Firefox": "#668002"
+                        },
+                        {
+                            "Status": "Pass"
+                        }
+                    ],
+                    [
+                        {
+                            "Web Component": "Button"
+                        },
+                        {
+                            "Properties": "font-family"
+                        },
+                        {
+                            "Chrome": "arial, sans-serif"
+                        },
+                        {
+                            "IE": "arial,sans-serif"
+                        },
+                        {
+                            "Status": "Pass"
+                        },
+                        {
+                            "Firefox": "arial,sans-serif"
+                        },
+                        {
+                            "Status": "Pass"
+                        }
+                    ]
+                ],
+                "componentIdentifier": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[2]/div[1]/form[1]/div[6]/div[1]/div[1]/div[2]/span[1]/input[1],backButton,Back",
+                "overallStatus": "fail"
+            },
+            {
+                "componentid": "C2:continueButtonId",
+                "componentsArray": [
+                    [
+                        {
+                            "Web Component": "Button"
+                        },
+                        {
+                            "Properties": "Height"
+                        },
+                        {
+                            "Chrome": "30"
+                        },
+                        {
+                            "IE": "30"
+                        },
+                        {
+                            "Status": "Pass"
+                        },
+                        {
+                            "Firefox": "30"
+                        },
+                        {
+                            "Status": "Pass"
+                        }
+                    ],
+                    [
+                        {
+                            "Web Component": "Button"
+                        },
+                        {
+                            "Properties": "Width"
+                        },
+                        {
+                            "Chrome": "180"
+                        },
+                        {
+                            "IE": "180"
+                        },
+                        {
+                            "Status": "Pass"
+                        },
+                        {
+                            "Firefox": "180"
+                        },
+                        {
+                            "Status": "Pass"
+                        }
+                    ],
+                    [
+                        {
+                            "Web Component": "Button"
+                        },
+                        {
+                            "Properties": "Left"
+                        },
+                        {
+                            "Chrome": "607"
+                        },
+                        {
+                            "IE": "607"
+                        },
+                        {
+                            "Status": "Pass"
+                        },
+                        {
+                            "Firefox": "428"
+                        },
+                        {
+                            "Status": "Fail"
+                        }
+                    ],
+                    [
+                        {
+                            "Web Component": "Button"
+                        },
+                        {
+                            "Properties": "Top"
+                        },
+                        {
+                            "Chrome": "1351"
+                        },
+                        {
+                            "IE": "1370"
+                        },
+                        {
+                            "Status": "Pass"
+                        },
+                        {
+                            "Firefox": "1395"
+                        },
+                        {
+                            "Status": "Pass"
+                        }
+                    ],
+                    [
+                        {
+                            "Web Component": "Button"
+                        },
+                        {
+                            "Properties": "Text"
+                        },
+                        {
+                            "Chrome": "Continue"
+                        },
+                        {
+                            "IE": "Continue"
+                        },
+                        {
+                            "Status": "Pass"
+                        },
+                        {
+                            "Firefox": "Continue"
+                        },
+                        {
+                            "Status": "Pass"
+                        }
+                    ],
+                    [
+                        {
+                            "Web Component": "Button"
+                        },
+                        {
+                            "Properties": "INNERTEXT"
+                        },
+                        {
+                            "Chrome": ""
+                        },
+                        {
+                            "IE": ""
+                        },
+                        {
+                            "Status": "Pass"
+                        },
+                        {
+                            "Firefox": ""
+                        },
+                        {
+                            "Status": "Pass"
+                        }
+                    ],
+                    [
+                        {
+                            "Web Component": "Button"
+                        },
+                        {
+                            "Properties": "font-size"
+                        },
+                        {
+                            "Chrome": "0px"
+                        },
+                        {
+                            "IE": "0px"
+                        },
+                        {
+                            "Status": "Pass"
+                        },
+                        {
+                            "Firefox": "0px"
+                        },
+                        {
+                            "Status": "Pass"
+                        }
+                    ],
+                    [
+                        {
+                            "Web Component": "Button"
+                        },
+                        {
+                            "Properties": "color"
+                        },
+                        {
+                            "Chrome": "#000000"
+                        },
+                        {
+                            "IE": "#000000"
+                        },
+                        {
+                            "Status": "Pass"
+                        },
+                        {
+                            "Firefox": "#000000"
+                        },
+                        {
+                            "Status": "Pass"
+                        }
+                    ],
+                    [
+                        {
+                            "Web Component": "Button"
+                        },
+                        {
+                            "Properties": "font-family"
+                        },
+                        {
+                            "Chrome": "arial, sans-serif"
+                        },
+                        {
+                            "IE": "arial,sans-serif"
+                        },
+                        {
+                            "Status": "Pass"
+                        },
+                        {
+                            "Firefox": "arial,sans-serif"
+                        },
+                        {
+                            "Status": "Pass"
+                        }
+                    ]
+                ],
+                "componentIdentifier": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[2]/div[1]/form[1]/div[6]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/input[1],continueButtonId,Continue",
+                "overallStatus": "fail"
+            },
+            {
+                "componentid": "C3:yourQuoteAmendDetailsButton1",
+                "componentsArray": [
+                    [
+                        {
+                            "Web Component": "Button"
+                        },
+                        {
+                            "Properties": "Height"
+                        },
+                        {
+                            "Chrome": "18"
+                        },
+                        {
+                            "IE": "17"
+                        },
+                        {
+                            "Status": "Pass"
+                        },
+                        {
+                            "Firefox": "17"
+                        },
+                        {
+                            "Status": "Pass"
+                        }
+                    ],
+                    [
+                        {
+                            "Web Component": "Button"
+                        },
+                        {
+                            "Properties": "Width"
+                        },
+                        {
+                            "Chrome": "26"
+                        },
+                        {
+                            "IE": "26"
+                        },
+                        {
+                            "Status": "Pass"
+                        },
+                        {
+                            "Firefox": "25"
+                        },
+                        {
+                            "Status": "Pass"
+                        }
+                    ],
+                    [
+                        {
+                            "Web Component": "Button"
+                        },
+                        {
+                            "Properties": "Left"
+                        },
+                        {
+                            "Chrome": "1112"
+                        },
+                        {
+                            "IE": "1112"
+                        },
+                        {
+                            "Status": "Pass"
+                        },
+                        {
+                            "Firefox": "935"
+                        },
+                        {
+                            "Status": "Pass"
+                        }
+                    ],
+                    [
+                        {
+                            "Web Component": "Button"
+                        },
+                        {
+                            "Properties": "Top"
+                        },
+                        {
+                            "Chrome": "200"
+                        },
+                        {
+                            "IE": "200"
+                        },
+                        {
+                            "Status": "Pass"
+                        },
+                        {
+                            "Firefox": "200"
+                        },
+                        {
+                            "Status": "Pass"
+                        }
+                    ],
+                    [
+                        {
+                            "Web Component": "Button"
+                        },
+                        {
+                            "Properties": "Text"
+                        },
+                        {
+                            "Chrome": "Edit"
+                        },
+                        {
+                            "IE": "Edit"
+                        },
+                        {
+                            "Status": "Pass"
+                        },
+                        {
+                            "Firefox": "Edit"
+                        },
+                        {
+                            "Status": "Pass"
+                        }
+                    ],
+                    [
+                        {
+                            "Web Component": "Button"
+                        },
+                        {
+                            "Properties": "INNERTEXT"
+                        },
+                        {
+                            "Chrome": ""
+                        },
+                        {
+                            "IE": ""
+                        },
+                        {
+                            "Status": "Pass"
+                        },
+                        {
+                            "Firefox": ""
+                        },
+                        {
+                            "Status": "Pass"
+                        }
+                    ],
+                    [
+                        {
+                            "Web Component": "Button"
+                        },
+                        {
+                            "Properties": "font-size"
+                        },
+                        {
+                            "Chrome": "15.2998px"
+                        },
+                        {
+                            "IE": "15.2px"
+                        },
+                        {
+                            "Status": "Pass"
+                        },
+                        {
+                            "Firefox": "15.3px"
+                        },
+                        {
+                            "Status": "Pass"
+                        }
+                    ],
+                    [
+                        {
+                            "Web Component": "Button"
+                        },
+                        {
+                            "Properties": "color"
+                        },
+                        {
+                            "Chrome": "#557000"
+                        },
+                        {
+                            "IE": "#557000"
+                        },
+                        {
+                            "Status": "Pass"
+                        },
+                        {
+                            "Firefox": "#557000"
+                        },
+                        {
+                            "Status": "Pass"
+                        }
+                    ],
+                    [
+                        {
+                            "Web Component": "Button"
+                        },
+                        {
+                            "Properties": "font-family"
+                        },
+                        {
+                            "Chrome": "arial, sans-serif"
+                        },
+                        {
+                            "IE": "arial,sans-serif"
+                        },
+                        {
+                            "Status": "Pass"
+                        },
+                        {
+                            "Firefox": "arial,sans-serif"
+                        },
+                        {
+                            "Status": "Pass"
+                        }
+                    ]
+                ],
+                "componentIdentifier": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[2]/div[1]/form[1]/h2[1]/span[1]/input[1],yourQuoteAmendDetailsButton1,Edit",
+                "overallStatus": "pass"
+            }
+        ],
+        "pageTitle": "Payment | John Lewis Event Insurance"
+    },
+    {
+        "components": [],
+        "pageTitle": "Your cover and account | John Lewis Event Insurance"
+    }
+]

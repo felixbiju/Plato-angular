@@ -1,0 +1,32 @@
+import { ActivatedRouteSnapshot, CanActivate, CanActivateChild, CanLoad, Route, Router, RouterStateSnapshot } from '@angular/router';
+import { NgxPermissionsService } from '../service/permissions.service';
+import { NgxRolesService } from "../service/roles.service";
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/observable/forkJoin';
+import 'rxjs/add/observable/from';
+import 'rxjs/add/operator/mergeMap';
+import 'rxjs/add/operator/do';
+import 'rxjs/add/operator/map';
+export declare class NgxPermissionsGuard implements CanActivate, CanLoad, CanActivateChild {
+    private permissionsService;
+    private rolesService;
+    private router;
+    constructor(permissionsService: NgxPermissionsService, rolesService: NgxRolesService, router: Router);
+    canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean> | boolean;
+    canActivateChild(childRoute: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean;
+    canLoad(route: Route): boolean | Observable<boolean> | Promise<boolean>;
+    private hasPermissions(route, state?);
+    private transformPermission(purePermissions, route, state);
+    private isParameterAvailable(permission);
+    private passingExceptPermissionsValidation(permissions, route, state);
+    private redirectToAnotherRoute(redirectTo, route, state?, failedPermissionName?);
+    private isRedirectionWithParameters(object);
+    private hasNavigationExtrasAsFunction(redirectTo);
+    private hasNavigationCommandsAsFunction(redirectTo);
+    private onlyRedirectCheck(permissions, route, state?);
+    private handleRedirectOfFailedPermission(permissions, failedPermission, route, state?);
+    private isFailedPermissionPropertyOfRedirectTo(permissions, failedPermission);
+    private checkOnlyPermissions(purePermissions, route, state?);
+    private passingOnlyPermissionsValidation(permissions, route, state?);
+    private hasRedirectToAsFunctionOrObject(redirectTo);
+}

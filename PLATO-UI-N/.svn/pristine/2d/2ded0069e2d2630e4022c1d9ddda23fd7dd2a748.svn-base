@@ -1,0 +1,1309 @@
+import { Directive, EventEmitter, Inject, Injectable, InjectionToken, Input, NgModule, Output, TemplateRef, ViewContainerRef } from '@angular/core';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/observable/of';
+import 'rxjs/add/observable/throw';
+import 'rxjs/add/operator/first';
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/operator/toPromise';
+import 'rxjs/add/operator/mergeAll';
+import 'rxjs/add/observable/merge';
+import 'rxjs/add/observable/from';
+import { merge } from 'rxjs/observable/merge';
+import 'rxjs/add/operator/every';
+import 'rxjs/add/operator/merge';
+import 'rxjs/add/operator/skip';
+import { Router } from '@angular/router';
+import 'rxjs/add/observable/forkJoin';
+import 'rxjs/add/operator/mergeMap';
+import 'rxjs/add/operator/do';
+import 'rxjs/add/operator/map';
+
+var NgxPermissionsStore = /** @class */ (function () {
+    function NgxPermissionsStore() {
+        this.permissionsSource = new BehaviorSubject({});
+        this.permissions$ = this.permissionsSource.asObservable();
+    }
+    NgxPermissionsStore.decorators = [
+        { type: Injectable },
+    ];
+    /**
+     * @nocollapse
+     */
+    NgxPermissionsStore.ctorParameters = function () { return []; };
+    return NgxPermissionsStore;
+}());
+
+/**
+ * @param {?} functionToCheck
+ * @return {?}
+ */
+function isFunction(functionToCheck) {
+    var /** @type {?} */ getType = {};
+    return !!functionToCheck && functionToCheck instanceof Function && getType.toString.call(functionToCheck) === '[object Function]';
+}
+/**
+ * @param {?} value
+ * @return {?}
+ */
+function isPlainObject(value) {
+    if (Object.prototype.toString.call(value) !== '[object Object]') {
+        return false;
+    }
+    else {
+        var /** @type {?} */ prototype = Object.getPrototypeOf(value);
+        return prototype === null || prototype === Object.prototype;
+    }
+}
+/**
+ * @param {?} value
+ * @return {?}
+ */
+function isString(value) {
+    return !!value && typeof value === 'string';
+}
+/**
+ * @param {?} value
+ * @return {?}
+ */
+function isBoolean(value) {
+    return typeof value === 'boolean';
+}
+/**
+ * @param {?} promise
+ * @return {?}
+ */
+function isPromise(promise) {
+    return Object.prototype.toString.call(promise) === "[object Promise]";
+}
+/**
+ * @param {?} value
+ * @return {?}
+ */
+function notEmptyValue(value) {
+    if (Array.isArray(value)) {
+        return value.length > 0;
+    }
+    return !!value;
+}
+/**
+ * @param {?} value
+ * @return {?}
+ */
+function transformStringToArray(value) {
+    if (isString(value)) {
+        return [value];
+    }
+    return value;
+}
+
+var __assign = (undefined && undefined.__assign) || Object.assign || function(t) {
+    for (var s, i = 1, n = arguments.length; i < n; i++) {
+        s = arguments[i];
+        for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+            t[p] = s[p];
+    }
+    return t;
+};
+var USE_PERMISSIONS_STORE = new InjectionToken('USE_PERMISSIONS_STORE');
+var NgxPermissionsService = /** @class */ (function () {
+    /**
+     * @param {?=} isolate
+     * @param {?=} permissionsStore
+     */
+    function NgxPermissionsService(isolate, permissionsStore) {
+        if (isolate === void 0) { isolate = false; }
+        this.isolate = isolate;
+        this.permissionsStore = permissionsStore;
+        this.permissionsSource = this.isolate ? new BehaviorSubject({}) : this.permissionsStore.permissionsSource;
+        this.permissions$ = this.permissionsSource.asObservable();
+    }
+    /**
+     * Remove all permissions from permissions source
+     * @return {?}
+     */
+    NgxPermissionsService.prototype.flushPermissions = function () {
+        this.permissionsSource.next({});
+    };
+    /**
+     * @param {?} permission
+     * @return {?}
+     */
+    NgxPermissionsService.prototype.hasPermission = function (permission) {
+        if (!permission || (Array.isArray(permission) && permission.length === 0)) {
+            return Promise.resolve(true);
+        }
+        permission = transformStringToArray(permission);
+        return this.hasArrayPermission(permission);
+    };
+    /**
+     * @param {?} permissions
+     * @param {?=} validationFunction
+     * @return {?}
+     */
+    NgxPermissionsService.prototype.loadPermissions = function (permissions, validationFunction) {
+        var _this = this;
+        var /** @type {?} */ newPermissions = permissions.reduce(function (source, p) {
+            return _this.reducePermission(source, p, validationFunction);
+        }, {});
+        this.permissionsSource.next(newPermissions);
+    };
+    /**
+     * @param {?} permission
+     * @param {?=} validationFunction
+     * @return {?}
+     */
+    NgxPermissionsService.prototype.addPermission = function (permission, validationFunction) {
+        var _this = this;
+        if (Array.isArray(permission)) {
+            var /** @type {?} */ permissions = permission.reduce(function (source, p) {
+                return _this.reducePermission(source, p, validationFunction);
+            }, this.permissionsSource.value);
+            this.permissionsSource.next(permissions);
+        }
+        else {
+            var /** @type {?} */ permissions = this.reducePermission(this.permissionsSource.value, permission, validationFunction);
+            this.permissionsSource.next(permissions);
+        }
+    };
+    /**
+     * @param {?} permissionName
+     * @return {?}
+     */
+    NgxPermissionsService.prototype.removePermission = function (permissionName) {
+        var /** @type {?} */ permissions = __assign({}, this.permissionsSource.value);
+        delete permissions[permissionName];
+        this.permissionsSource.next(permissions);
+    };
+    /**
+     * @param {?} name
+     * @return {?}
+     */
+    NgxPermissionsService.prototype.getPermission = function (name) {
+        return this.permissionsSource.value[name];
+    };
+    /**
+     * @return {?}
+     */
+    NgxPermissionsService.prototype.getPermissions = function () {
+        return this.permissionsSource.value;
+    };
+    /**
+     * @param {?} source
+     * @param {?} name
+     * @param {?=} validationFunction
+     * @return {?}
+     */
+    NgxPermissionsService.prototype.reducePermission = function (source, name, validationFunction) {
+        if (!!validationFunction && isFunction(validationFunction)) {
+            return __assign({}, source, (_a = {}, _a[name] = { name: name, validationFunction: validationFunction }, _a));
+        }
+        else {
+            return __assign({}, source, (_b = {}, _b[name] = { name: name }, _b));
+        }
+        var _a, _b;
+    };
+    /**
+     * @param {?} permissions
+     * @return {?}
+     */
+    NgxPermissionsService.prototype.hasArrayPermission = function (permissions) {
+        var _this = this;
+        var /** @type {?} */ promises = [];
+        permissions.forEach(function (key) {
+            if (_this.hasPermissionValidationFunction(key)) {
+                var /** @type {?} */ immutableValue = __assign({}, _this.permissionsSource.value);
+                return promises.push(Observable.from(Promise.resolve(((_this.permissionsSource.value[key].validationFunction))(key, immutableValue))).catch(function () {
+                    return Observable.of(false);
+                }));
+            }
+            else {
+                //check for name of the permission if there is no validation function
+                promises.push(Observable.of(!!_this.permissionsSource.value[key]));
+            }
+        });
+        return merge(promises)
+            .mergeAll()
+            .first(function (data) {
+            return data !== false;
+        }, function () { return true; }, false)
+            .toPromise()
+            .then(function (data) {
+            return data;
+        });
+    };
+    /**
+     * @param {?} key
+     * @return {?}
+     */
+    NgxPermissionsService.prototype.hasPermissionValidationFunction = function (key) {
+        return !!this.permissionsSource.value[key] && !!this.permissionsSource.value[key].validationFunction && isFunction(this.permissionsSource.value[key].validationFunction);
+    };
+    NgxPermissionsService.decorators = [
+        { type: Injectable },
+    ];
+    /**
+     * @nocollapse
+     */
+    NgxPermissionsService.ctorParameters = function () { return [
+        { type: undefined, decorators: [{ type: Inject, args: [USE_PERMISSIONS_STORE,] },] },
+        { type: NgxPermissionsStore, },
+    ]; };
+    return NgxPermissionsService;
+}());
+
+var NgxRolesStore = /** @class */ (function () {
+    function NgxRolesStore() {
+        this.rolesSource = new BehaviorSubject({});
+        this.roles$ = this.rolesSource.asObservable();
+    }
+    return NgxRolesStore;
+}());
+
+var __assign$1 = (undefined && undefined.__assign) || Object.assign || function(t) {
+    for (var s, i = 1, n = arguments.length; i < n; i++) {
+        s = arguments[i];
+        for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+            t[p] = s[p];
+    }
+    return t;
+};
+var USE_ROLES_STORE = new InjectionToken('USE_ROLES_STORE');
+var NgxRolesService = /** @class */ (function () {
+    /**
+     * @param {?=} isolate
+     * @param {?=} rolesStore
+     * @param {?=} permissionsService
+     */
+    function NgxRolesService(isolate, rolesStore, permissionsService) {
+        if (isolate === void 0) { isolate = false; }
+        this.isolate = isolate;
+        this.rolesStore = rolesStore;
+        this.permissionsService = permissionsService;
+        this.rolesSource = this.isolate ? new BehaviorSubject({}) : this.rolesStore.rolesSource;
+        this.roles$ = this.rolesSource.asObservable();
+    }
+    /**
+     * @param {?} name
+     * @param {?} validationFunction
+     * @return {?}
+     */
+    NgxRolesService.prototype.addRole = function (name, validationFunction) {
+        var /** @type {?} */ roles = __assign$1({}, this.rolesSource.value, (_a = {}, _a[name] = { name: name, validationFunction: validationFunction }, _a));
+        this.rolesSource.next(roles);
+        var _a;
+    };
+    /**
+     * @param {?} rolesObj
+     * @return {?}
+     */
+    NgxRolesService.prototype.addRoles = function (rolesObj) {
+        var _this = this;
+        Object.keys(rolesObj).forEach(function (key, index) {
+            _this.addRole(key, rolesObj[key]);
+        });
+    };
+    /**
+     * @return {?}
+     */
+    NgxRolesService.prototype.flushRoles = function () {
+        this.rolesSource.next({});
+    };
+    /**
+     * @param {?} roleName
+     * @return {?}
+     */
+    NgxRolesService.prototype.removeRole = function (roleName) {
+        var /** @type {?} */ roles = __assign$1({}, this.rolesSource.value);
+        delete roles[roleName];
+        this.rolesSource.next(roles);
+    };
+    /**
+     * @return {?}
+     */
+    NgxRolesService.prototype.getRoles = function () {
+        return this.rolesSource.value;
+    };
+    /**
+     * @param {?} name
+     * @return {?}
+     */
+    NgxRolesService.prototype.getRole = function (name) {
+        return this.rolesSource.value[name];
+    };
+    /**
+     * @param {?} names
+     * @return {?}
+     */
+    NgxRolesService.prototype.hasOnlyRoles = function (names) {
+        if (!names || (Array.isArray(names) && names.length === 0)) {
+            return Promise.resolve(true);
+        }
+        names = transformStringToArray(names);
+        return Promise.all([this.hasRoleKey(names), this.hasRolePermission(this.rolesSource.value, names)])
+            .then(function (_a) {
+            var hasRoles = _a[0], hasPermissions = _a[1];
+            return hasRoles || hasPermissions;
+        });
+    };
+    /**
+     * @param {?} roleName
+     * @return {?}
+     */
+    NgxRolesService.prototype.hasRoleKey = function (roleName) {
+        var _this = this;
+        var /** @type {?} */ promises = [];
+        roleName.forEach(function (key) {
+            if (!!_this.rolesSource.value[key] && !!_this.rolesSource.value[key].validationFunction && isFunction(_this.rolesSource.value[key].validationFunction) && !isPromise(_this.rolesSource.value[key].validationFunction)) {
+                return promises.push(Observable.from(Promise.resolve(((_this.rolesSource.value[key].validationFunction))())).catch(function () {
+                    return Observable.of(false);
+                }));
+            }
+            promises.push(Observable.of(false));
+        });
+        return merge(promises).mergeAll().first(function (data) {
+            return data !== false;
+        }, function () { return true; }, false).toPromise().then(function (data) {
+            return data;
+        });
+    };
+    /**
+     * @param {?} roles
+     * @param {?} roleNames
+     * @return {?}
+     */
+    NgxRolesService.prototype.hasRolePermission = function (roles, roleNames) {
+        var _this = this;
+        return Observable.from(roleNames)
+            .mergeMap(function (key) {
+            if (roles[key] && Array.isArray(roles[key].validationFunction)) {
+                return Observable.from(/** @type {?} */ (roles[key].validationFunction))
+                    .mergeMap(function (permission) {
+                    return _this.permissionsService.hasPermission(permission);
+                })
+                    .every(function (hasPermissions) {
+                    return hasPermissions === true;
+                });
+            }
+            return Observable.of(false);
+        })
+            .first(function (hasPermission) {
+            return hasPermission === true;
+        }, function () { return true; }, false)
+            .toPromise();
+    };
+    NgxRolesService.decorators = [
+        { type: Injectable },
+    ];
+    /**
+     * @nocollapse
+     */
+    NgxRolesService.ctorParameters = function () { return [
+        { type: undefined, decorators: [{ type: Inject, args: [USE_ROLES_STORE,] },] },
+        { type: NgxRolesStore, },
+        { type: NgxPermissionsService, },
+    ]; };
+    return NgxRolesService;
+}());
+
+var NgxPermissionsConfigurationStore = /** @class */ (function () {
+    function NgxPermissionsConfigurationStore() {
+        this.strategiesSource = new BehaviorSubject({});
+        this.strategies$ = this.strategiesSource.asObservable();
+    }
+    NgxPermissionsConfigurationStore.decorators = [
+        { type: Injectable },
+    ];
+    /**
+     * @nocollapse
+     */
+    NgxPermissionsConfigurationStore.ctorParameters = function () { return []; };
+    return NgxPermissionsConfigurationStore;
+}());
+
+var NgxPermissionsPredefinedStrategies = {
+    REMOVE: 'remove',
+    SHOW: 'show'
+};
+
+var USE_CONFIGURATION_STORE = new InjectionToken('USE_CONFIGURATION_STORE');
+var NgxPermissionsConfigurationService = /** @class */ (function () {
+    /**
+     * @param {?=} isolate
+     * @param {?=} configurationStore
+     */
+    function NgxPermissionsConfigurationService(isolate, configurationStore) {
+        if (isolate === void 0) { isolate = false; }
+        this.isolate = isolate;
+        this.configurationStore = configurationStore;
+        this.strategiesSource = this.isolate ? new BehaviorSubject({}) : this.configurationStore.strategiesSource;
+        this.strategies$ = this.strategiesSource.asObservable();
+        this.onAuthorisedDefaultStrategy = this.isolate ? undefined : this.configurationStore.onAuthorisedDefaultStrategy;
+        this.onUnAuthorisedDefaultStrategy = this.isolate ? undefined : this.configurationStore.onUnAuthorisedDefaultStrategy;
+    }
+    /**
+     * @param {?} name
+     * @return {?}
+     */
+    NgxPermissionsConfigurationService.prototype.setDefaultOnAuthorizedStrategy = function (name) {
+        if (this.strategiesSource.value[name] || this.predefinedStrategy(name)) {
+            this.onAuthorisedDefaultStrategy = name;
+        }
+        else {
+            throw new Error("No " + name + " strategy is found please define one");
+        }
+    };
+    /**
+     * @param {?} name
+     * @return {?}
+     */
+    NgxPermissionsConfigurationService.prototype.setDefaultOnUnauthorizedStrategy = function (name) {
+        if (this.strategiesSource.value[name] || this.predefinedStrategy(name)) {
+            this.onUnAuthorisedDefaultStrategy = name;
+        }
+        else {
+            throw new Error("No ' " + name + " ' strategy is found please define one");
+        }
+    };
+    /**
+     * @param {?} key
+     * @param {?} func
+     * @return {?}
+     */
+    NgxPermissionsConfigurationService.prototype.addPermissionStrategy = function (key, func) {
+        this.strategiesSource.value[key] = func;
+    };
+    /**
+     * @param {?} key
+     * @return {?}
+     */
+    NgxPermissionsConfigurationService.prototype.getStrategy = function (key) {
+        return this.strategiesSource.value[key];
+    };
+    /**
+     * @return {?}
+     */
+    NgxPermissionsConfigurationService.prototype.getAllStrategies = function () {
+        return this.strategiesSource.value;
+    };
+    /**
+     * @param {?} strategy
+     * @return {?}
+     */
+    NgxPermissionsConfigurationService.prototype.predefinedStrategy = function (strategy) {
+        return strategy === NgxPermissionsPredefinedStrategies.SHOW || strategy == NgxPermissionsPredefinedStrategies.REMOVE;
+    };
+    NgxPermissionsConfigurationService.decorators = [
+        { type: Injectable },
+    ];
+    /**
+     * @nocollapse
+     */
+    NgxPermissionsConfigurationService.ctorParameters = function () { return [
+        { type: undefined, decorators: [{ type: Inject, args: [USE_CONFIGURATION_STORE,] },] },
+        { type: NgxPermissionsConfigurationStore, },
+    ]; };
+    return NgxPermissionsConfigurationService;
+}());
+
+var NgxPermissionsDirective = /** @class */ (function () {
+    /**
+     * @param {?} permissionsService
+     * @param {?} configurationService
+     * @param {?} rolesService
+     * @param {?} viewContainer
+     * @param {?} templateRef
+     */
+    function NgxPermissionsDirective(permissionsService, configurationService, rolesService, viewContainer, templateRef) {
+        this.permissionsService = permissionsService;
+        this.configurationService = configurationService;
+        this.rolesService = rolesService;
+        this.viewContainer = viewContainer;
+        this.templateRef = templateRef;
+        this.permissionsAuthorized = new EventEmitter();
+        this.permissionsUnauthorized = new EventEmitter();
+        this.firstMergeUnusedRun = 1;
+    }
+    /**
+     * @return {?}
+     */
+    NgxPermissionsDirective.prototype.ngOnInit = function () {
+        this.viewContainer.clear();
+        this.initPermissionSubscription = this.validateExceptOnlyPermissions();
+    };
+    /**
+     * @return {?}
+     */
+    NgxPermissionsDirective.prototype.ngOnDestroy = function () {
+        if (this.initPermissionSubscription) {
+            this.initPermissionSubscription.unsubscribe();
+        }
+    };
+    /**
+     * @return {?}
+     */
+    NgxPermissionsDirective.prototype.validateExceptOnlyPermissions = function () {
+        var _this = this;
+        return this.permissionsService.permissions$
+            .merge(this.rolesService.roles$)
+            .skip(this.firstMergeUnusedRun)
+            .subscribe(function () {
+            if (notEmptyValue(_this.ngxPermissionsExcept)) {
+                _this.validateExceptAndOnlyPermissions();
+                return;
+            }
+            if (notEmptyValue(_this.ngxPermissionsOnly)) {
+                _this.validateOnlyPermissions();
+                return;
+            }
+            _this.handleAuthorisedPermission(_this.getAuthorisedTemplates());
+        });
+    };
+    /**
+     * @return {?}
+     */
+    NgxPermissionsDirective.prototype.validateExceptAndOnlyPermissions = function () {
+        var _this = this;
+        Promise.all([this.permissionsService.hasPermission(this.ngxPermissionsExcept), this.rolesService.hasOnlyRoles(this.ngxPermissionsExcept)])
+            .then(function (_a) {
+            var hasPermission = _a[0], hasRole = _a[1];
+            if (hasPermission || hasRole) {
+                _this.handleUnauthorisedPermission(_this.ngxPermissionsExceptElse || _this.ngxPermissionsElse);
+            }
+            else {
+                if (!!_this.ngxPermissionsOnly) {
+                    throw false;
+                }
+                else {
+                    _this.handleAuthorisedPermission(_this.ngxPermissionsExceptThen || _this.ngxPermissionsThen || _this.templateRef);
+                }
+            }
+        }).catch(function () {
+            if (!!_this.ngxPermissionsOnly) {
+                _this.validateOnlyPermissions();
+            }
+            else {
+                _this.handleAuthorisedPermission(_this.ngxPermissionsExceptThen || _this.ngxPermissionsThen || _this.templateRef);
+            }
+        });
+    };
+    /**
+     * @return {?}
+     */
+    NgxPermissionsDirective.prototype.validateOnlyPermissions = function () {
+        var _this = this;
+        Promise.all([this.permissionsService.hasPermission(this.ngxPermissionsOnly), this.rolesService.hasOnlyRoles(this.ngxPermissionsOnly)])
+            .then(function (_a) {
+            var permissionPr = _a[0], roles = _a[1];
+            if (permissionPr || roles) {
+                _this.handleAuthorisedPermission(_this.ngxPermissionsOnlyThen || _this.ngxPermissionsThen || _this.templateRef);
+            }
+            else {
+                _this.handleUnauthorisedPermission(_this.ngxPermissionsOnlyElse || _this.ngxPermissionsElse);
+            }
+        }).catch(function () {
+            _this.handleUnauthorisedPermission(_this.ngxPermissionsOnlyElse || _this.ngxPermissionsElse);
+        });
+    };
+    /**
+     * @param {?} template
+     * @return {?}
+     */
+    NgxPermissionsDirective.prototype.handleUnauthorisedPermission = function (template) {
+        if (!isBoolean(this.currentAuthorizedState) || this.currentAuthorizedState) {
+            this.currentAuthorizedState = false;
+            this.permissionsUnauthorized.emit();
+            if (this.unauthorisedStrategyDefined()) {
+                if (isString(this.unauthorisedStrategyDefined())) {
+                    this.applyStrategy(this.unauthorisedStrategyDefined());
+                }
+                else if (isFunction(this.unauthorisedStrategyDefined())) {
+                    this.showTemplateBlockInView(this.templateRef);
+                    ((this.unauthorisedStrategyDefined()))(this.templateRef);
+                }
+                return;
+            }
+            if (this.configurationService.onUnAuthorisedDefaultStrategy && this.noElseBlockDefined()) {
+                this.applyStrategy(this.configurationService.onUnAuthorisedDefaultStrategy);
+            }
+            else {
+                this.showTemplateBlockInView(template);
+            }
+        }
+    };
+    /**
+     * @param {?} template
+     * @return {?}
+     */
+    NgxPermissionsDirective.prototype.handleAuthorisedPermission = function (template) {
+        if (!isBoolean(this.currentAuthorizedState) || !this.currentAuthorizedState) {
+            this.currentAuthorizedState = true;
+            this.permissionsAuthorized.emit();
+            if (this.onlyAuthorisedStrategyDefined()) {
+                if (isString(this.onlyAuthorisedStrategyDefined())) {
+                    this.applyStrategy(this.onlyAuthorisedStrategyDefined());
+                }
+                else if (isFunction(this.onlyAuthorisedStrategyDefined())) {
+                    this.showTemplateBlockInView(this.templateRef);
+                    ((this.onlyAuthorisedStrategyDefined()))(this.templateRef);
+                }
+                return;
+            }
+            if (this.configurationService.onAuthorisedDefaultStrategy && this.noThenBlockDefined()) {
+                this.applyStrategy(this.configurationService.onAuthorisedDefaultStrategy);
+            }
+            else {
+                this.showTemplateBlockInView(template);
+            }
+        }
+    };
+    /**
+     * @param {?} template
+     * @return {?}
+     */
+    NgxPermissionsDirective.prototype.showTemplateBlockInView = function (template) {
+        this.viewContainer.clear();
+        if (!template) {
+            return;
+        }
+        this.viewContainer.createEmbeddedView(template);
+    };
+    /**
+     * @return {?}
+     */
+    NgxPermissionsDirective.prototype.getAuthorisedTemplates = function () {
+        return this.ngxPermissionsOnlyThen
+            || this.ngxPermissionsExceptThen
+            || this.ngxPermissionsThen
+            || this.templateRef;
+    };
+    /**
+     * @return {?}
+     */
+    NgxPermissionsDirective.prototype.noElseBlockDefined = function () {
+        return !this.ngxPermissionsExceptElse || !this.ngxPermissionsElse;
+    };
+    /**
+     * @return {?}
+     */
+    NgxPermissionsDirective.prototype.noThenBlockDefined = function () {
+        return !this.ngxPermissionsExceptThen || !this.ngxPermissionsThen;
+    };
+    /**
+     * @return {?}
+     */
+    NgxPermissionsDirective.prototype.onlyAuthorisedStrategyDefined = function () {
+        return this.ngxPermissionsOnlyAuthorisedStrategy ||
+            this.ngxPermissionsExceptAuthorisedStrategy ||
+            this.ngxPermissionsAuthorisedStrategy;
+    };
+    /**
+     * @return {?}
+     */
+    NgxPermissionsDirective.prototype.unauthorisedStrategyDefined = function () {
+        return this.ngxPermissionsOnlyUnauthorisedStrategy ||
+            this.ngxPermissionsExceptUnauthorisedStrategy ||
+            this.ngxPermissionsUnauthorisedStrategy;
+    };
+    /**
+     * @param {?} str
+     * @return {?}
+     */
+    NgxPermissionsDirective.prototype.applyStrategy = function (str) {
+        if (str === NgxPermissionsPredefinedStrategies.SHOW) {
+            this.showTemplateBlockInView(this.templateRef);
+            return;
+        }
+        if (str === NgxPermissionsPredefinedStrategies.REMOVE) {
+            this.viewContainer.clear();
+            return;
+        }
+        var /** @type {?} */ strategy = this.configurationService.getStrategy(str);
+        this.showTemplateBlockInView(this.templateRef);
+        strategy(this.templateRef);
+    };
+    NgxPermissionsDirective.decorators = [
+        { type: Directive, args: [{
+                    selector: '[ngxPermissionsOnly],[ngxPermissionsExcept]'
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    NgxPermissionsDirective.ctorParameters = function () { return [
+        { type: NgxPermissionsService, },
+        { type: NgxPermissionsConfigurationService, },
+        { type: NgxRolesService, },
+        { type: ViewContainerRef, },
+        { type: TemplateRef, },
+    ]; };
+    NgxPermissionsDirective.propDecorators = {
+        'ngxPermissionsOnly': [{ type: Input },],
+        'ngxPermissionsOnlyThen': [{ type: Input },],
+        'ngxPermissionsOnlyElse': [{ type: Input },],
+        'ngxPermissionsExcept': [{ type: Input },],
+        'ngxPermissionsExceptElse': [{ type: Input },],
+        'ngxPermissionsExceptThen': [{ type: Input },],
+        'ngxPermissionsThen': [{ type: Input },],
+        'ngxPermissionsElse': [{ type: Input },],
+        'ngxPermissionsOnlyAuthorisedStrategy': [{ type: Input },],
+        'ngxPermissionsOnlyUnauthorisedStrategy': [{ type: Input },],
+        'ngxPermissionsExceptUnauthorisedStrategy': [{ type: Input },],
+        'ngxPermissionsExceptAuthorisedStrategy': [{ type: Input },],
+        'ngxPermissionsUnauthorisedStrategy': [{ type: Input },],
+        'ngxPermissionsAuthorisedStrategy': [{ type: Input },],
+        'permissionsAuthorized': [{ type: Output },],
+        'permissionsUnauthorized': [{ type: Output },],
+    };
+    return NgxPermissionsDirective;
+}());
+
+var __assign$2 = (undefined && undefined.__assign) || Object.assign || function(t) {
+    for (var s, i = 1, n = arguments.length; i < n; i++) {
+        s = arguments[i];
+        for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+            t[p] = s[p];
+    }
+    return t;
+};
+var NgxPermissionsGuard = /** @class */ (function () {
+    /**
+     * @param {?} permissionsService
+     * @param {?} rolesService
+     * @param {?} router
+     */
+    function NgxPermissionsGuard(permissionsService, rolesService, router) {
+        this.permissionsService = permissionsService;
+        this.rolesService = rolesService;
+        this.router = router;
+    }
+    /**
+     * @param {?} route
+     * @param {?} state
+     * @return {?}
+     */
+    NgxPermissionsGuard.prototype.canActivate = function (route, state) {
+        return this.hasPermissions(route, state);
+    };
+    /**
+     * @param {?} childRoute
+     * @param {?} state
+     * @return {?}
+     */
+    NgxPermissionsGuard.prototype.canActivateChild = function (childRoute, state) {
+        return this.hasPermissions(childRoute, state);
+    };
+    /**
+     * @param {?} route
+     * @return {?}
+     */
+    NgxPermissionsGuard.prototype.canLoad = function (route) {
+        return this.hasPermissions(route);
+    };
+    /**
+     * @param {?} route
+     * @param {?=} state
+     * @return {?}
+     */
+    NgxPermissionsGuard.prototype.hasPermissions = function (route, state) {
+        var /** @type {?} */ purePermissions = !!route && route.data ? /** @type {?} */ (route.data['permissions']) : {};
+        var /** @type {?} */ permissions = this.transformPermission(purePermissions, route, state);
+        if (this.isParameterAvailable(permissions.except)) {
+            return this.passingExceptPermissionsValidation(permissions, route, state);
+        }
+        if (this.isParameterAvailable(permissions.only)) {
+            return this.passingOnlyPermissionsValidation(permissions, route, state);
+        }
+        return true;
+    };
+    /**
+     * @param {?} purePermissions
+     * @param {?} route
+     * @param {?} state
+     * @return {?}
+     */
+    NgxPermissionsGuard.prototype.transformPermission = function (purePermissions, route, state) {
+        var /** @type {?} */ permissions = __assign$2({}, purePermissions);
+        if (isFunction(permissions.except)) {
+            permissions.except = ((permissions.except))(route, state);
+        }
+        if (isFunction(permissions.only)) {
+            permissions.only = ((permissions.only))(route, state);
+        }
+        permissions.except = transformStringToArray(permissions.except);
+        permissions.only = transformStringToArray(permissions.only);
+        return permissions;
+    };
+    /**
+     * @param {?} permission
+     * @return {?}
+     */
+    NgxPermissionsGuard.prototype.isParameterAvailable = function (permission) {
+        return !!(permission) && permission.length > 0;
+    };
+    /**
+     * @param {?} permissions
+     * @param {?} route
+     * @param {?} state
+     * @return {?}
+     */
+    NgxPermissionsGuard.prototype.passingExceptPermissionsValidation = function (permissions, route, state) {
+        var _this = this;
+        if (!!permissions.redirectTo && ((isFunction(permissions.redirectTo)) || (isPlainObject(permissions.redirectTo) && !this.isRedirectionWithParameters(permissions.redirectTo)))) {
+            var /** @type {?} */ failedPermission_1 = '';
+            return Observable.from(/** @type {?} */ (permissions.except))
+                .mergeMap(function (data) {
+                return Observable.forkJoin([_this.permissionsService.hasPermission(/** @type {?} */ (data)), _this.rolesService.hasOnlyRoles(/** @type {?} */ (data))])
+                    .do(function (hasPerm) {
+                    var /** @type {?} */ dontHavePermissions = hasPerm.every(function (data) {
+                        return data === false;
+                    });
+                    if (!dontHavePermissions) {
+                        failedPermission_1 = data;
+                    }
+                });
+            }).first(function (data) {
+                return data.some(function (data) {
+                    return data === true;
+                });
+            }, function () { return true; }, false).mergeMap(function (isAllFalse) {
+                if (!!failedPermission_1) {
+                    _this.handleRedirectOfFailedPermission(permissions, failedPermission_1, route, state);
+                    return Observable.of(false);
+                }
+                if (!isAllFalse && permissions.only) {
+                    return _this.onlyRedirectCheck(permissions, route, state);
+                }
+                return Observable.of(!isAllFalse);
+            }).toPromise();
+        }
+        return Promise.all([this.permissionsService.hasPermission(/** @type {?} */ (permissions.except)), this.rolesService.hasOnlyRoles(/** @type {?} */ (permissions.except))])
+            .then(function (_a) {
+            var permissionsPr = _a[0], roles = _a[1];
+            if (permissionsPr || roles) {
+                if (permissions.redirectTo) {
+                    _this.redirectToAnotherRoute(permissions.redirectTo, route, state);
+                    return false;
+                }
+                else {
+                    return false;
+                }
+            }
+            else {
+                if (permissions.only) {
+                    return _this.checkOnlyPermissions(permissions, route, state);
+                }
+                return true;
+            }
+        });
+    };
+    /**
+     * @param {?} redirectTo
+     * @param {?} route
+     * @param {?=} state
+     * @param {?=} failedPermissionName
+     * @return {?}
+     */
+    NgxPermissionsGuard.prototype.redirectToAnotherRoute = function (redirectTo, route, state, failedPermissionName) {
+        if (isFunction(redirectTo)) {
+            redirectTo = ((redirectTo))(failedPermissionName, route, state);
+        }
+        if (this.isRedirectionWithParameters(redirectTo)) {
+            if (this.hasNavigationExtrasAsFunction(redirectTo)) {
+                ((redirectTo)).navigationExtras = ((((redirectTo)).navigationExtras))(route, state);
+            }
+            if (this.hasNavigationCommandsAsFunction(redirectTo)) {
+                ((redirectTo)).navigationCommands = ((((redirectTo)).navigationCommands))(route, state);
+            }
+            this.router.navigate(((((redirectTo)).navigationCommands)), ((((redirectTo)).navigationExtras)));
+            return;
+        }
+        if (Array.isArray(redirectTo)) {
+            this.router.navigate(redirectTo);
+        }
+        else {
+            this.router.navigate([redirectTo]);
+        }
+    };
+    /**
+     * @param {?} object
+     * @return {?}
+     */
+    NgxPermissionsGuard.prototype.isRedirectionWithParameters = function (object) {
+        return isPlainObject(object) && (!!object.navigationCommands || !!object.navigationExtras);
+    };
+    /**
+     * @param {?} redirectTo
+     * @return {?}
+     */
+    NgxPermissionsGuard.prototype.hasNavigationExtrasAsFunction = function (redirectTo) {
+        return !!((redirectTo)).navigationExtras && isFunction(((redirectTo)).navigationExtras);
+    };
+    /**
+     * @param {?} redirectTo
+     * @return {?}
+     */
+    NgxPermissionsGuard.prototype.hasNavigationCommandsAsFunction = function (redirectTo) {
+        return !!((redirectTo)).navigationCommands && isFunction(((redirectTo)).navigationCommands);
+    };
+    /**
+     * @param {?} permissions
+     * @param {?} route
+     * @param {?=} state
+     * @return {?}
+     */
+    NgxPermissionsGuard.prototype.onlyRedirectCheck = function (permissions, route, state) {
+        var _this = this;
+        var /** @type {?} */ failedPermission = '';
+        return Observable.from(permissions.only)
+            .mergeMap(function (data) {
+            return Observable.forkJoin([_this.permissionsService.hasPermission(/** @type {?} */ (data)), _this.rolesService.hasOnlyRoles(/** @type {?} */ (data))])
+                .do(function (hasPerm) {
+                var /** @type {?} */ failed = hasPerm.every(function (data) {
+                    return data === false;
+                });
+                if (failed) {
+                    failedPermission = data;
+                }
+            });
+        })
+            .first(function (data) {
+            if (isFunction(permissions.redirectTo)) {
+                return data.some(function (data) {
+                    return data === true;
+                });
+            }
+            return data.every(function (data) {
+                return data === false;
+            });
+        }, function () { return true; }, false)
+            .mergeMap(function (pass) {
+            if (isFunction(permissions.redirectTo)) {
+                if (pass) {
+                    return Observable.of(true);
+                }
+                else {
+                    _this.handleRedirectOfFailedPermission(permissions, failedPermission, route, state);
+                    return Observable.of(false);
+                }
+            }
+            else {
+                if (!!failedPermission) {
+                    _this.handleRedirectOfFailedPermission(permissions, failedPermission, route, state);
+                }
+                return Observable.of(!pass);
+            }
+        }).toPromise();
+    };
+    /**
+     * @param {?} permissions
+     * @param {?} failedPermission
+     * @param {?} route
+     * @param {?=} state
+     * @return {?}
+     */
+    NgxPermissionsGuard.prototype.handleRedirectOfFailedPermission = function (permissions, failedPermission, route, state) {
+        if (this.isFailedPermissionPropertyOfRedirectTo(permissions, failedPermission)) {
+            this.redirectToAnotherRoute(((permissions.redirectTo))[failedPermission], route, state, failedPermission);
+        }
+        else {
+            if (isFunction(permissions.redirectTo)) {
+                this.redirectToAnotherRoute(((permissions.redirectTo)), route, state, failedPermission);
+            }
+            else {
+                this.redirectToAnotherRoute(((permissions.redirectTo))['default'], route, state, failedPermission);
+            }
+        }
+    };
+    /**
+     * @param {?} permissions
+     * @param {?} failedPermission
+     * @return {?}
+     */
+    NgxPermissionsGuard.prototype.isFailedPermissionPropertyOfRedirectTo = function (permissions, failedPermission) {
+        return !!permissions.redirectTo && permissions.redirectTo[(failedPermission)];
+    };
+    /**
+     * @param {?} purePermissions
+     * @param {?} route
+     * @param {?=} state
+     * @return {?}
+     */
+    NgxPermissionsGuard.prototype.checkOnlyPermissions = function (purePermissions, route, state) {
+        var _this = this;
+        var /** @type {?} */ permissions = __assign$2({}, purePermissions);
+        return Promise.all([this.permissionsService.hasPermission(/** @type {?} */ (permissions.only)), this.rolesService.hasOnlyRoles(/** @type {?} */ (permissions.only))])
+            .then(function (_a) {
+            var permissionsPr = _a[0], roles = _a[1];
+            if (permissionsPr || roles) {
+                return true;
+            }
+            else {
+                if (permissions.redirectTo) {
+                    _this.redirectToAnotherRoute(permissions.redirectTo, route, state);
+                    return false;
+                }
+                else {
+                    return false;
+                }
+            }
+        });
+    };
+    /**
+     * @param {?} permissions
+     * @param {?} route
+     * @param {?=} state
+     * @return {?}
+     */
+    NgxPermissionsGuard.prototype.passingOnlyPermissionsValidation = function (permissions, route, state) {
+        if ((isFunction(permissions.redirectTo) || isPlainObject(permissions.redirectTo) && !this.isRedirectionWithParameters(permissions.redirectTo))) {
+            return this.onlyRedirectCheck(permissions, route, state);
+        }
+        return this.checkOnlyPermissions(permissions, route, state);
+    };
+    /**
+     * @param {?} redirectTo
+     * @return {?}
+     */
+    NgxPermissionsGuard.prototype.hasRedirectToAsFunctionOrObject = function (redirectTo) {
+        return isFunction(redirectTo) || isPlainObject(redirectTo) && !this.isRedirectionWithParameters(redirectTo);
+    };
+    NgxPermissionsGuard.decorators = [
+        { type: Injectable },
+    ];
+    /**
+     * @nocollapse
+     */
+    NgxPermissionsGuard.ctorParameters = function () { return [
+        { type: NgxPermissionsService, },
+        { type: NgxRolesService, },
+        { type: Router, },
+    ]; };
+    return NgxPermissionsGuard;
+}());
+
+var NgxPermissionsAllowStubDirective = /** @class */ (function () {
+    /**
+     * @param {?} viewContainer
+     * @param {?} templateRef
+     */
+    function NgxPermissionsAllowStubDirective(viewContainer, templateRef) {
+        this.viewContainer = viewContainer;
+        this.templateRef = templateRef;
+        this.permissionsAuthorized = new EventEmitter();
+        this.permissionsUnauthorized = new EventEmitter();
+    }
+    /**
+     * @return {?}
+     */
+    NgxPermissionsAllowStubDirective.prototype.ngOnInit = function () {
+        this.viewContainer.clear();
+        if (this.getAuthorizedTemplate()) {
+            this.viewContainer.createEmbeddedView(this.getAuthorizedTemplate());
+        }
+        this.permissionsUnauthorized.emit();
+    };
+    /**
+     * @return {?}
+     */
+    NgxPermissionsAllowStubDirective.prototype.getAuthorizedTemplate = function () {
+        return this.ngxPermissionsOnlyThen ||
+            this.ngxPermissionsExceptThen ||
+            this.ngxPermissionsThen ||
+            this.templateRef;
+    };
+    NgxPermissionsAllowStubDirective.decorators = [
+        { type: Directive, args: [{
+                    selector: '[ngxPermissionsOnly],[ngxPermissionsExcept]'
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    NgxPermissionsAllowStubDirective.ctorParameters = function () { return [
+        { type: ViewContainerRef, },
+        { type: TemplateRef, },
+    ]; };
+    NgxPermissionsAllowStubDirective.propDecorators = {
+        'ngxPermissionsOnly': [{ type: Input },],
+        'ngxPermissionsOnlyThen': [{ type: Input },],
+        'ngxPermissionsOnlyElse': [{ type: Input },],
+        'ngxPermissionsExcept': [{ type: Input },],
+        'ngxPermissionsExceptElse': [{ type: Input },],
+        'ngxPermissionsExceptThen': [{ type: Input },],
+        'ngxPermissionsThen': [{ type: Input },],
+        'ngxPermissionsElse': [{ type: Input },],
+        'permissionsAuthorized': [{ type: Output },],
+        'permissionsUnauthorized': [{ type: Output },],
+    };
+    return NgxPermissionsAllowStubDirective;
+}());
+
+var NgxPermissionsRestrictStubDirective = /** @class */ (function () {
+    /**
+     * @param {?} viewContainer
+     */
+    function NgxPermissionsRestrictStubDirective(viewContainer) {
+        this.viewContainer = viewContainer;
+        this.permissionsAuthorized = new EventEmitter();
+        this.permissionsUnauthorized = new EventEmitter();
+    }
+    /**
+     * @return {?}
+     */
+    NgxPermissionsRestrictStubDirective.prototype.ngOnInit = function () {
+        this.viewContainer.clear();
+        if (this.getUnAuthorizedTemplate()) {
+            this.viewContainer.createEmbeddedView(this.getUnAuthorizedTemplate());
+        }
+        this.permissionsUnauthorized.emit();
+    };
+    /**
+     * @return {?}
+     */
+    NgxPermissionsRestrictStubDirective.prototype.getUnAuthorizedTemplate = function () {
+        return this.ngxPermissionsOnlyElse ||
+            this.ngxPermissionsExceptElse ||
+            this.ngxPermissionsElse;
+    };
+    NgxPermissionsRestrictStubDirective.decorators = [
+        { type: Directive, args: [{
+                    selector: '[ngxPermissionsOnly],[ngxPermissionsExcept]'
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    NgxPermissionsRestrictStubDirective.ctorParameters = function () { return [
+        { type: ViewContainerRef, },
+    ]; };
+    NgxPermissionsRestrictStubDirective.propDecorators = {
+        'ngxPermissionsOnly': [{ type: Input },],
+        'ngxPermissionsOnlyThen': [{ type: Input },],
+        'ngxPermissionsOnlyElse': [{ type: Input },],
+        'ngxPermissionsExcept': [{ type: Input },],
+        'ngxPermissionsExceptElse': [{ type: Input },],
+        'ngxPermissionsExceptThen': [{ type: Input },],
+        'ngxPermissionsThen': [{ type: Input },],
+        'ngxPermissionsElse': [{ type: Input },],
+        'permissionsAuthorized': [{ type: Output },],
+        'permissionsUnauthorized': [{ type: Output },],
+    };
+    return NgxPermissionsRestrictStubDirective;
+}());
+
+var NgxRole = /** @class */ (function () {
+    /**
+     * @param {?} name
+     * @param {?} validationFunction
+     */
+    function NgxRole(name, validationFunction) {
+        this.name = name;
+        this.validationFunction = validationFunction;
+    }
+    return NgxRole;
+}());
+
+var NgxPermissionsModule = /** @class */ (function () {
+    function NgxPermissionsModule() {
+    }
+    /**
+     * @param {?=} config
+     * @return {?}
+     */
+    NgxPermissionsModule.forRoot = function (config) {
+        if (config === void 0) { config = {}; }
+        return {
+            ngModule: NgxPermissionsModule,
+            providers: [
+                NgxPermissionsStore,
+                NgxRolesStore,
+                NgxPermissionsConfigurationStore,
+                NgxPermissionsService,
+                NgxPermissionsGuard,
+                NgxRolesService,
+                NgxPermissionsConfigurationService,
+                { provide: USE_PERMISSIONS_STORE, useValue: config.permissionsIsolate },
+                { provide: USE_ROLES_STORE, useValue: config.rolesIsolate },
+                { provide: USE_CONFIGURATION_STORE, useValue: config.configurationIsolate },
+            ]
+        };
+    };
+    /**
+     * @param {?=} config
+     * @return {?}
+     */
+    NgxPermissionsModule.forChild = function (config) {
+        if (config === void 0) { config = {}; }
+        return {
+            ngModule: NgxPermissionsModule,
+            providers: [
+                { provide: USE_PERMISSIONS_STORE, useValue: config.permissionsIsolate },
+                { provide: USE_ROLES_STORE, useValue: config.rolesIsolate },
+                { provide: USE_CONFIGURATION_STORE, useValue: config.configurationIsolate },
+                NgxPermissionsConfigurationService,
+                NgxPermissionsService,
+                NgxRolesService,
+                NgxPermissionsGuard
+            ]
+        };
+    };
+    NgxPermissionsModule.decorators = [
+        { type: NgModule, args: [{
+                    imports: [],
+                    declarations: [
+                        NgxPermissionsDirective
+                    ],
+                    exports: [
+                        NgxPermissionsDirective
+                    ]
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    NgxPermissionsModule.ctorParameters = function () { return []; };
+    return NgxPermissionsModule;
+}());
+var NgxPermissionsAllowStubModule = /** @class */ (function () {
+    function NgxPermissionsAllowStubModule() {
+    }
+    NgxPermissionsAllowStubModule.decorators = [
+        { type: NgModule, args: [{
+                    imports: [],
+                    declarations: [
+                        NgxPermissionsAllowStubDirective
+                    ],
+                    exports: [
+                        NgxPermissionsAllowStubDirective
+                    ]
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    NgxPermissionsAllowStubModule.ctorParameters = function () { return []; };
+    return NgxPermissionsAllowStubModule;
+}());
+var NgxPermissionsRestrictStubModule = /** @class */ (function () {
+    function NgxPermissionsRestrictStubModule() {
+    }
+    NgxPermissionsRestrictStubModule.decorators = [
+        { type: NgModule, args: [{
+                    imports: [],
+                    declarations: [
+                        NgxPermissionsRestrictStubDirective
+                    ],
+                    exports: [
+                        NgxPermissionsRestrictStubDirective
+                    ]
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    NgxPermissionsRestrictStubModule.ctorParameters = function () { return []; };
+    return NgxPermissionsRestrictStubModule;
+}());
+
+export { NgxPermissionsModule, NgxPermissionsAllowStubModule, NgxPermissionsRestrictStubModule, NgxRolesStore, NgxPermissionsStore, NgxPermissionsConfigurationStore, NgxPermissionsDirective, USE_PERMISSIONS_STORE, NgxPermissionsService, USE_ROLES_STORE, NgxRolesService, USE_CONFIGURATION_STORE, NgxPermissionsConfigurationService, NgxPermissionsGuard, NgxRole, NgxPermissionsAllowStubDirective, NgxPermissionsRestrictStubDirective, NgxPermissionsPredefinedStrategies };

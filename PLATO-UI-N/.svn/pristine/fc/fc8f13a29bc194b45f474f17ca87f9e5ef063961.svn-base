@@ -1,0 +1,138 @@
+[
+    {
+        "total_test_cases": "4",
+        "failed": "2",
+        "passed": "2",
+        "components": [
+            {
+                "componentid": "New Business",
+                "componentsArray": [
+                    [
+                        {
+                            "Web Component": "1"
+                        },
+                        {
+                            "Properties": "To verify in ENl screen"
+                        },
+                        {
+                            "Chrome": "In EN Screen All data filled corrctly"
+                        },
+                        {
+                            "IE": "In EN Screen All data filled corrctly"
+                        },
+                        {
+                            "Status": "Pass"
+                        }
+                    ],
+                    [
+                        {
+                            "Web Component": "2"
+                        },
+                        {
+                            "Properties": "Clicking On Accept Button Verification"
+                        },
+                        {
+                            "Chrome": "Clicking On Accept Button Should Navigate Screen To Early Kockout  Page"
+                        },
+                        {
+                            "IE": "Clicking On Accept Button Is Navigated Screen To Early Kockout Page As Expected"
+                        },
+                        {
+                            "Status": "Pass"
+                        }
+                    ]
+                ],
+                "overallStatus": "fail"
+            },
+            {
+                "componentid": "MTA",
+                "componentsArray": [
+                    [
+                        {
+                            "Web Component": "1"
+                        },
+                        {
+                            "Properties": "To verify in ENl screen"
+                        },
+                        {
+                            "Chrome": "In EN Screen All data filled corrctly"
+                        },
+                        {
+                            "IE": "In EN Screen All data filled corrctly"
+                        },
+                        {
+                            "Status": "Pass"
+                        }
+                    ],
+                    [
+                        {
+                            "Web Component": "2"
+                        },
+                        {
+                            "Properties": "Clicking On Accept Button Verification"
+                        },
+                        {
+                            "Chrome": "Clicking On Accept Button Should Navigate Screen To Early Kockout  Page"
+                        },
+                        {
+                            "IE": "Clicking On Accept Button Is Navigated Screen To Early Kockout Page As Expected"
+                        },
+                        {
+                            "Status": "Pass"
+                        }
+                    ]
+                ],
+                "overallStatus": "pass"
+            }
+        ],
+        "scenario_description": "TS03_Level3_UW_101"
+    },
+ {
+        "total_test_cases": "5",
+        "failed": "3",
+        "passed": "2",
+        "components": [
+            {
+                "componentid": "Quote",
+                "componentsArray": [
+                    [
+                        {
+                            "Web Component": "1"
+                        },
+                        {
+                            "Properties": "To verify in ENl screen"
+                        },
+                        {
+                            "Chrome": "In EN Screen All data filled corrctly"
+                        },
+                        {
+                            "IE": "In EN Screen All data filled corrctly"
+                        },
+                        {
+                            "Status": "Pass"
+                        }
+                    ],
+                    [
+                        {
+                            "Web Component": "2"
+                        },
+                        {
+                            "Properties": "Clicking On Accept Button Verification"
+                        },
+                        {
+                            "Chrome": "Clicking On Accept Button Should Navigate Screen To Early Kockout  Page"
+                        },
+                        {
+                            "IE": "Clicking On Accept Button Is Navigated Screen To Early Kockout Page As Expected"
+                        },
+                        {
+                            "Status": "Pass"
+                        }
+                    ]
+                ],
+                "overallStatus": "fail"
+            }
+        ],
+        "scenario_description": "TS02_Level2_UW_102"
+    }
+]

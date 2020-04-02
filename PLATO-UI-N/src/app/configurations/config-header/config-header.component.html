@@ -1,0 +1,84 @@
+<nav class="navbar navbar-default" id="myNavbar" [ngStyle]="{ 'background-image': 'url(' + account_image + ')'}">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#"> <img class="img-responsive" id="plato-logo" src="../../assets/Plato.png"> </a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <div class="nav navbar-nav" id="leftMenu">
+          <button mat-icon-button id="iconBtn" [routerLink]="['/dashboard']"> <mat-icon> home </mat-icon> </button>
+          <button mat-icon-button id="iconBtn" [routerLink]="['/config']"> <mat-icon> settings </mat-icon> </button>
+      </div>
+
+      <div class="navbar-form navbar-left">
+        <button mat-icon-button id="menuBtn" [matMenuTriggerFor]="userMenu" class="pull-right" > <img class="img-circle img-responsive" style="height:30px;" src="{{user_pic}}"> </button>
+      </div>
+
+      <ul class="nav navbar-nav navbar-right">
+        <li><li> <img class="img-responsive" id="account-logo" src="{{account_logo}}" > </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<a id="menuBtn" [matMenuTriggerFor]="portfolio" style="margin-left:0.5%;"> Portfolio </a> >
+<a id="menuBtn" [matMenuTriggerFor]="account"> Acocunt </a> >
+<a id="menuBtn" [matMenuTriggerFor]="project"> Project </a> >
+
+<!-- portfoliio menu -->
+<mat-menu #portfolio="matMenu" id="myMenu">
+  <button mat-menu-item >Portfolio 1</button>
+  <button mat-menu-item >Portfolio 2</button>
+  <button mat-menu-item >Portfolio 3</button>
+  <button mat-menu-item >Portfolio 4</button>
+</mat-menu>
+
+<mat-menu #Portfolio="matMenu">
+  <button mat-menu-item id="myMenuBtn">Account 1</button>
+  <button mat-menu-item id="myMenuBtn">Account 2</button>
+  <button mat-menu-item id="myMenuBtn">Account 3</button>
+  <button mat-menu-item id="myMenuBtn">Account 4</button>
+</mat-menu>
+
+<mat-menu #account="matMenu">
+  <button mat-menu-item id="myMenuBtn">Account 1</button>
+  <button mat-menu-item id="myMenuBtn">Account 2</button>
+  <button mat-menu-item id="myMenuBtn">Account 3</button>
+  <button mat-menu-item id="myMenuBtn">Account 4</button>
+</mat-menu>
+
+<!-- projects menu -->
+<mat-menu #project="matMenu" id="myMenu">
+  <button mat-menu-item id="myMenuBtn">Project 1</button>
+  <button mat-menu-item id="myMenuBtn">Project 2</button>
+  <button mat-menu-item id="myMenuBtn">Project 3</button>
+  <button mat-menu-item id="myMenuBtn">Project 4</button>
+  <button mat-menu-item id="myMenuBtn">Project 5</button>
+</mat-menu>
+
+<mat-menu #userMenu="matMenu" id="myMenu" >
+  <figure class="text-center">
+    <img class="img-circle img -responsive" style="height:90px;" src="{{user_pic}}">
+    <figcaption style="margin:1%;">Sohail M. - Senior Solution Architect <br> <span> Member since May, 2005 </span> </figcaption>
+  </figure>
+  <button mat-menu-item [matMenuTriggerFor]="role" id="myMenuBtn" >
+    <mat-icon id="myMenuBtn" > accessibility </mat-icon> Roles
+  </button>
+  <button mat-menu-item [routerLink]="['/user-details']" id="myMenuBtn" > <mat-icon id="myMenuBtn" > account_circle </mat-icon> Account Details </button>
+  <button mat-menu-item (click)="logout()" id="myMenuBtn" > <mat-icon id="myMenuBtn" > eject </mat-icon> Sign Out </button>
+</mat-menu>
+<mat-menu #role="matMenu">
+  <ul *ngFor="let role of roles" class="list-unstyled">
+    <button mat-menu-item *ngIf="role.roleName === 'Admin'" [matMenuTriggerFor]="admin" id="myMenuBtn" > {{ role.roleName }} </button>
+    <button mat-menu-item *ngIf="!(role.roleName === 'Admin')" id="myMenuBtn" > {{ role.roleName }} </button>
+  </ul>
+</mat-menu>
+<mat-menu #admin="matMenu">
+  <button mat-menu-item id="myMenuBtn" [routerLink]="['/config']" > Configurations </button>
+</mat-menu>

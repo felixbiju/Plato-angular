@@ -1,0 +1,52 @@
+<div class="login-wrap ">
+  <div class="login-html w3-animate-zoom">
+    <div class="row">
+      <div class="col-md-12  login-form">
+        <img src = "../../assets/images/plato_logo_light_blue.png" class="login-icon"/>
+        <hr>
+        <form (submit)='onLoginSubmit()' #form="ngForm">
+          <mat-input-container>
+              <input matInput class="myInput" type="text" placeholder="Enter Your Username" [(ngModel)]="username" name="username" required>
+          </mat-input-container>
+          <mat-input-container>
+                <input matInput class="pwd" type="password" placeholder="Enter Your Password" [(ngModel)]="password" name="password" required>
+          </mat-input-container>
+          <button id="login_button" mat-raised-button color="accent" type="submit" [disabled]="form.invalid" onclick="changebg()">
+              Log In </button>
+          <!-- <a class="forgetPassword" matTooltip="Click here to reset password" matTooltipPosition="below" onclick="document.getElementById('modal01').style.display='block'">
+                  Forget Password? </a> -->
+        </form>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- modal for forgot password -->
+<div id="modal01" class="w3-modal modal-sm">
+  <div class="w3-modal-content w3-animate-zoom">
+    <header class="w3-container">
+      <a onclick="document.getElementById('modal01').style.display='none'" class="modal-close">
+        <svg viewBox="0 0 24 24">
+          <path d="M19 6.41l-1.41-1.41-5.59 5.59-5.59-5.59-1.41 1.41 5.59 5.59-5.59 5.59 1.41 1.41 5.59-5.59 5.59 5.59 1.41-1.41-5.59-5.59z"
+          />
+          <path d="M0 0h24v24h-24z" fill="none" />
+        </svg>
+      </a>
+      <h2>Forget Password</h2>
+    </header>
+    <div class="w3-container modal-content customScroll text-center">
+      <mat-form-field class="input-full-width" style="margin: 15px auto;">
+        <input matInput placeholder="Enter Username or Email-Id" [(ngModel)]="username" name="username" style="padding: 5px 0px;color: black !important;opacity: 1;font-weight: normal;border-radius: unset;">
+      </mat-form-field>
+    </div>
+    <footer class="w3-container">
+        <button class="btn mat-raised-button mat-primary" color="primary" mat-raised-button onclick="document.getElementById('confirmBox01').style.display='none'">
+          Cancel
+        </button>
+        <button class="btn mat-raised-button mat-primary" color="primary" mat-raised-button (click)="getPassword(username)">
+            Get Password
+        </button>
+      </footer>
+  </div>
+</div>

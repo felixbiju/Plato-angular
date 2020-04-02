@@ -1,0 +1,101 @@
+
+.divederchild mat-card {
+    margin: 2% auto;
+    padding: 0px !important;
+    border: 1px solid #ccc;
+}
+
+.modal-lg .w3-modal-content {
+    border-top-right-radius: 25px;
+    border-bottom-left-radius: 25px;
+    box-shadow: 0px 0px 44px 5px rgba(0, 0, 0, 0.37);
+    border: 1px solid #7d7d7d;
+    width: 100% !important;
+}
+
+.divederchild mat-card:hover {
+    border: 1px solid rgba(131, 49, 49, 0.658);
+}
+
+h6 {
+    text-align: center;
+    word-wrap: break-word;
+}
+
+.row {
+    margin: 1% auto !important;
+}
+
+.myheading {
+    background-color: #1094d5;
+    color: white;
+    font-size: 12px;
+    width: 100%;
+    padding: 0.5%;
+    line-height: 12px;
+    margin-bottom: 1px;
+    margin-top: 15px;
+}
+.mytitle{
+    margin-left: 22px;
+}
+.min-max_button{
+    float: left !important;
+    height: 20px;
+    width: 20px;
+    position: absolute;
+    top: 16px;
+    left: 16px;
+
+}
+
+.techdebt_header a,
+.techdebt_header a:hover {
+    color: #fff;
+}
+
+.technicaldebtcard {
+    border: 1px solid #ccc;
+    margin: 1% auto;
+    padding: 0px !important;
+    width: 50%;
+}
+
+.technicaldebtcard:hover {
+    width: 50%;
+    border: 1px solid #000;
+}
+
+.sonarcard {
+    margin: 20px auto;
+    padding: 5px;
+    border: 1px solid #ccc;
+}
+
+.sonarcard:hover {
+    border: 1px solid #000;
+}
+
+.plato_table td,
+.plato_table th {
+    padding: 5px;
+}
+
+.plato_table {
+    width: 100%;
+    margin-top: 1%;
+}
+.graphfont{
+font-size: 12px;
+}
+.headingfont{
+    font-size: 14px;
+}
+.closebutton{
+    padding: 2px;
+    margin: 7px;
+}
+.w3-container{
+    height:auto;
+}
+

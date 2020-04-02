@@ -1,0 +1,136 @@
+{
+    "children": [
+        {
+            "children": [
+				 {
+                    "children": [
+                        {
+                            "size": 1,
+                            "name": "Local Currency",
+                            "description": "3"
+                        },
+                        {
+                            "size": 1,
+                            "name": "Foreign Currency",
+                            "description": "8"
+                        }
+                    ],
+                    "name": "AdhocCharge",
+                    "description": "3,8"
+                },
+				{
+                    "children": [
+                        {
+                            "size": 1,
+                            "name": "Local Currency",
+                            "description": "5"
+                        },
+                        {
+                            "size": 1,
+                            "name": "Foreign Currency",
+                            "description": "6"
+                        }
+                    ],
+                    "name": "Payment",
+                    "description": "5,6"
+                }
+            ],
+            "name": "FT",
+            "description": "3,5,6,8"
+        }, 
+		{
+            "children": [
+                {
+                    "children": [
+                        {
+                            "size": 1,
+                            "name": "Fixed Deposit",
+                            "description": "17"
+                        },
+                        {
+                            "size": 1,
+                            "name": "Call Deposit",
+                            "description": "18"
+                        }
+                    ],
+                    "name": "Confirmations",
+                    "description": "17,18"
+                },
+				 {
+                    "children": [
+                        {
+                            "size": 1,
+                            "name": "Fixed Deposit",
+                            "description": "19"
+                        },
+                        {
+                            "size": 1,
+                            "name": "Call Deposit",
+                            "description": "20"
+                        }
+                    ],
+                    "name": "Interest",
+                    "description": "19,20"
+                },
+				{
+                    "children": [
+                       {
+                            "size": 1,
+                            "name": "Fixed Deposit",
+                            "description": "22"
+                        },
+                        {
+                            "size": 1,
+                            "name": "Call Deposit",
+                            "description": "28"
+                        }
+                    ],
+                    "name": "Reports",
+                    "description": "22,28"
+                }
+            ],
+            "name": "MM",
+            "description": "17,18,19,20,22,28"
+        },
+		{
+            "children": [
+                {
+                    "children": [
+                        {
+                            "size": 1,
+                            "name": "Fixed Rate",
+                            "description": "31"
+                        },
+						{
+                            "size": 1,
+                            "name": "Floating Rate",
+                            "description": "34"
+                        }
+                    ],
+                    "name": "AL(Lending)",
+                    "description": "31,34"
+                },
+				 {
+                    "children": [
+                        {
+                            "size": 1,
+                            "name": "Fixed Deposit",
+                            "description": "49"
+                        },
+						{
+                            "size": 1,
+                            "name": "Call Deposit",
+                            "description": "57"
+                        }
+                    ],
+                    "name": "AD(Deposits)",
+                    "description": "49,57"
+                }
+            ],
+            "name": "AA",
+            "description": "31,34,49,57"
+        }
+    ],
+    "name": "flare",
+    "description": "flare"
+}

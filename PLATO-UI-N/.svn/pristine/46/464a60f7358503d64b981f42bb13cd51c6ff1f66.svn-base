@@ -1,0 +1,288 @@
+<div id="reportpopup" class="w3-modal modal-lg myE2EModal action-popup">
+    <div class="w3-modal-content w3-animate-zoom" id="modalContainer">
+      <header class="w3-container">
+        <a (click)="closeTableAndModal()" class="modal-close closebutton">
+          <svg viewBox="0 0 24 24">
+            <path d="M19 6.41l-1.41-1.41-5.59 5.59-5.59-5.59-1.41 1.41 5.59 5.59-5.59 5.59 1.41 1.41 5.59-5.59 5.59 5.59 1.41-1.41-5.59-5.59z"
+              />
+            <path d="M0 0h24v24h-24z" fill="none" />
+          </svg>
+        </a>
+        <h2 class="headingfont">{{tool_name |uppercase}} : {{'automation testing report'|uppercase}}</h2>
+      </header>
+      <div class="w3-container modal-content">
+        <div class="row fullContent customScroll">
+          <div style="background: whitesmoke">
+            <div style="margin:0% auto;border-bottom:1px solid #ccc;font-weight:500; padding-bottom: 6px;">
+              <div style="font-size: 12px; font-weight: 600; display: inline-block;"></div>
+              <div class="mychip" *ngFor="let obj of newObj">
+                {{obj.label |titlecase }} : {{obj.value}}
+              </div>
+              <div *ngIf="doc_url" class="mydocchip">
+                <a href="{{doc_url}}" target="_blank"> {{doc_name |uppercase}} </a>
+              </div>
+  
+              <div *ngIf="execution_time" class="mydocchip">
+                Total execution time : {{execution_time}}
+              </div>
+            </div>
+          </div>
+  
+          <!-- if tabular data is present -->
+          <ng-container *ngIf="xcheckreports?.length > 0">
+            <div class="col-md-3 PageList customScroll">
+              <div class="listItem" (click)="showComponent(xcheckpage); setClickedTitle(i);" [class.active]="i === selectedTitle" style="padding:3%;display:flow-root;cursor: pointer; min-height: 55px;"
+                *ngFor="let xcheckpage of xcheckreports;let i=index">
+                <span *ngIf="xcheckpage.pageTitle" style="float: left; max-width: 89%; width: 89%; word-break: break-all;">{{xcheckpage.pageTitle | replaceUnderscore}}</span>
+                <span *ngIf="xcheckpage.scenario_description" style="float: left;">{{xcheckpage.scenario_description}} </span>
+                <span style="float:right;color:green;font-weight:bold;text-align:left;width:30px;" *ngIf="(xcheckpage.overallStatus| lowercase) === 'pass'">{{xcheckpage.overallStatus | titlecase}}</span>
+                <span style="float:right;color:red;font-weight:bold;text-align:left;width:30px;" *ngIf="(xcheckpage.overallStatus| lowercase) === 'fail'">{{xcheckpage.overallStatus | titlecase}}</span>
+                <span style="float:right;color:green;font-weight:bold;text-align:left;width:30px;" *ngIf="(xcheckpage.OverAll_Status| lowercase) === 'pass'">{{xcheckpage.OverAll_Status | titlecase}}</span>
+                <span style="float:right;color:red;font-weight:bold;text-align:left;width:30px;" *ngIf="(xcheckpage.OverAll_Status| lowercase) === 'fail'">{{xcheckpage.OverAll_Status | titlecase}}</span>
+              </div>
+            </div>
+            <div class="col-md-9 ComponentDescription customScroll">
+              <h6 style="font-weight:800;" *ngIf="mypageTitle">{{mypageTitle | replaceUnderscore}}</h6>
+              <mat-expansion-panel *ngIf="dynamic === 'false'" class="headPanel" disabled>
+                <mat-expansion-panel-header>
+                  <mat-panel-title class="Paneltitle">
+                    <div style="padding-left:5%;width:513px; color:black">Details</div>
+                    <div style="color:black; ">
+                      <span>Status</span>
+                    </div>
+                  </mat-panel-title>
+                </mat-expansion-panel-header>
+              </mat-expansion-panel>
+              <mat-expansion-panel *ngIf="dynamic === 'true'" class="headPanel" disabled>
+                <mat-expansion-panel-header>
+                  <mat-panel-title class="Paneltitle">
+                    <table class="paneltable">
+                      <tr>
+                        <th style="width:365px;color:black;">TestCase Name</th>
+                        <th style="width:55px;color:black;">Status</th>
+                        <th style="width:220px;color:black;">Response Message</th>
+                        <th style="width:125px;color:black;">OutputId</th>
+                      </tr>
+                    </table>
+                  </mat-panel-title>
+                </mat-expansion-panel-header>
+              </mat-expansion-panel>
+              <ng-container *ngFor="let endtoends of eachtooldata">
+                <ng-container *ngFor="let endtoend of endtoends | tool">
+                  <mat-accordion>
+                    <mat-expansion-panel *ngIf="(endtoend.key === 'componentsArray') && (endtoends.componentsArray?.length > 0)" class="myExpantion">
+                      <mat-expansion-panel-header>
+                        <table class="paneltable">
+                          <tr>
+                            <td style="width:535px;color:black; ">
+                              <mat-panel-title>{{ (endtoends.componentid.length>120)? (endtoends.componentid | slice:0:120)+'..':(endtoends.componentid) }}</mat-panel-title>
+                            </td>
+                            <td style="width:55px">
+                              <mat-panel-description *ngIf="(endtoends.overallStatus| lowercase) === 'pass'" style="font-weight:bold;color:green;">{{endtoends.overallStatus | titlecase}}</mat-panel-description>
+                              <mat-panel-description *ngIf="(endtoends.overallStatus| lowercase) === 'fail'" style="font-weight:bold;color:red;">{{endtoends.overallStatus | titlecase}}</mat-panel-description>
+                            </td>
+                            <td style="width:45px">
+                              <mat-panel-description *ngIf="(endtoends.Response_Message)" style="color:black;">{{endtoends.Response_Message}}</mat-panel-description>
+                            </td>
+                            <td style="width:125px">
+                              <mat-panel-description *ngIf="(endtoends.OutputID)" style="color:black;">{{endtoends.OutputID}}</mat-panel-description>
+                            </td>
+                          </tr>
+                        </table>
+                      </mat-expansion-panel-header>
+                      <table class="plato_table">
+                        <tr class="plato_table">
+                          <th *ngFor="let endtoendth of endtoend.value[0] |tool; let i=index;">
+                            <ng-container *ngFor="let endtoendth of endtoend.value[0][i] |tool ">
+                              <div *ngIf="(endtoendth.key |lowercase) !== 'status' && (endtoendth.key |lowercase) !== 'extra_data'">{{endtoendth.key | uppercase}}</div>
+                              <div *ngIf="(endtoendth.key |lowercase) === 'status'" style="text-align: center;justify-content: center;">{{endtoendth.key | uppercase}}</div>
+                              <div *ngIf="(endtoendth.key |lowercase) === 'extra_data'" style="text-align: center;justify-content: center;"></div>
+                            </ng-container>
+                          </th>
+                        </tr>
+                        <tr class="plato_table" *ngFor="let data of endtoend.value; let j = index">
+                          <td *ngFor="let endtoendtdhead of endtoend.value[0] |tool; let k=index; ">
+                            <ng-container *ngFor="let endtoendth of endtoend.value[j][k] |tool ">
+                              <ng-container *ngIf="(endtoendth.key| lowercase) !== 'status' && (endtoendth.key| lowercase) !== 'screenshot' && (endtoendth.key| lowercase) !== 'extra_data'">
+                                {{endtoendth.value}}
+                              </ng-container>
+                              <ng-container *ngIf="(endtoendth.key| lowercase) === 'status'">
+                                <div style="font-weight: bold;text-align: center;justify-content: center;color:green;" *ngIf="(endtoendth.value| lowercase) === 'pass'">
+                                  {{endtoendth.value | titlecase}}
+                                </div>
+                              </ng-container>
+                              <ng-container *ngIf="(endtoendth.key| lowercase) === 'status'">
+                                <div style="background-color: red;color: white;font-weight: bold;border-radius: 30px;text-align: center;justify-content: center;border: 1px solid #0000ff6b;"
+                                  *ngIf="(endtoendth.value| lowercase) === 'fail'">
+                                  {{endtoendth.value | titlecase}}
+                                </div>
+                              </ng-container>
+                              <ng-container *ngIf="(endtoendth.key| lowercase) === 'status'">
+                                <div style="font-weight: bold;text-align: center;justify-content: center;color:#4d86a0;" *ngIf="(endtoendth.value| lowercase) !== 'fail' && (endtoendth.value| lowercase) !== 'pass'">
+                                  {{endtoendth.value | titlecase}}
+                                </div>
+                              </ng-container>
+                              <ng-container *ngIf="(endtoendth.key| lowercase) === 'screenshot'" style="text-align: center; justify-content: center;">
+                                <a *ngIf="endtoendth.value" class="screenshotList" target="_blank" (click)="openURL(endtoendth.value)">
+                                View
+                                </a>
+                              </ng-container>
+                              <ng-container *ngIf="(endtoendth.key| lowercase) === 'extra_data'">
+                                <ng-container *ngIf="(endtoendth.value| lowercase) !== ''">
+                                    <div class="warning_text">
+                                      <img src="../../assets/genral_icons/info.png" style="margin-left: 10px;"/>
+                                      <span>{{endtoendth.value}}</span>
+                                    </div>
+                                </ng-container>
+                              </ng-container>
+                            </ng-container>
+                          </td>
+                        </tr>
+                      </table>
+                    </mat-expansion-panel>
+                    <mat-expansion-panel *ngIf="(endtoend.key === 'componentsArray') && (endtoends.componentsArray?.length === 0)" disabled class="myExpantion">
+                      <mat-expansion-panel-header>
+                        <table class="paneltable">
+                          <tr>
+                            <td style="width:535px;color:black;">
+                              <mat-panel-title>{{ (endtoends.componentid.length>120)? (endtoends.componentid | slice:0:120)+'..':(endtoends.componentid) }}</mat-panel-title>
+                            </td>
+                            <td style="width:55px">
+                              <mat-panel-description *ngIf="(endtoends.overallStatus| lowercase) === 'pass'" style="font-weight:bold;color:green;">{{endtoends.overallStatus | titlecase}}</mat-panel-description>
+                              <mat-panel-description *ngIf="(endtoends.overallStatus| lowercase) === 'fail'" style="font-weight:bold;color:red;">{{endtoends.overallStatus | titlecase}}</mat-panel-description>
+                            </td>
+                            <!-- <td style="width:125px"><mat-panel-description *ngIf="(endtoends.Response_Time)" style="color:black;">{{endtoends.Response_Time}}</mat-panel-description></td> -->
+                            <td style="width:220px">
+                              <mat-panel-description *ngIf="(endtoends.Response_Message)" style="color:black;">{{endtoends.Response_Message}}</mat-panel-description>
+                            </td>
+                            <td style="width:125px">
+                              <mat-panel-description *ngIf="(endtoends.OutputID)" style="color:black;">{{endtoends.OutputID}}</mat-panel-description>
+                            </td>
+                          </tr>
+                          <!-- <mat-panel-description *ngIf="(endtoends.Error_Count)" style="font-weight:bold;color:black;">{{endtoends.Error_Count}}</mat-panel-description> -->
+                        </table>
+                      </mat-expansion-panel-header>
+                    </mat-expansion-panel>
+                  </mat-accordion>
+                </ng-container>
+              </ng-container>
+            </div>
+          </ng-container>
+          <!-- if report url is present -->
+          <ng-container *ngIf="report_url">
+            <iframe [src]="report_url | safe" width="100%" height="1600" allowfullscreen frameBorder="0">Browser not compatible.</iframe>
+          </ng-container>
+      </div>
+    </div>
+    <footer class="w3-container">
+      <button class="btn mat-raised-button mat-primary" color="primary" mat-raised-button onclick="document.getElementById('reportpopup').style.display='none'"
+        (click)="hidetable()">
+      Close
+      </button>
+    </footer>
+  </div>
+  </div>
+  <!-- stacktrace popup -->
+  <div id="stacktraceModal" class="w3-modal modal-lg myE2EModal">
+    <div class="w3-modal-content w3-animate-zoom" id="modalContainer">
+      <header class="w3-container">
+        <a (click)="closeModal('stacktraceModal')" class="modal-close closebutton">
+          <svg viewBox="0 0 24 24">
+            <path d="M19 6.41l-1.41-1.41-5.59 5.59-5.59-5.59-1.41 1.41 5.59 5.59-5.59 5.59 1.41 1.41 5.59-5.59 5.59 5.59 1.41-1.41-5.59-5.59z" />
+            <path d="M0 0h24v24h-24z" fill="none" />
+          </svg>
+        </a>
+        <h2 class="headingfont">{{error_details.tool_name |uppercase}} - StcakTrace</h2>
+      </header>
+      <div class="w3-container modal-content customScroll">
+        <div class="mySatckTraceDiv">
+          <p> <strong>Error Name: </strong> {{error_details?.name}}</p>
+          <p> <strong>Error Type: </strong>
+            {{error_details?.type}}
+            <span *ngIf="error_details?.type === null">null</span>
+          </p>
+          <p> <strong>Error Code: </strong> {{error_details?.code}}</p>
+          <p> <strong>Error Message: </strong> {{error_details?.msg}}</p>
+          <p> <strong>StackTrace: </strong> {{error_details?.stackTrace}}</p>
+        </div>
+      </div>
+      <footer class="w3-container">
+        <button class="btn mat-raised-button mat-primary" color="primary" mat-raised-button onclick="document.getElementById('reportpopup').style.display='none'"
+          (click)="closeModal('stacktraceModal')">
+        Close
+        </button>
+      </footer>
+    </div>
+  </div>
+  
+  <!-- GRAPH -->
+  <div style=" padding-bottom: 120px;">
+      <mat-expansion-panel expanded="true" class="main-exp-panel" *ngFor="let eachtooldata of ToolData">
+        <mat-expansion-panel-header [collapsedHeight]="'40px'" [expandedHeight]="'40px'">
+          <mat-panel-title>
+              {{eachtooldata?.tool_name}}
+           <a [href]="eachtooldata?.ToolReport[0]?.report_url" target="_blank" *ngIf="((eachtooldata?.ToolReport[0]?.report_url)&&(eachtooldata?.ToolReport[0]?.report_url!=='not found')&&(eachtooldata?.ToolReport[0]?.report_url!=='')&&(eachtooldata?.ToolReport[0]?.report_url!==null))">
+              -report link
+            </a>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+  
+    <div id="{{eachtooldata?.tool_name}}" style="display:block; margin: 1% auto !important;" class="row" *ngIf="((!eachtooldata?.error_body)&&(eachtooldata?.ToolReport[0]?.total_scenario_executed!=='NA'))" >
+      <!-- pie chart -->
+      <ng-container *ngIf="((eachtooldata?.ToolReport)&&(eachtooldata?.ToolReport[0]?.total_scenario_executed!=='NA'))">
+        <ng-container *ngFor="let endtoends of eachtooldata?.ToolReport">
+          <div class="col-md-12" *ngIf="endtoends?.HTML_">
+              <div class="holds-the-iframe">
+                  <iframe [src]="endtoends?.HTML_ | safe" width="100%" height="400" allowfullscreen frameBorder="0">Browser not compatible.</iframe>
+              </div>
+          </div>
+          <div *ngIf="endtoends?.chart_values" class="text-center my-grapgh-card" onclick="document.getElementById('reportpopup').style.display='block'"
+          (click)=" particulartool(endtoends)">
+            <h6 class="graphfont"> {{endtoends.chart_name}}</h6>
+            <div class="chart-box">
+              <canvas baseChart width="50 !important" height="50 !important" [data]="endtoends?.chart_values" [labels]="endtoends?.chart_labels" [chartType]="pieChartType"
+              [colors]="pieChartColors" [legend]="piechartlegend" [options]="piechartoptions">
+              </canvas>
+            </div>
+          </div>
+        </ng-container>
+      </ng-container>
+  
+  
+      <!-- bar chart
+    <div *ngIf="showBarGraph" class="my-grapgh-card">
+          <mat-card  *ngFor="let endtoends of eachtooldata.ToolReport" class="text-center " onclick="document.getElementById('reportpopup').style.display='block'"
+            (click)=" particulartool(endtoends)">
+            <h6 class="graphfont"> {{endtoends.bar_chart_name}}</h6>
+            <canvas baseChart [datasets]="endtoends.bar_charts_value.bar_chart_data" [labels]="endtoends.bar_charts_value.bar_chart_labels"
+              [chartType]="barChartType" [colors]="barChartColors" [legend]="barchartlegend" [options]="barChartOptions">
+            </canvas>
+          </mat-card>
+      </div> -->
+    </div>
+    <!-- error card -->
+  <mat-card *ngIf="((eachtooldata?.error_body?.error_message) || (eachtooldata?.ToolReport[0]?.report_url==='not found'))" class="error-card">
+      <mat-card-header>
+        <mat-card-title>
+          <img alt="error" src="../../../../assets/genral_icons/error.png" class="img-responsive" />
+          Errors during the execution
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <p *ngIf="eachtooldata.error_body?.code !== null"><strong>Error Code:</strong> {{eachtooldata.error_body?.code}}</p>
+        <p *ngIf="eachtooldata.error_body?.name !== null"><strong>Error Name:</strong> {{eachtooldata.error_body?.name}}</p>
+        <p *ngIf="eachtooldata.error_body?.type !== null"><strong>Error Type:</strong> {{eachtooldata.error_body?.type}}</p>
+        <p *ngIf="(eachtooldata?.ToolReport[0]?.report_url==='not found')"><strong>Error Type:</strong>Report Not Found</p>
+        <p *ngIf="eachtooldata.error_body?.type === null"><strong>Error Type:</strong> {{'null'}}</p>
+        <p *ngIf="eachtooldata.error_body?.message !== null">
+          <strong>Message:</strong>
+          {{eachtooldata.error_body?.error_message}}
+        </p>
+        <p class="note-para" (click)="openModal('stacktraceModal', eachtooldata)">
+          Click here for complete error details or goto log files / console.
+        </p>
+      </mat-card-content>
+    </mat-card>
+  </mat-expansion-panel>
+  </div>
+  

@@ -1,0 +1,36 @@
+<div class="fullPage">
+  <mat-card class="myUserCard">
+    <mat-card-header class="myUserCardHeader">
+      <mat-card-title class="myUserCardTitle"> {{ userData.name |uppercase }} </mat-card-title>
+      <mat-card-subtitle class="myUserCardSubTitle"> {{ userData.email }} </mat-card-subtitle>
+    </mat-card-header>
+    <mat-divider></mat-divider>
+    <mat-card-content class="myUserCardContent">
+      <div>
+        Default Project Details -
+      </div>
+      <div>
+        <p>
+          <span> Portfolio ID: </span>
+          <span>{{userData.defaultProjectDetails.portfolio_id}}</span>
+          <span> Portfolio Name: </span>
+          <span>{{userData.defaultProjectDetails.portfolio_name}}</span>
+        </p>
+
+        <p>
+          <span> Account ID: </span>
+          <span>{{userData.defaultProjectDetails.account_id}}</span>
+          <span> Account Name: </span>
+          <span>{{userData.defaultProjectDetails.account_name}}</span>
+        </p>
+
+        <p>
+          <span> Project ID: </span>
+          <span>{{userData.defaultProjectDetails.project_id}}</span>
+          <span> Project Name: </span>
+          <span>{{userData.defaultProjectDetails.project_name}}</span>
+        </p>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

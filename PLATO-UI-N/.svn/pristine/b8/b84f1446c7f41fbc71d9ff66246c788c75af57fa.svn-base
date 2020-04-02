@@ -1,0 +1,199 @@
+.top_bar mat-form-field {
+    margin: 0 4px !important;
+}
+
+.example-full-width {
+    width: 100%;
+}
+
+.leftAlign {
+    text-align: left;
+}
+
+.buttonstyle {
+    text-align: center;
+    font-size: 12px;
+}
+
+#project_column {
+    margin: 1% auto;
+    width: 100%;
+}
+
+.plato_table td {
+    padding: 4px;
+    font-size: 12px !important;
+}
+.plato_table th {
+    padding: 4px;
+    font-size: 14px !important;
+}
+
+.modal-lg .mat-form-field {
+    display: inline-block;
+    position: relative;
+    text-align: left;
+    width: 100%;
+}
+
+.modal-lg .mat-selection-list .mat-list-option {
+    display: block;
+    border: 1px solid #ccc;
+    border-left: none;
+    border-right: none;
+    margin-bottom: 1px;
+}
+
+ul.list-unstyled {
+    border: 1px solid #ccc;
+    margin-top: 1px;
+    border-left: 0;
+    border-right: 0;
+    margin-bottom: 5px;
+    background-color: transparent !important;
+    padding-left: 0 !important;
+    display: -webkit-inline-box;
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+    width: 98%;
+}
+
+ul.list-unstyled li {
+    padding: 5px;
+    margin: 0px auto;
+}
+
+.allocationBtn1 {
+    float: right;
+    margin: 1%;
+    background-color: #3a68b7;
+    color: white;
+    width: 100%;
+}
+
+/* to make modal bigger in size */
+
+/* .modal-lg {
+    padding: 2% 2% 2% 2% !important;
+}
+
+.modal-lg .modal-content {
+    height: 450px !important;
+} */
+
+.modal-lg .w3-modal-content {
+    width: 100% !important;
+}
+
+.plato_table {
+    width: 99%;
+    margin: 1% auto;
+}
+
+.myRow {
+    margin-right: 0 !important;
+    margin-left: -8px !important;
+}
+
+.search_bar {
+    border: 1px solid rgba(9, 76, 128, 0.56);
+    margin: 0px 0.5% !important;
+    margin-bottom: 5px !important;
+    padding: 0px;
+    float: left;
+    width: 99%;
+}
+
+::placeholder {
+    font-family: 'Segoe UI Light', Verdana, sans-serif, Arial;
+    color: white;
+    opacity: 1;
+    /* Firefox */
+}
+
+:-ms-input-placeholder {
+    /* Internet Explorer 10-11 */
+    font-family: 'Segoe UI Light', Verdana, sans-serif, Arial;
+    color: white;
+    opacity: 1;
+}
+
+:-ms-input-placeholder {
+    /* Microsoft Edge */
+    font-family: 'Segoe UI Light', Verdana, sans-serif, Arial;
+    color: white;
+    opacity: 1;
+}
+
+.search_bar .search_input {
+    background-color: #094c80;
+    border: none;
+    color: white;
+    font-family: 'Segoe UI Light', Verdana, sans-serif, Arial;
+    height: 30px;
+    padding: 5px 10px;
+    font-size: 15px;
+    line-height: 1.5;
+    border-radius: 0px;
+}
+
+mat-card.col-md-3.myUsersCard.mat-card {
+    min-height: 450px !important;
+    padding: 15px !important;
+    margin: 0px !important;
+}
+
+mat-card-header.myUsersCardHeader.mat-card-header {
+    margin: 0px !important;
+    padding: 0px !important;
+    background-color: #094c80;
+    color: white;
+}
+
+mat-card-title.myUsersCardTitle.mat-card-title {
+    margin: 5px !important;
+    text-align: -webkit-auto;
+}
+
+mat-card-content.myUsersCardContent.mat-card-content {
+    display: flex;
+    margin: 1px !important;
+    border-bottom: 1px solid #ccc;
+    border-top: 1px solid #ccc;
+    padding: 5px;
+    font-size: 12px !important;
+}
+
+.top_bar{
+  min-height: 65px;
+  height: auto !important;
+}
+
+.plato_table {
+  margin-top: 80px;
+  margin-left: 5px;
+}
+
+.rolls-list {
+  text-align: left;
+  min-height: 325px;
+}
+
+.rolls-list li {
+  margin: 4px 0;
+  font-size: 12px;
+  border-bottom: 1px solid #b5b3b3;
+}
+
+.custom-height {
+  overflow-y: scroll;
+  max-height: 390px;
+}
+
+.left-role-list {
+  overflow-y: auto;
+  height: 160px;
+  margin: 0 0 5px 0;
+  text-align: left;
+  font-size: 12px;
+}

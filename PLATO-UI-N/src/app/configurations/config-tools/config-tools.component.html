@@ -1,0 +1,318 @@
+<div id="createTask" class="w3-modal modal-lg action-popup">
+  <div class="w3-modal-content w3-animate-zoom" id="modalContainer1">
+    <header class="w3-container">
+      <a onclick="document.getElementById('createTask').style.display='none'" class="modal-close">
+        <svg viewBox="0 0 24 24">
+          <path d="M19 6.41l-1.41-1.41-5.59 5.59-5.59-5.59-1.41 1.41 5.59 5.59-5.59 5.59 1.41 1.41 5.59-5.59 5.59 5.59 1.41-1.41-5.59-5.59z"/>
+          <path d="M0 0h24v24h-24z" fill="none" />
+        </svg>
+      </a>
+      <h2>Map Tool to Project</h2>
+    </header>
+    <div class="w3-container modal-content customScroll text-center">
+      <div class="row myScreenRow1">
+        <mat-card class="col-sm-3 myCard1" *ngFor="let mytoolcategory of (maintools |user) |sortBy:'category_id'">
+          <mat-card-header class="myCardHeader1">
+            <mat-card-title class="myCardTitle1">
+              {{ mytoolcategory.key |uppercase}}
+            </mat-card-title>
+          </mat-card-header>
+          <mat-card-content class="myCardContent1" *ngFor="let mytoolname of mytoolcategory.value">
+            <span style="float:left;font-size: 13px;">
+              {{mytoolname.tool_name}}
+            </span>
+            <span style="float:right;">
+              <mat-checkbox (click)="isCheckedForCreation(mytoolname.tool_id)"></mat-checkbox>
+            </span>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+    <footer class="w3-container">
+      <button mat-raised-button class="btn mat-raised-button mat-primary mat-raised-cancel-button" color="primary" onclick="document.getElementById('createTask').style.display='none'">
+        Cancel
+      </button>
+      <button mat-raised-button class="btn mat-raised-button mat-primary mat-raised-cancel-button" color="primary" onclick="document.getElementById('createTask').style.display='none'" (click)="createToolMapping()">
+        Add
+      </button>
+    </footer>
+  </div>
+</div>
+
+<div id="updateTask" class="w3-modal modal-sm action-popup">
+  <div class="w3-modal-content w3-animate-zoom">
+    <header class="w3-container">
+      <a onclick="document.getElementById('updateTask').style.display='none'" class="modal-close">
+        <svg viewBox="0 0 24 24">
+          <path d="M19 6.41l-1.41-1.41-5.59 5.59-5.59-5.59-1.41 1.41 5.59 5.59-5.59 5.59 1.41 1.41 5.59-5.59 5.59 5.59 1.41-1.41-5.59-5.59z"/>
+          <path d="M0 0h24v24h-24z" fill="none" />
+        </svg>
+      </a>
+      <h2>Update Tool Mapping</h2>
+    </header>
+    <div class="w3-container modal-content customScroll text-center">
+      <mat-form-field class="example-full-width" style="margin-top:5px">
+        <textarea matInput placeholder="Edit Command to Execute" matTextareaAutosize matAutosizeMinRows="1" matAutosizeMaxRows="10" [(ngModel)]="existsToolMapping.command_to_execute" value=""></textarea>
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Edit Report Path" [(ngModel)]="existsToolMapping.report_path" value="">
+      </mat-form-field>
+
+      <mat-input-container class="example-full-width">
+        <mat-select [(value)]="existsToolMapping.node_name" placeholder="Node Name">
+          <mat-option *ngFor="let node of node_list" [value]="node.node_name">
+            {{ node.node_name }}
+          </mat-option>
+        </mat-select>
+      </mat-input-container>
+    </div>
+    <footer class="w3-container">
+      <button mat-raised-button class="btn mat-raised-button mat-primary" color="primary" onclick="document.getElementById('updateTask').style.display='none'">
+        Cancel
+      </button>
+      <button mat-raised-button class="btn mat-raised-button mat-primary" color="primary" (click)="updateTool()" onclick="document.getElementById('updateTask').style.display='none'">
+        Update
+      </button>
+    </footer>
+  </div>
+</div>
+
+<!-- Modal -->
+<div id="reportConfig01" class="w3-modal modal-lg action-popup">
+    <div class="w3-modal-content w3-animate-zoom">
+        <header class="w3-container">
+            <a onclick="document.getElementById('reportConfig01').style.display='none'" class="modal-close" (click)="clearcheckpoints();">
+        <svg viewBox="0 0 24 24">
+          <path d="M19 6.41l-1.41-1.41-5.59 5.59-5.59-5.59-1.41 1.41 5.59 5.59-5.59 5.59 1.41 1.41 5.59-5.59 5.59 5.59 1.41-1.41-5.59-5.59z"
+          />
+          <path d="M0 0h24v24h-24z" fill="none" />
+        </svg>
+      </a>
+            <h2>Add Check Points in Report</h2>
+        </header>
+        <div class="w3-container modal-content customScroll">
+            <div class="row">
+                <div class="col-sm-12">
+                    <form (submit)="addCheckPointModule(checkPointModuleName); addModuleNameForm.reset();" #addModuleNameForm="ngForm">
+                        <mat-form-field>
+                            <input matInput placeholder="Enter Module Name" [(ngModel)]="checkPointModuleName" name="moduleName" required [disabled]="checkPointModuleAddBtn">
+                        </mat-form-field>
+                        <button mat-icon-button type="submit" [disabled]="addModuleNameForm.invalid || checkPointModuleAddBtn">
+                <img title="Add" src="../../assets/genral_icons/plus.png" style="cursor: pointer; margin: 5px; vertical-align: middle;"/>
+            </button>
+                    </form>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <mat-card *ngFor="let cardTitle of createCheckPointModule; let i=index" id="reportConfigCard" style="margin:0 auto; width:100%; padding:0 0 20px 0; box-shadow: none;">
+                        <mat-card-header id="reportConfigCardHeader">
+                            {{cardTitle}}
+                        </mat-card-header>
+                        <mat-card-content id="reportConfigCardContent">
+                            <form (submit)="addCheckPointName(cardTitle, checkPoint, pass_criteria, fail_criteria); addCheckPointNameForm.reset();" #addCheckPointNameForm="ngForm">
+                                <mat-form-field>
+                                    <input matInput placeholder="Enter CheckPoint Name" [(ngModel)]="checkPoint" name="checkPointName" required>
+                                </mat-form-field>
+                                <mat-form-field>
+                                    <input matInput placeholder="Enter Pass Criteria" [(ngModel)]="pass_criteria" name="checkPointPassCriteria" required>
+                                </mat-form-field>
+                                <mat-form-field>
+                                    <input matInput placeholder="Enter Fail Criteria" [(ngModel)]="fail_criteria" name="checkPointFailCriteria" required>
+                                </mat-form-field>
+                                <button mat-icon-button type="submit" [disabled]="addCheckPointNameForm.invalid">
+                    <img title="Add" src="../../assets/genral_icons/plus.png" style="cursor: pointer; margin: 5px; vertical-align: middle;"/>
+                </button>
+                            </form>
+                            <mat-list class="list-group list-group-flush">
+                                <mat-list-item class="list-group-item" *ngFor="let cardContent of createCheckpoint; let j=index">
+                                    {{i+1}}.{{j+1}} - {{cardContent.checkpoint_name}}
+                                </mat-list-item>
+                            </mat-list>
+                            <button class="btn mat-raised-button mat-primary pull-right" style="margin-right: 10px;" color="primary" mat-raised-button *ngIf="saveCheckPoint" (click)="saveCheckPointsConfigurations(cardTitle)">
+                              Save
+                            </button>
+                        </mat-card-content>
+                    </mat-card>
+                </div>
+            </div>
+            <div class="row" [sortablejs]="localCheckPointsArray">
+                <div class="form-group search_bar">
+                    <input class="form-control form-control-sm search_input" type="text" placeholder="Search modules by name..." [(ngModel)]="filterText" />
+                </div>
+                <mat-card class="card col-md-3 col-lg-4" *ngFor="let module of (localCheckPointsArray | CheckPointsFilter: filterText); let j=index" id="reportConfigCard">
+                    <mat-card-header id="reportConfigCardHeader">
+                        <span class="pull-left" style="padding: 10px;line-height: 20px;"> {{j+1}}.&nbsp;{{module.module_name}} </span>
+                        <span class="pull-right" style="margin-right: 20px;">
+              <button mat-icon-button class="pull-right" (click)="deleteCheckPointModule(module.module_name)">
+                  <img title="Delete" src="../../assets/genral_icons/bin_sm.png" style="cursor: pointer; margin: 5px; vertical-align: middle;"/>
+              </button>
+            </span>
+                    </mat-card-header>
+                    <mat-card-content style="width:100%; float:left">
+                        <mat-list class="list-group list-group-flush" role="list" [sortablejs]="module.checkpoint_criteria">
+                            <mat-list-item class="list-group-item" id="checkPointList" role="listitem" *ngFor="let checkPoint of module.checkpoint_criteria; let i=index">
+                                {{j+1}}.{{i+1}}&nbsp;-&nbsp;{{checkPoint.checkpoint_name}}
+                            </mat-list-item>
+                        </mat-list>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+            <mat-divider></mat-divider>
+            <div class="row" [sortablejs]="checkPointsById">
+                <mat-card class="card" *ngFor="let module of (checkPointsById |sortBy: 'order_number') | CheckPointsFilter: filterText; let i=index" id="reportConfigCard">
+                    <mat-card-header id="reportConfigCardHeader">
+                        <span class="pull-left" style="padding: 10px; line-height: 20px;"> {{i+1}}.&nbsp;{{module.module_name}} </span>
+                        <span class="pull-right" style="margin-right:20px">
+              <button mat-icon-button (click)="getCheckPointByModuleId(module)">
+                  <img title="Edit" src="../../assets/genral_icons/edit.png" style="cursor: pointer; margin: 5px; vertical-align: middle;"/>
+              </button>
+              <button mat-icon-button (click)="deleteCheckPointModuleOnServer(module)">
+                  <img title="Delete" src="../../assets/genral_icons/bin_sm.png" style="cursor: pointer; margin: 5px; vertical-align: middle;"/>
+              </button>
+            </span>
+                    </mat-card-header>
+
+                    <mat-card-content class="checkPointCards">
+                        <mat-list class="list-group list-group-flush" role="list" [sortablejs]="module.checkpoint_criteria">
+                            <mat-list-item class="list-group-item" id="checkPointList" role="listitem" *ngFor="let checkPoint of module.checkpoint_criteria|sortBy: 'order_number';let j=index">
+                                <span class="pull-left" matTooltip="Pass Criteria : {{checkPoint.pass_criteria}}
+                & fail Criteria : {{checkPoint.fail_criteria}}"> {{i+1}}.{{j+1}}.&nbsp;{{checkPoint.checkpoint_name}} </span>
+                                <span class="pull-right">
+                  <img (click)="deleteCheckPointDetails(checkPoint)" title="Delete" src="../../assets/genral_icons/bin_sm.png" style="cursor: pointer; margin: 5px; vertical-align: middle;"/>
+                </span>
+                            </mat-list-item>
+                        </mat-list>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+        </div>
+        <footer class="w3-container">
+            <button class="btn mat-raised-button mat-primary" color="primary" mat-raised-button onclick="document.getElementById('reportConfig01').style.display='none'" (click)="clearcheckpoints();">Close</button>
+            <button class="btn mat-raised-button mat-primary" color="primary" mat-raised-button (click)="saveCheckPointConfiguration()">Save Configurations</button>
+        </footer>
+    </div>
+</div>
+
+<div id="updateCheckPoint" class="w3-modal modal-lg action-popup">
+    <div class="w3-modal-content w3-animate-zoom">
+        <header class="w3-container">
+            <a onclick="document.getElementById('updateCheckPoint').style.display='none'" class="modal-close">
+        <svg viewBox="0 0 24 24">
+          <path d="M19 6.41l-1.41-1.41-5.59 5.59-5.59-5.59-1.41 1.41 5.59 5.59-5.59 5.59 1.41 1.41 5.59-5.59 5.59 5.59 1.41-1.41-5.59-5.59z"
+          />
+          <path d="M0 0h24v24h-24z" fill="none" />
+        </svg>
+      </a>
+            <h2>Update CheckPoint Module</h2>
+        </header>
+        <div class="w3-container modal-content customScroll">
+            <mat-form-field class="example-full-width">
+                <input matInput placeholder="CheckPoint Module Name" [(ngModel)]="moduleCheckpoint.module_name" value="">
+            </mat-form-field>
+            <div class="container">
+                <div class="row" *ngFor="let checkPoint of checkPoint_Criteria; let i=index">
+                    <mat-form-field class="col-md-4 col-sm-4">
+                        <input matInput placeholder="{{i+1}}.CheckPoint Name" [(ngModel)]="checkPoint.checkpoint_name" value="">
+                    </mat-form-field>
+                    <mat-form-field class="col-md-4 col-sm-4">
+                        <input matInput placeholder="Pass Criteria" [(ngModel)]="checkPoint.pass_criteria" value="">
+                    </mat-form-field>
+                    <mat-form-field class="col-md-4 col-sm-4">
+                        <input matInput placeholder="Fail Criteria" [(ngModel)]="checkPoint.fail_criteria" value="">
+                    </mat-form-field>
+                </div>
+            </div>
+        </div>
+        <footer class="w3-container">
+            <button type="button" class="btn btn-primary" style="background-color:transparent;color:white;" (click)="updateCheckPoint(moduleCheckpoint)" onclick="document.getElementById('updateCheckPoint').style.display='none'">
+        Update
+      </button>
+        </footer>
+    </div>
+</div>
+
+<div class="top_bar">
+    <ng-container *ngFor="let component of screenPermission">
+        <mat-form-field id="portfolioDropdown" *ngIf="component.name === 'Select Portfolio'" style="float: left;padding-top: 10px;">
+            <mat-select [(value)]="portfolio_name" placeholder="Select Portfolio" [disabled]="component.checked">
+                <mat-option *ngFor="let portfolio of portfolios" (click)="selectedPortfolioValue(portfolio)" [value]="portfolio.portfolio_name">
+                    {{ portfolio.portfolio_name }}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </ng-container>
+
+    <ng-container *ngFor="let component of screenPermission">
+        <mat-form-field id="accountDropdown" *ngIf="component.name === 'Select Account'">
+            <mat-select [(value)]="account_name" placeholder="Select Account" [disabled]="component.checked">
+                <mat-option *ngFor="let account of accounts" (click)="selectedAccountValue(account)" [value]="account.accountName">
+                    {{account.accountName}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </ng-container>
+
+    <ng-container *ngFor="let component of screenPermission">
+        <mat-form-field id="projectDropdown" *ngIf="component.name === 'Select Project'">
+            <mat-select [(value)]="project_name" placeholder="Select Project" [disabled]="component.checked">
+                <mat-option *ngFor="let project of projects" (click)="selectedProjectValue(project)" [value]="project.project_name">
+                    {{project.project_name}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </ng-container>
+
+    <div class="top_bar_button">
+        <ng-container *ngFor="let component of screenPermission">
+            <button class="pull-right" mat-icon-button (click)='deleteToolMapping()' *ngIf="component.name === 'Delete Tool Mapping'" [ngStyle]="{'opacity':!isDeleteShow || component.checked ? '0.5' : '1' }" [disabled]="!isDeleteShow || component.checked" [disableRipple]="true">
+        <img title="Delete existing Tool Mapping" src="../../assets/genral_icons/bin_sm.png" style="cursor: pointer; margin: 10px; vertical-align: text-top;"/>
+      </button>
+        </ng-container>
+        <ng-container *ngFor="let component of screenPermission">
+            <button class="pull-right" mat-icon-button (click)='getParticularTool()' *ngIf="component.name === 'Edit Tool Mapping'" [ngStyle]="{'opacity':!isEditShow || component.checked ? '0.5' : '1' }" [disabled]="!isEditShow || component.checked" [disableRipple]="true"
+                onclick="document.getElementById('updateTask').style.display='block'">
+            <img title="Edit existing Tool Mapping" src="../../assets/genral_icons/edit.png" style="cursor: pointer; margin: 10px; vertical-align: text-top;"/>
+      </button>
+        </ng-container>
+        <ng-container *ngFor="let component of screenPermission">
+            <button class="pull-right" mat-icon-button onclick="document.getElementById('createTask').style.display='block'" *ngIf="component.name === 'Create Tool Mapping'" [ngStyle]="{'opacity':!isCreateShow || component.checked ? '0.5' : '1' }" [disabled]="!isCreateShow || component.checked"
+                [disableRipple]="true">
+        <img title="Create new Tool Mapping" src="../../assets/genral_icons/plus.png" style="cursor: pointer; margin: 10px; vertical-align: text-top;"/>
+      </button>
+        </ng-container>
+    </div>
+</div>
+
+<div class="table-responsive plato_table">
+    <table class="table">
+        <tr id="tableHead">
+          <th class="centerAlign">
+            <mat-checkbox [(ngModel)]="checkAll" (click)="setAllChecked()"></mat-checkbox>
+          </th>
+          <th class="leftAlign"> Name </th>
+          <th class="leftAlign"> Command to Execute </th>
+          <th class="leftAlign"> Report Path </th>
+          <th class="leftAlign"> Category </th>
+          <th class="leftAlign"> Live Build Check Points </th>
+        </tr>
+
+        <tr *ngFor="let tool of tools" id="rowNo">
+          <td class="centerAlign">
+              <mat-checkbox [ngModel]="checkTool" (click)='isChecked(tool.tool_project_mapping_id)'> </mat-checkbox>
+          </td>
+          <td> {{tool.tool_name}} </td>
+          <td style="word-break:break-all;"> {{tool.command_to_execute}} </td>
+          <td style="word-break:break-all;"> {{tool.report_path}} </td>
+          <td> {{tool.category_name}} </td>
+          <td class="centerAlign">
+            <ng-container *ngFor="let component of screenPermission">
+              <button mat-icon-button id="tool.tool_project_mapping_id" (click)="selectedLiveBuild(tool);" *ngIf="component.name === 'Live Build Checkpoints'" [ngStyle]="{'opacity':component.checked ? '0.5' : '1' }" [disabled]="component.checked">
+                  <img title="Settings" src="../../assets/genral_icons/process.png" style="cursor: pointer; margin: 5px; vertical-align: middle;"/>
+              </button>
+            </ng-container>
+          </td>
+        </tr>
+    </table>
+</div>

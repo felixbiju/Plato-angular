@@ -1,0 +1,273 @@
+.my-tool-card .my-grapgh-card {
+    margin: 20px 25% !important;
+    padding: 0px;
+    border: 1px solid #ccc;
+    min-width: 500px;
+    max-width: strech;
+}
+
+.my-tool-card .my-grapgh-card:hover {
+    border: 1px solid #000;
+}
+
+.myheading {
+    background-color: #1094d5;
+    color: white;
+    font-size: 12px;
+    width: 100%;
+    padding: 0.5%;
+    line-height: 12px;
+    margin-bottom: 1px;
+    margin-top: 15px;
+}
+
+.plato_table td,
+.plato_table th {
+    padding: 5px;
+}
+
+.plato_table {
+    width: 100%;
+    margin-top: 1%;
+}
+
+.closebutton {
+    padding: 2px;
+    margin: 4%;
+}
+
+.mycomponents {
+    font-size: 14px;
+}
+
+/* to make modal bigger in size */
+
+.myE2EModal {
+    padding: 1%;
+}
+
+.myE2EModal .modal-content {
+    height: 480px !important;
+    padding: 0px;
+}
+
+.myE2EModal .w3-modal-content {
+    width: 100% !important;
+}
+
+.fullContent {
+    text-align: justify;
+    margin: 0px auto;
+}
+
+.PageList {
+    border-right: 1px solid #ccc;
+    min-height: 520px;
+    font-size: 12px;
+    font-family: "Lato", Verdana, sans-serif, Arial !important;
+    margin: 2px auto;
+    padding: 6px;
+}
+
+.ComponentDescription {
+    margin: 0px auto;
+    min-height: 520px;
+    font-family: "Lato", Verdana, sans-serif, Arial !important;
+}
+
+.Paneltitle {
+    font-size: 13px;
+    font-family: "Lato", Verdana, sans-serif, Arial !important;
+}
+
+.plato_table1 {
+    font-size: 10px;
+    font-family: "Lato", Verdana, sans-serif, Arial !important;
+}
+
+.plato_table .table>thead>tr>th,
+.plato_table .table>tbody>tr>th,
+.plato_table .table>tfoot>tr>th,
+.plato_table .table>thead>tr>td,
+.plato_table .table>tbody>tr>td,
+.plato_table .table>tfoot>tr>td {
+    padding: 0px;
+    line-height: 1.42857143;
+    vertical-align: middle;
+    padding-left: 10px;
+    font-size: 13px;
+}
+
+.plato_table {
+    font-family: "Lato", Verdana, sans-serif, Arial !important;
+    border-collapse: collapse;
+    width: 99%;
+    margin: 0 0.5% 2% 0.5%;
+}
+
+.plato_table tr {
+    border-top: 1px solid #D8E5F5;
+    border-bottom: 1px solid #D8E5F5;
+}
+
+.plato_table th {
+    background-color: #094c80;
+    border: none;
+    color: #fff;
+    text-align: left;
+    justify-content: left;
+    width: max-content;
+    height: min-content;
+    text-shadow: none;
+    font-size: 12px !important;
+    font-weight: normal;
+    white-space: nowrap;
+}
+
+.plato_table td {
+    text-align: left;
+    font-size: 12px !important;
+}
+
+.plato_table tr:nth-child(even) {
+    background-color: #f1f6f8;
+    ;
+}
+
+.Paneltitle1 p:nth-child(even) {
+    background-color: #176483;
+}
+
+.pull-right {
+    margin: 12px;
+}
+
+.PageList .listItem.active {
+    border: 1px solid rgb(124, 123, 123) !important;
+}
+
+.PageList .listItem:nth-child(odd) {
+    background-color: rgb(233, 230, 230);
+}
+
+.ComponentDescription .myExpantion {
+    border: 1px solid #ccc;
+    border-bottom: none;
+}
+
+.ComponentDescription .myExpantion .mat-expansion-panel-header {
+    height: 35px !important;
+    border-bottom: 1px solid #ccc;
+}
+
+.ComponentDescription .myExpantion mat-panel-title.mat-expansion-panel-header-title {
+    width: 70px;
+}
+
+.ComponentDescription .myExpantion ::ng-deep.mat-expansion-panel-content {
+    font: 400 14px/20px "Lato", Verdana, sans-serif, Arial !important;
+}
+
+.ComponentDescription .myExpantion ::ng-deep.mat-expansion-panel-body {
+    margin: 2px 15px;
+    overflow: auto;
+}
+
+::ng-deep .mat-expansion-indicator {
+    margin-right: 5% !important;
+}
+
+.fullContent div.mychip {
+    width: 185px;
+    padding: 0px;
+    font-size: 12px;
+    color: white;
+    vertical-align: sub;
+    height: 16px;
+    display: inline-block;
+    margin: 0px 5px;
+    text-align: center;
+    justify-content: center;
+    border-radius: 30px;
+}
+
+.fullContent div.mydocchip {
+    width: max-content;
+    padding: 0px;
+    font-size: 12px;
+    color: cornflowerblue;
+    text-decoration: underline;
+    vertical-align: sub;
+    height: 16px;
+    display: inline-block;
+    margin: 0px 5px;
+    text-align: center;
+    justify-content: center;
+    border-radius: 30px;
+    background: transparent;
+}
+
+.headPanel {
+    color: black !important;
+    font-weight: bold;
+    background: #ccc;
+    border: 1px solid rgb(131, 130, 130);
+    height: 20px;
+}
+
+.headPanel mat-expansion-panel-header.mat-expansion-panel-header {
+    height: 20px !important;
+}
+
+.w3-container modal-content {
+    overflow: none;
+}
+
+.mychip:nth-child(2) {
+    background: green;
+}
+
+.mychip:nth-child(3) {
+    background: red;
+}
+
+.mychip:nth-child(4) {
+    background: #4d86a0;
+}
+
+.mychip:nth-child(5) {
+    background: #9457da;
+}
+
+.screenshotList {
+    border: none;
+    color: cornflowerblue;
+    list-style-type: none;
+    padding-left: 15%;
+}
+
+.mytitle {
+    margin-left: 22px;
+}
+
+.min-max_button {
+    float: left !important;
+    height: 20px;
+    width: 20px;
+    position: absolute;
+    top: 16px;
+    left: 16px;
+}
+
+.graphfont {
+    font-size: 12px;
+}
+
+.headingfont {
+    font-size: 14px;
+}
+
+.closebutton {
+    padding: 2px;
+    margin: 7px;
+}

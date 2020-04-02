@@ -1,0 +1,36 @@
+import { NgxRole } from '../model/role.model';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/observable/of';
+import 'rxjs/add/observable/throw';
+import 'rxjs/add/operator/first';
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/operator/toPromise';
+import 'rxjs/add/operator/mergeAll';
+import 'rxjs/add/observable/from';
+import 'rxjs/add/operator/every';
+import { InjectionToken } from '@angular/core';
+import { NgxRolesStore } from '../store/roles.store';
+import { NgxPermissionsService } from './permissions.service';
+export declare const USE_ROLES_STORE: InjectionToken<{}>;
+export declare type NgxRolesObject = {
+    [name: string]: NgxRole;
+};
+export declare class NgxRolesService {
+    private isolate;
+    private rolesStore;
+    private permissionsService;
+    private rolesSource;
+    roles$: Observable<NgxRolesObject>;
+    constructor(isolate: boolean, rolesStore: NgxRolesStore, permissionsService: NgxPermissionsService);
+    addRole(name: string, validationFunction: Function | string[]): void;
+    addRoles(rolesObj: {
+        [name: string]: Function | string[];
+    }): void;
+    flushRoles(): void;
+    removeRole(roleName: string): void;
+    getRoles(): NgxRolesObject;
+    getRole(name: string): NgxRole;
+    hasOnlyRoles(names: string | string[]): Promise<boolean>;
+    private hasRoleKey(roleName);
+    private hasRolePermission(roles, roleNames);
+}

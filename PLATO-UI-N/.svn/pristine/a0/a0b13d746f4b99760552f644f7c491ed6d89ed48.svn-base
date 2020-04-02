@@ -1,0 +1,42 @@
+.myInputCard.mat-card {
+    width: 98%;
+    margin: 0% auto;
+    padding: 0px;
+    box-shadow: none !important;
+}
+
+.myInputCardContent.mat-card-content {
+    margin: 0px;
+    padding: 0px;
+}
+
+.input-full-width.mat-input-container.mat-form-field {
+    padding: 0px;
+    margin: 0px;
+    margin-left: 0.5%;
+    width: 90%;
+}
+
+button.btn.mat-raised-button.mat-primary.pull-right {
+    margin-top: 4px;
+}
+
+.myheading {
+    background-color: transparent;
+    color: #c90026;
+    margin: 10px;
+    height: 35px;
+    padding: 0.4% 1%;
+    width: 98.2%;
+    border-top: 1px solid #c90026;
+    border-bottom: 1px solid #c90026;
+    font-size: 15px;
+    font-family: 'Segoe UI Light', Verdana, sans-serif, Arial;
+}
+
+.loaderdiv {
+    margin: 10% auto;
+}
+.text-center {
+    font-size: 11px !important;
+}

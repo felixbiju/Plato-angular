@@ -1,0 +1,475 @@
+<div id="createTask" class="w3-modal modal-sm action-popup">
+  <div class="w3-modal-content w3-animate-zoom">
+    <header class="w3-container">
+      <a onclick="document.getElementById('createTask').style.display='none'" class="modal-close" (click)="resetForm(myform)">
+        <svg viewBox="0 0 24 24">
+          <path d="M19 6.41l-1.41-1.41-5.59 5.59-5.59-5.59-1.41 1.41 5.59 5.59-5.59 5.59 1.41 1.41 5.59-5.59 5.59 5.59 1.41-1.41-5.59-5.59z"
+          />
+          <path d="M0 0h24v24h-24z" fill="none" />
+        </svg>
+      </a>
+      <h2>Create User</h2>
+    </header>
+    <form #myform="ngForm">
+      <div class="w3-container modal-content customScroll text-center">
+        <mat-form-field class="example-full-width" style="margin-top:30px">
+          <input matInput placeholder="Enter Email" [(ngModel)]="newUser.user_id" value="" required id="useremail" name="useremail" #useremail="ngModel">
+          <div *ngIf="useremail.errors && (useremail.dirty || useremail.touched)" class="alert alert-danger">
+            <div [hidden]="!useremail.errors.required">
+              User email is required!
+            </div>
+          </div>
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Enter Name" [(ngModel)]="newUser.name"value="" required id="username" name="username" #username="ngModel">
+          <div *ngIf="username.errors && (username.dirty || username.touched)" class="alert alert-danger">
+            <div [hidden]="!username.errors.required">
+              Username is required!
+            </div>
+          </div>
+        </mat-form-field>
+        <mat-form-field class="example-full-width" style="margin-bottom:30px">
+          <input matInput type="password" placeholder="Enter Password" [(ngModel)]="newUser.password"value="" required id="password" name="password" #password="ngModel" >
+          <div *ngIf="password.errors && (password.dirty || password.touched)" class="alert alert-danger">
+            <div [hidden]="!password.errors.required">
+              Password is required!
+            </div>
+          </div>
+        </mat-form-field>
+      </div>
+      <footer class="w3-container">
+        <button mat-raised-button (click)="resetForm(myform)" class="btn mat-raised-button mat-primary mat-raised-cancel-button" color="primary" onclick="document.getElementById('createTask').style.display='none'">
+          Cancel
+        </button>
+        <button mat-raised-button  class="btn mat-raised-button mat-primary mat-raised-cancel-button" [disabled]="myform.invalid" color="primary" (click)="createUser()" onclick="document.getElementById('createTask').style.display='none'">
+          Create
+        </button>
+      </footer>
+      </form>
+  </div>
+</div>
+
+<div id="updateTask" class="w3-modal modal-sm action-popup">
+  <div class="w3-modal-content w3-animate-zoom">
+    <header class="w3-container">
+      <a onclick="document.getElementById('updateTask').style.display='none'" class="modal-close" >
+        <svg viewBox="0 0 24 24">
+          <path d="M19 6.41l-1.41-1.41-5.59 5.59-5.59-5.59-1.41 1.41 5.59 5.59-5.59 5.59 1.41 1.41 5.59-5.59 5.59 5.59 1.41-1.41-5.59-5.59z"
+          />
+          <path d="M0 0h24v24h-24z" fill="none" />
+        </svg>
+      </a>
+      <h2>Update User</h2>
+    </header>
+    <div class="w3-container modal-content customScroll text-center">
+      <mat-form-field class="example-full-width" style="margin-top:30px;">
+        <input matInput placeholder="Enter Name" [(ngModel)]="newUser.name" value="">
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width" style="margin-bottom:30px;">
+        <input matInput type="password" placeholder="Enter Password" [(ngModel)]="newUser.password" value="">
+      </mat-form-field>
+    </div>
+    <footer class="w3-container">
+        <button mat-raised-button  class="btn mat-raised-button mat-primary mat-raised-cancel-button" color="primary"
+        onclick="document.getElementById('updateTask').style.display='none'">
+          Cancel
+        </button>
+        <button mat-raised-button  class="btn mat-raised-button mat-primary" color="primary"
+        (click)="updateUser()"
+        onclick="document.getElementById('updateTask').style.display='none'">
+          Update
+        </button>
+      </footer>
+  </div>
+</div>
+
+<div id="allocate" class="w3-modal modal-lg action-popup">
+  <div class="w3-modal-content w3-animate-zoom">
+    <header class="w3-container">
+      <a onclick="document.getElementById('allocate').style.display='none'" class="modal-close">
+        <svg viewBox="0 0 24 24">
+          <path d="M19 6.41l-1.41-1.41-5.59 5.59-5.59-5.59-1.41 1.41 5.59 5.59-5.59 5.59 1.41 1.41 5.59-5.59 5.59 5.59 1.41-1.41-5.59-5.59z"
+          />
+          <path d="M0 0h24v24h-24z" fill="none" />
+        </svg>
+      </a>
+      <h2> Allocate Project To - {{selectedUser |uppercase}}
+      </h2>
+    </header>
+    <div class="w3-container modal-content text-center" style=" min-height: 400px !important; max-height: 400px !important; overflow: hidden;">
+      <div class="row myRow" style="padding-top: 10px;">
+
+      </div>
+      <div class="row">
+        <div class="col-md-3" style="border-right: 1px solid #ccc5c5;">
+          <div class="col-md-12">
+            <mat-form-field id="portfolioDropdown">
+              <mat-select placeholder="Select Portfolio" [(value)]="selected_portfolio_name">
+                <mat-option *ngFor="let portfolio of portfolios" (click)="selPortfolioValue(portfolio.portfolio_name,portfolio.portfolio_id)"
+                  [value]="portfolio.portfolio_name">
+                  {{ portfolio.portfolio_name }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-12">
+            <mat-form-field id="accountDropdown">
+              <mat-select placeholder="Select Account" [(value)]="selected_account_name" [disabled]="(!selected_portfolio_name) || (selected_portfolio_name?.length < 1)">
+                <mat-option *ngFor="let account of accounts" (click)="selAccountValue(account.accountName,account.accountId)" [value]="account.accountName">
+                  {{account.accountName}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-12">
+            <mat-form-field id="projectDropdown">
+              <mat-select placeholder="Select Project" [(value)]="selected_project_name" [disabled]="(!selected_portfolio_name && !selected_account_name) || (selected_account_name?.length < 1)">
+                <mat-option *ngFor="let project of projects" (click)="selProject(project.project_name,project.project_id)" [value]="project.project_name">
+                  {{project.project_name}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col-md-12" *ngIf="!roles">
+            <div class="left-role-list dashed-border" style="padding: 30px 12px; height: 190px">
+              Roles will be displayed once you select:
+              <div *ngIf="!selected_portfolio_name || selected_portfolio_name?.length < 1" style="margin: 0 8px;">1. Portfolio </div>
+              <div *ngIf="!selected_account_name   || selected_account_name?.length   < 1" style="margin: 0 8px;">2. Account   </div>
+              <div *ngIf="!selected_project_name   || selected_project_name?.length   < 1" style="margin: 0 8px;">3. Project   </div>
+            </div>
+          </div>
+          <div class="col-md-12" *ngIf="roles && selected_portfolio_name && selected_account_name && selected_project_name">
+            <form (submit)="addProjectForUser(); roleForm.reset();" #roleForm="ngForm">
+              <div class="row customScroll left-role-list">
+                <div class="col-md-6" *ngFor="let role of roles" style="font-size: 11px; text-align: left; margin: 6px 0; padding-left: 0; padding-right: 0;">
+                  <mat-checkbox [ngModel]="checkRole(role.roleId)"
+                  (click)='selectedRoleValue(role)' name="roleCheckbox" required> </mat-checkbox>
+                  <span style="margin-left: 4px;">{{role.roleName}}</span>
+                </div>
+              </div>
+              <button class="allocationBtn1 custom-mat-primary" mat-raised-button color="primary"
+              type="submit" [disabled]="roleForm.invalid">
+                Add
+              </button>
+            </form>
+          </div>
+        </div>
+        <div class="col-md-9 customScroll custom-height">
+          <div class="table-responsive plato_table" style="margin-top: 0px;">
+            <table class="table">
+              <tr>
+                <th>Default Project</th>
+                <th>Project Name</th>
+                <th>Roles</th>
+                <th>Actions</th>
+              </tr>
+              <tr *ngFor="let userRole of userRoles">
+                <td *ngIf= "( userRole.default_project |lowercase) === 'y'">
+                  <mat-icon style="float:left">radio_button_checked </mat-icon>
+                </td>
+                <td *ngIf= "( userRole.default_project |lowercase) === 'n'">
+                  <mat-icon style="float:left" (click)="StoreDefault(userRole)">radio_button_unchecked</mat-icon>
+                </td>
+                <td>{{userRole.project_name}} </td>
+                <td>{{userRole.role_name}}</td>
+                <td>
+                  <button mat-icon-button
+                  (click)="getRolesForUser(userRole.user_id, userRole.project_id)"
+                  onclick="document.getElementById('updateRoleForProject').style.display='block'">
+                    <img src="../../assets/genral_icons/edit.png"
+                    style="cursor: pointer; margin: 5px; vertical-align: sub;"/>
+                  </button>
+                  <button mat-icon-button
+                  (click)="deallocateProjects(userRole.user_id, userRole.project_id)">
+                    <img
+                    src="../../assets/genral_icons/bin_sm.png"
+                    style="cursor: pointer; margin: 5px; vertical-align: sub;"/>
+                  </button>
+                </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer class="w3-container">
+      <button mat-raised-button class="btn mat-raised-button custom-mat-primary mat-primary" color="primary"
+      onclick="document.getElementById('allocate').style.display='none'"> Done </button>
+    </footer>
+  </div>
+</div>
+
+<div id="updateRoleForProject" class="w3-modal modal-sm action-popup">
+  <div class="w3-modal-content w3-animate-zoom">
+    <header class="w3-container">
+      <a onclick="document.getElementById('updateRoleForProject').style.display='none'" class="modal-close" (click)="resetForm(roleUpdateForm)">
+        <svg viewBox="0 0 24 24">
+          <path d="M19 6.41l-1.41-1.41-5.59 5.59-5.59-5.59-1.41 1.41 5.59 5.59-5.59 5.59 1.41 1.41 5.59-5.59 5.59 5.59 1.41-1.41-5.59-5.59z"
+          />
+          <path d="M0 0h24v24h-24z" fill="none" />
+        </svg>
+      </a>
+      <h2>Update User's Allocated Roles</h2>
+    </header>
+    <form #roleUpdateForm="ngForm">
+      <div class="w3-container modal-content customScroll text-center">
+        <div class="row">
+          <div class="col-md-4" style="font-size: 11px; text-align: left; margin: 6px 0;" *ngFor="let role of roles">
+            <mat-checkbox [ngModel]="checkRole(role.roleId)" (click)='selectedRoleValue(role)' name="roleCheckbox" required> </mat-checkbox>
+            <span style="margin-left: 4px;">{{role.roleName}}</span>
+          </div>
+        </div>
+      </div>
+      <footer class="w3-container">
+        <button mat-raised-button class="btn mat-raised-button mat-primary mat-raised-cancel-button" color="primary"
+        onclick="document.getElementById('updateRoleForProject').style.display='none'" (click)="resetForm(roleUpdateForm)">
+          Cancel
+        </button>
+        <button mat-raised-button class="btn mat-raised-button mat-primary" color="primary"
+        type="submit"
+        onclick="document.getElementById('updateRoleForProject').style.display='none'" (click)="updateRoleForProject()">
+          Update Roles
+        </button>
+      </footer>
+    </form>
+  </div>
+</div>
+
+<div id="multipleAllocation" class="w3-modal modal-lg action-popup">
+  <div class="w3-modal-content w3-animate-zoom">
+    <header class="w3-container">
+      <a onclick="document.getElementById('multipleAllocation').style.display='none'" class="modal-close">
+        <svg viewBox="0 0 24 24">
+          <path d="M19 6.41l-1.41-1.41-5.59 5.59-5.59-5.59-1.41 1.41 5.59 5.59-5.59 5.59 1.41 1.41 5.59-5.59 5.59 5.59 1.41-1.41-5.59-5.59z"
+          />
+          <path d="M0 0h24v24h-24z" fill="none" />
+        </svg>
+      </a>
+      <h2>Allocate Projects To Selected Users</h2>
+    </header>
+    <div class="w3-container modal-content customScroll text-center">
+      <div class="row myRow">
+        <mat-card class="col-md-3 myUsersCard">
+          <mat-card-header class="myUsersCardHeader">
+            <mat-card-title class="myUsersCardTitle">
+              Selected Users List -
+            </mat-card-title>
+          </mat-card-header>
+          <mat-card-content class="myUsersCardContent customScroll" *ngFor="let user of usersSelected">
+            <span style="padding-right:10px;">{{user |uppercase}}</span>
+          </mat-card-content>
+        </mat-card>
+        <div class="col-md-9">
+          <div class="row">
+            <div class="col-md-4">
+              <mat-form-field id="portfolioDropdown">
+                <mat-select placeholder="Select Portfolio" [(value)]="selected_portfolio_name">
+                  <mat-option *ngFor="let portfolio of portfolios" (click)="selPortfolioValue(portfolio.portfolio_name,portfolio.portfolio_id)"
+                    [value]="portfolio.portfolio_name">
+                    {{ portfolio.portfolio_name }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+
+            <div class="col-md-4">
+              <mat-form-field id="accountDropdown">
+                <mat-select placeholder="Select Account" [(value)]="selected_account_name" >
+                  <mat-option *ngFor="let account of accounts" (click)="selAccountValue(account.accountName,account.accountId)" [value]="account.accountName">
+                    {{account.accountName}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+
+            <div class="col-md-4">
+              <mat-form-field id="projectDropdown">
+                <mat-select placeholder="Select Project" [(value)]="selected_project_name" [disabled]="(selected_portfolio_name === null)">
+                  <mat-option *ngFor="let project of projects" (click)="selProject(project.project_name,project.project_id)" [value]="project.project_name">
+                    {{project.project_name}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <ng-container *ngIf="roles">
+              <ul class="list-unstyled">
+                <li *ngFor="let role of roles">
+                  <mat-checkbox [ngModel]="checkRole(role.roleId)" (click)='selectedRoleValue(role)'> </mat-checkbox>
+                  {{role.roleName}}
+                </li>
+              </ul>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer class="w3-container">
+      <button mat-raised-button class="btn mat-raised-button mat-primary mat-raised-cancel-button" color="primary"
+      onclick="document.getElementById('multipleAllocation').style.display='none'">
+        Cancel
+      </button>
+      <button mat-raised-button class="btn mat-raised-button mat-primary" color="primary"
+      (click)="deallocateMultipleUsersFromProject()"
+      onclick="document.getElementById('multipleAllocation').style.display='none'">
+        Deallocate
+      </button>
+      <button mat-raised-button class="btn mat-raised-button mat-primary" color="primary"
+      (click)="allocateMultipleUsersFromProject()"
+      onclick="document.getElementById('multipleAllocation').style.display='none'">
+        Allocate
+      </button>
+    </footer>
+  </div>
+</div>
+
+<mat-card class="config-card">
+  <mat-card-header>
+    <mat-card-title class="config-card-heading">  Users Configuration </mat-card-title>
+    <mat-card-actions class="actions">
+      <ng-container *ngFor="let component of screenPermission">
+        <mat-form-field id="portfolioDropdown"
+        *ngIf="component.name === 'Select Portfolio'">
+          <mat-select [(value)]="portfolio_name" placeholder="Select Portfolio" [disabled]="component.checked">
+            <mat-option class="portfoliooptions" *ngFor="let portfolio of portfolios" (click)="selectedPortfolioValue(portfolio)" [value]="portfolio.portfolio_name">
+              {{ portfolio.portfolio_name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </ng-container>
+
+      <ng-container *ngFor="let component of screenPermission">
+        <mat-form-field id="accountDropdown" *ngIf="component.name === 'Select Account'">
+          <mat-select [(value)]="account_name" placeholder="Select Account" [disabled]="component.checked || (!portfolio_name) || (portfolio_name?.length < 1)">
+            <mat-option class="accountoptions" *ngFor="let account of accounts" (click)="selectedAccountValue(account)" [value]="account.accountName">
+              {{account.accountName}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </ng-container>
+
+      <ng-container *ngFor="let component of screenPermission">
+        <mat-form-field id="projectDropdown"
+        *ngIf="component.name === 'Select Project'">
+          <mat-select [(value)]="project_name" placeholder="Select Project" [disabled]="component.checked || (!portfolio_name && !account_name ) || (account_name?.length < 1)">
+            <mat-option class="projectoptions" *ngFor="let project of projects" (click)="selectedProjectValue(project)" [value]="project.project_name">
+              {{project.project_name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </ng-container>
+
+
+      <ng-container *ngFor="let component of screenPermission">
+        <button mat-icon-button style="width: 25px;"
+        matTooltip="Show all Users"
+        (click)="getAllUsers()"
+        *ngIf="component.name === 'Show All Users'"
+        [ngStyle]="{'opacity':component.checked ? '0.5' : '1' }"
+        [disabled]="component.checked"
+        [disableRipple]="true">
+          <img src="../../assets/genral_icons/refresh.png" style="cursor: pointer; margin: 5px; vertical-align: sub; width: 20px;" alt="Show all users"/>
+        </button>
+      </ng-container>
+      <ng-container *ngFor="let component of screenPermission">
+        <button mat-icon-button style="width: 25px;"
+        matTooltip="Create new User"
+        *ngIf="component.name === 'Create User'"
+        [ngStyle]="{'opacity':component.checked ? '0.5' : '1' }"
+        [disabled]="component.checked"
+        [disableRipple]="true"
+        onclick="document.getElementById('createTask').style.display='block'" >
+          <img title="Create new User" src="../../assets/genral_icons/plus.png" style="cursor: pointer; margin: 5px; width: 20px; vertical-align: sub;" />
+        </button>
+      </ng-container>
+      <ng-container *ngFor="let component of screenPermission">
+        <button mat-icon-button style="width: 25px;"
+        matTooltip="Multiple Allocation"
+        *ngIf="component.name === 'Multiple Allocation'"
+        [ngStyle]="{'opacity':!isMultipleShow || component.checked ? '0.5' : '1' }"
+        [disabled]="!isMultipleShow || component.checked"
+        [disableRipple]="true"
+        onclick="document.getElementById('multipleAllocation').style.display='block'">
+          <!-- Allocate Selected -->
+          <img  src="../../assets/genral_icons/users.png" style="cursor: pointer; margin: 5px; width: 20px; vertical-align: sub;">
+        </button>
+      </ng-container>
+      <ng-container *ngFor="let component of screenPermission">
+        <button mat-icon-button style="width: 25px;"
+        matTooltip="Edit existing User"
+        (click)='getParticularUser()'
+        onclick="document.getElementById('updateTask').style.display='block'"
+        *ngIf="component.name === 'Edit User'"
+        [ngStyle]="{'opacity':!isEditShow || component.checked ? '0.5' : '1' }"
+        [disabled]="!isEditShow || component.checked"
+        [disableRipple]="true">
+          <img title="Edit existing User" src="../../assets/genral_icons/edit.png" style="cursor: pointer; margin: 5px; width: 20px; vertical-align: sub;" />
+        </button>
+      </ng-container>
+      <ng-container *ngFor="let component of screenPermission">
+        <button mat-icon-button style="width: 25px;"
+        matTooltip="Delete existing User"
+        (click)='deleteUser()'
+        *ngIf="component.name === 'Delete User'"
+        [ngStyle]="{'opacity':!isDeleteShow || component.checked ? '0.5' : '1' }"
+        [disabled]="!isDeleteShow || component.checked"
+        [disableRipple]="true">
+          <img title="Delete existing User" src="../../assets/genral_icons/bin_sm.png" style="cursor: pointer; margin: 5px; width: 20px; vertical-align: sub;" />
+        </button>
+      </ng-container>
+    </mat-card-actions>
+  </mat-card-header>
+  <mat-card-content>
+    <div class="table-responsive plato_table">
+      <table class="table">
+        <tr>
+          <th class="leftAlign"> <mat-checkbox [(ngModel)]="checkAll" (click)="setAllChecked()"></mat-checkbox></th>
+          <th class="leftAlign"> Name </th>
+          <th class="leftAlign" > Email Id </th>
+          <th class="leftAlign"> Project </th>
+          <th class="leftAlign"> Role </th>
+          <th colspan="2" class="leftAlign"> Operations </th>
+        </tr>
+
+        <tr *ngFor="let userid of (users |user)">
+          <td class="centerAlign">
+            <mat-checkbox
+              [ngModel]="checkUser"
+              (click)='isChecked(userid.key)'>
+            </mat-checkbox>
+          </td>
+
+          <td>
+            <span *ngFor="let username of userid.value | user">
+              {{username.key |uppercase}}
+            </span>
+          </td>
+
+          <td>
+            {{userid.key}}
+          </td>
+
+          <td *ngFor="let username of userid.value | user">
+            <tr class="example-full-width" *ngFor="let userproject of username.value | user; let j = index" style="border: none; background-color: transparent;">
+              <td id="tdstyle" >{{userproject.key}}</td>
+            </tr>
+          </td>
+
+          <td *ngFor="let username of userid.value | user" >
+            <tr class="example-full-width" *ngFor= "let userproject of username.value | user" style="border: none; background-color: transparent;">
+              <td>{{userproject.value}}</td>
+            </tr>
+          </td>
+
+          <td>
+            <button mat-button class="buttonstyle" (click)="getUserDetails(userid.key)"
+            onclick="document.getElementById('allocate').style.display='block'"> Allocate </button>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </mat-card-content>
+</mat-card>
+

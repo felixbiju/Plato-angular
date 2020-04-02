@@ -1,0 +1,82 @@
+#modalContainer {
+    width: 30%;
+}
+
+.main-container {
+  min-height: 390px;
+}
+
+
+
+.example-form {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+}
+
+.example-full-width {
+    width: 100%;
+}
+
+.plato_table td {
+    padding: 4px;
+    font-size: 12px !important;
+}
+
+.plato_table th {
+    padding: 4px;
+    font-size: 14px !important;
+}
+
+.checkboxAlign {
+    text-align: center;
+}
+
+.headerAlign {
+    text-align: left;
+}
+
+.instructionDiv {
+    margin: 10px auto;
+    text-align: left;
+    font-size: 12px !important;
+}
+
+#online-circle {
+    height: 10px;
+    width: 10px;
+    border-radius: 50%;
+    background: green;
+    display: inline-block;
+    margin: 5px 5px 0px 0px;
+}
+
+#offline-circle {
+  height: 10px;
+  width: 10px;
+  border-radius: 50%;
+  background: rgb(97, 97, 97);
+  display: inline-block;
+  margin: 5px 5px 0px 0px;
+}
+
+#dead-circle {
+  height: 10px;
+  width: 10px;
+  border-radius: 50%;
+  background: rgb(218, 14, 14);
+  display: inline-block;
+  margin: 5px 5px 0px 0px;
+}
+
+.my_table_bar {
+  position: fixed;
+  z-index: 2;
+}
+
+.top_bar_button {
+  position: fixed;
+  right: 10px;
+  float: right;
+  top: 48px;
+}

@@ -1,0 +1,7 @@
+<img *ngIf="isLive" [src]="imageUrl" class="screen" onError="this.src='../../../../assets/images/errorLivePreview.jpg'"/>
+<div *ngIf="!isLive && videoLink !== null" class="screen video">
+  <video  controls #videoPlayer>
+      <source [src]="videoLink" type="video/mp4" />
+      Browser not supported
+  </video>
+</div>

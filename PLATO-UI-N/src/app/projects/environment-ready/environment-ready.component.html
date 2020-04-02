@@ -1,0 +1,176 @@
+<div class="container-fluid completeGraph" id="completeGraphView" style="display: none;">
+    <div class="row" style=" margin: 0px;">
+        <div class="col-md-9" style="padding: 20px; ">
+                <mat-card class="example-card" *ngFor="let data of dataFromUrl; let i=index">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <mat-card-header class="custom-header">
+                                    <div mat-card-avatar style="margin: 5px;">
+                                        <div class="lds-ripple" *ngIf="completeGraphStatuscheckApp === true" ><div></div><div></div></div>
+                                        <div class="dot-green" *ngIf="(completeGraphStatus | lowercase) === 'running'"></div>
+                                        <div class="dot-red" *ngIf="(completeGraphStatus | lowercase) === 'stopped'"></div>
+                                    </div>
+                                        <mat-card-title>{{ completeGraphName }}</mat-card-title>
+                                        <mat-card-subtitle>{{ completeGraphUrl }}</mat-card-subtitle>
+                                </mat-card-header>
+                            </div>
+                            <div class="col-md-8" >
+                                <span class="close" (click)="hideCompleteGraph()">&times;</span>
+                                <mat-form-field style="float: right; margin-left:5px;">
+                                    <input matInput [matDatepicker]="endPicker" placeholder="To" [formControl]="to_date_form"
+                                        [min]="minDateTo" [max]="maxDateTo"   (dateInput)="addToEvent($event)">
+                                    <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
+                                    <mat-datepicker #endPicker></mat-datepicker>
+                                </mat-form-field>
+                                <mat-form-field style="float: right;">
+                                    <input matInput [matDatepicker]="startPicker" placeholder="From" [formControl]="from_date_form"
+                                        [min]="minDateFrom" [max]="maxDateFrom"   (dateInput)="addFromEvent($event)">
+                                    <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
+                                    <mat-datepicker #startPicker></mat-datepicker>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <mat-card-content  style="height:300px;">
+                            <canvas baseChart width="3" height="1"
+                                        [datasets]="data.graphData"
+                                        [labels]="data.chartLabel"
+                                        [options]="applineFullChartOptions"
+                                        [colors]="applineChartColors"
+                                        [legend]="applineFullChartLegend"
+                                        [chartType]="applineChartType"></canvas>
+                        </mat-card-content>
+                    </mat-card>
+        </div>
+    </div>
+</div>
+<div style="background-color: #f5f5f580; margin-top: -10px;">
+    <mat-expansion-panel [disabled]="true" style="height: 60px !important; margin-left: -10px;">
+      <mat-expansion-panel-header style="color: #3498db; cursor: default; padding: 15px 15px 5px 16px!important; margin: auto !important; height: 80px !important;">
+        <div class="col-md-12" style=" margin-right: -15px !important;">
+            <div class="col-md-4" style="margin-top: 5px;"><mat-card-title class="pageHeading">Environment Readiness</mat-card-title></div>
+            <div class="col-md-7" style="margin-top: -5px; ">
+                <mat-form-field appearance="outline" style="float: right; margin: 5px -25px 0px 0px; width: 220px;">
+                    <label style="float: left;">Refresh Interval : </label>
+                    <input style="max-width: 43px; margin: 1px 5px;" matInput type="number" value={{poolingTimeForm}} min=1 max=60 (input)="onRefreshTimeChange($event.target.value)">
+                    <p matSuffix>mins</p>
+                </mat-form-field>
+            </div>
+        </div>
+      </mat-expansion-panel-header>
+    </mat-expansion-panel>
+
+    <div class="container-fluid">
+        <div class="col-md-12">
+            <div class="myheading">
+                <span class="mytitle">Applications</span>
+                <img class="min-max_button" (click)="hideandshowreport('apps')" src="../../assets/genral_icons/minus_sm.png"/>
+                <span style="float: right; margin: 0px 5px; color:rgb(0, 188, 212);">Response Status</span>
+                <span style="float: right; margin: 0px 5px; color:rgba(92, 107, 192)">Response Time</span>
+            </div>
+        </div>
+
+        <div class="row appRow" id="apps" style="display: block; min-height: 220px;">
+            <div class="col-md-12">
+                <div class="col-md-4" *ngFor="let application of applications">
+                        <mat-card class="example-card" (click)="showCompleteGraph(application); setFunction('app')">
+
+                            <mat-card-content>
+                                <div class="fixHeight" *ngIf="statuscheckApp === false"></div>
+                                <div class="fixHeight info-message" *ngIf="!(application?.graphData[0]?.data?.length > 0)">
+                                  Graph not available
+                                </div>
+                                <canvas *ngIf="(application?.graphData[0]?.data?.length > 0)" baseChart width="3" height="1"
+                                    [datasets]="application.graphData"
+                                    [labels]="application.chartLabel"
+                                    [options]="applineChartOptions"
+                                    [colors]="applineChartColors"
+                                    [legend]="applineChartLegend"
+                                    [chartType]="applineChartType"></canvas>
+                            </mat-card-content>
+                            <mat-card-header>
+                                <div mat-card-avatar style="margin-top: 6px;">
+                                       <div class="lds-ripple" *ngIf="statuscheckApp === false" ><div></div><div></div></div>
+                                       <div class="dot-green" *ngIf="(application.applicationStatus | lowercase) === 'running'"></div>
+                                       <div class="dot-red" *ngIf="(application.applicationStatus | lowercase) === 'stopped'"></div>
+                                </div>
+                                    <mat-card-title>{{ (application.applicationName.length>40)? (application.applicationName | slice:0:40)+'..':(application.applicationName) }}</mat-card-title>
+                                    <mat-card-subtitle>{{ (application.applicationUrl.length>40)? (application.applicationUrl | slice:0:40)+'..':(application.applicationUrl) }}</mat-card-subtitle>
+                            </mat-card-header>
+                        </mat-card>
+                </div>
+            </div>
+      </div>
+      <div class="col-md-12">
+            <div class="myheading">
+                    <span class="mytitle">Servers</span>
+                    <img class="min-max_button" (click)="hideandshowreport('serv')" src="../../assets/genral_icons/minus_sm.png"/>
+            </div>
+      </div>
+      <div class="row appRow" id="serv" style="display: block;  min-height: 220px;">
+            <div class="col-md-12">
+                <div class="col-md-4" *ngFor="let server of servers">
+                        <mat-card class="example-card" (click)="showServerCompleteGraph(server); setFunction('serv')">
+
+                            <mat-card-content>
+                                <div class="fixHeight" *ngIf="statuscheckServer === false"></div>
+                                <div class="fixHeight info-message" *ngIf="!(server?.graphData[0]?.data?.length > 0)">
+                                    Graph not available
+                                </div>
+                                <canvas *ngIf="(server?.graphData[0]?.data?.length > 0)" baseChart width="3" height="1"
+                                    [datasets]="server.graphData"
+                                    [labels]="server.chartLabel"
+                                    [options]="applineChartOptions"
+                                    [colors]="applineChartColors"
+                                    [legend]="applineChartLegend"
+                                    [chartType]="applineChartType"></canvas>
+                            </mat-card-content>
+                            <mat-card-header>
+                                <div mat-card-avatar style="margin-top: 8px;">
+                                       <div class="lds-ripple" *ngIf="statuscheckServer === false" ><div></div><div></div></div>
+                                       <div class="dot-green" *ngIf="(server.serverStatus | lowercase) === 'running'"></div>
+                                       <div class="dot-red" *ngIf="(server.serverStatus | lowercase) === 'stopped'"></div>
+                                </div>
+                                    <mat-card-title>{{ (server.serverName.length>40)? (server.serverName | slice:0:40)+'..':(server.serverName) }}</mat-card-title>
+                                    <mat-card-subtitle>{{ (server.serverUrl.length>40)? (server.serverUrl | slice:0:40)+'..':(server.serverUrl) }} </mat-card-subtitle>
+                            </mat-card-header>
+                        </mat-card>
+                </div>
+            </div>
+      </div>
+      <div class="col-md-12">
+            <div class="myheading">
+                    <span class="mytitle">Databases</span>
+                    <img class="min-max_button" (click)="hideandshowreport('dbs')" src="../../assets/genral_icons/minus_sm.png"/>
+            </div>
+      </div>
+      <div class="row appRow" id="dbs" style="display: block;  min-height: 220px; margin-bottom:20px;">
+            <div class="col-md-12">
+                <div class="col-md-4" *ngFor="let datbase of databases">
+                        <mat-card style="padding: 20px 25px 25px 25px;" class="example-card" (click)="showDBCompleteGraph(server); setFunction('db')">
+
+                            <mat-card-content>
+                                <!-- no graph for database yet -->
+                                <!-- <div class="fixHeight" *ngIf="statuscheckDb === false"></div>
+                                <canvas baseChart width="3" height="1"
+                                    [datasets]="datbase.graphData"
+                                    [labels]="applineChartLabels"
+                                    [options]="applineChartOptions"
+                                    [colors]="applineChartColors"
+                                    [legend]="applineChartLegend"
+                                    [chartType]="applineChartType"></canvas> -->
+                            </mat-card-content>
+                            <mat-card-header>
+                                <div mat-card-avatar style="margin-top: 5px;">
+                                       <div class="lds-ripple" *ngIf="statuscheckDb === false" ><div></div><div></div></div>
+                                       <div class="dot-green" *ngIf="(datbase.databaseStatus | lowercase) === 'running'"></div>
+                                       <div class="dot-red" *ngIf="(datbase.databaseStatus | lowercase) === 'stopped'"></div>
+                                </div>
+                                    <mat-card-title>{{ (datbase.databaseName.length>40)? (datbase.databaseName | slice:0:40)+'..':(datbase.databaseName) }}</mat-card-title>
+                                    <mat-card-subtitle>{{ (datbase.databaseUrl.length>40)? (datbase.databaseUrl | slice:0:40)+'..':(datbase.databaseUrl) }}</mat-card-subtitle>
+                            </mat-card-header>
+                        </mat-card>
+                </div>
+            </div>
+      </div>
+    </div>
+</div>

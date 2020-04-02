@@ -1,0 +1,74 @@
+.mainPage {
+    padding: 0;
+    margin-top: 50px;
+    background: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: calc(100% - 85px);
+    width: 100%;
+    overflow: hidden;
+}
+
+#spinner01,
+.w3-modal-content {
+    background-color: transparent;
+}
+
+.myLoaderModal #modalContainer {
+    margin: 0 auto;
+    margin-top: 150px !important;
+    padding: 0 auto;
+}
+
+.myMsg {
+    right: 1.5em;
+    bottom: 3.5em;
+    position: fixed;
+    z-index: 2;
+    box-shadow: 1px 1px 4px 2px rgba(0, 0, 0, 0.47);
+    padding: 6px 16px;
+    font-size: 11px;
+    color: #f8f8f8;
+    background-color: #1d50a7;
+    width: fit-content;
+    vertical-align: middle;
+    border-radius: 1px;
+}
+
+#google_translate_element {
+    float: right;
+    visibility: hidden;
+}
+
+.con-table { display: table; border-collapse: separate; border-spacing: 8px 4px;}
+.con-row   { display: table-row;}
+.column    { display: table-cell; vertical-align: middle; }
+.sidebar {
+  width: 30px;
+  padding-top: 5px;
+}
+
+.content-message span {
+  font-size: 13px;
+}
+
+::ng-deep .mat-checkbox-checked.mat-accent .mat-checkbox-background, .mat-checkbox-indeterminate.mat-accent .mat-checkbox-background {
+  background-color: rgb(27, 142, 241) !important;
+}
+
+::ng-deep .mat-ripple-element {
+  background: rgba(192, 192, 192, 0.4) !important;
+}
+
+::ng-deep .mat-radio-button.mat-accent .mat-radio-inner-circle {
+  background-color: rgb(27, 142, 241);
+}
+
+::ng-deep .mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle {
+  border-color: rgb(27, 142, 241);
+}
+
+::ng-deep .mat-radio-button.mat-accent .mat-radio-ripple .mat-ripple-element {
+  background-color:rgba(192, 192, 192, 0.4) !important;
+}

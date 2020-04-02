@@ -1,0 +1,39 @@
+#modalContainer {
+  width: 30%;
+}
+
+.example-form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+}
+
+.example-full-width {
+  width: 100%;
+}
+
+.plato_table {
+  margin-top: 50px;
+  margin-left: 5px;
+}
+
+.plato_table td {
+  padding: 4px;
+  font-size: 12px !important;
+}
+.plato_table th {
+  padding: 4px;
+  font-size: 14px !important;
+}
+
+.leftAlign{
+  text-align: left;
+}
+
+.centerAlign{
+  text-align: center;
+}
+
+#selectAll{
+  width: 8%;
+}

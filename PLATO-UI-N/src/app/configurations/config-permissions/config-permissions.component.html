@@ -1,0 +1,71 @@
+<mat-card class="config-card">
+  <mat-card-header>
+    <mat-card-title class="config-card-heading">  Accounts Configuration </mat-card-title>
+    <mat-card-actions class="actions">
+      <ng-container *ngFor="let component of screenPermission">
+        <mat-form-field id="portfolioDropdown"
+        *ngIf="component.name === 'Select Role'">
+          <mat-select  placeholder="Select Role" [disabled]="component.checked">
+            <mat-option *ngFor="let role of roles" (click)="selectRole(role);" [value]="role.roleId">
+              {{ role.roleName }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </ng-container>
+      <ng-container *ngFor="let component of screenPermission">
+        <button mat-raised-button (click)="deletePermissionByRole()"
+        *ngIf="component.name === 'Save Permission'"
+        [ngStyle]="{'opacity':!selectedRole || component.checked ? '0.5' : '1' }"
+        [disabled]="!selectedRole || component.checked"
+        [disableRipple]="true">
+          Save
+        </button>
+      </ng-container>
+    </mat-card-actions>
+  </mat-card-header>
+  <mat-card-content>
+    <div class="row myScreenRow text-center">
+      <mat-card class="col-sm-3 myCard"
+      *ngFor="let module of screenData">
+        <mat-card-header class="myCardHeader">
+          <mat-card-title class="myCardTitle">
+            {{ module.moduleName |uppercase}}
+            <span style="float:right;">
+              <mat-checkbox
+              [(ngModel)]="!module.checked"
+              (click)="isModuleChecked(module)"></mat-checkbox>
+            </span>
+          </mat-card-title>
+        </mat-card-header>
+        <mat-card-content class="myCardContent"
+        *ngFor="let screen of module.screens">
+          <mat-card class="myChildCard">
+            <mat-card-header class="myChildCardHeader">
+              <mat-card-title class="myChildCardTitle">
+                {{screen.screenName |titlecase}}
+                <span style="float:right;">
+                  <mat-checkbox
+                  [(ngModel)]="!screen.checked"
+                  (click)="isScreenChecked(screen)"></mat-checkbox>
+                </span>
+              </mat-card-title>
+            </mat-card-header>
+            <ng-container
+            *ngFor="let component of screen.components">
+              <mat-card-content class="myChildCardContent">
+                <span style="float:left;font-size: 12px;">
+                  {{component.name |titlecase}}
+                </span>
+                <span style="float:right;">
+                  <mat-checkbox
+                  (click)="isComponentChecked(module, screen, component)"
+                  [(ngModel)]="!component.checked"></mat-checkbox>
+                </span>
+              </mat-card-content>
+            </ng-container>
+          </mat-card>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </mat-card-content>
+</mat-card>

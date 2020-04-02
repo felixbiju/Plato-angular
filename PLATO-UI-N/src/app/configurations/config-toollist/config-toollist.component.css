@@ -1,0 +1,87 @@
+#modalContainer {
+    width: 30%;
+}
+
+.example-form {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+}
+
+.example-full-width {
+    width: 100%;
+}
+
+.checkboxAlign {
+    text-align: center;
+}
+
+.headerAlign {
+    text-align: left;
+}
+
+.plato_table td {
+    padding: 4px;
+    font-size: 12px !important;
+}
+.plato_table th {
+    padding: 4px;
+    font-size: 14px !important;
+}
+.top_bar {
+  height: 57px;
+}
+.top_bar_button /deep/ .mat-icon-button{
+    width: 28px !important;
+}
+.portfoliooptions{
+    width: 100%;
+    text-align: left;
+    color: #656363;
+    font-size: 12px !important;
+    font-family: "Segoe UI light", Verdana, sans-serif, Arial !important;
+    height: 40px;
+}
+
+.toollist td{
+  padding: 5px 15px;
+  height: 45px !important;
+}
+
+table {
+  width: 100%;
+}
+
+.toollist tr {
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+}
+
+.plato_table {
+  margin-top: 60px;
+  margin-left: 5px;
+}
+
+.list-radio-button {
+  margin-top: 6px;
+}
+
+::ng-deep.mat-radio-container{
+  height: 14px !important;
+  width: 14px !important;
+}
+::ng-deep.mat-radio-outer-circle{
+  height: 14px !important;
+  width: 14px !important;
+}
+::ng-deep.mat-radio-inner-circle{
+  height: 14px !important;
+  width: 14px !important;
+}
+::ng-deep.mat-radio-button .mat-radio-ripple{
+  height: 28px !important;
+  width: 28px !important;
+  left: calc(50% - 14px) !important;
+  top: calc(50% - 14px) !important;
+}
+

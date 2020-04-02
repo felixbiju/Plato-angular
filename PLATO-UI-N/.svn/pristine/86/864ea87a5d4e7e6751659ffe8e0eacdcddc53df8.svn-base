@@ -1,0 +1,270 @@
+<div class='breadcrumbs'>
+  <div class='inner'>
+    <ul class='cf'>
+      <li>
+        <button mat-icon-button class="mat-icon-button-sm" (click)="sidenav.toggle()" [disableRipple]="true">
+          <img src="../../assets/genral_icons/menu.png"/>
+        </button>
+      </li>
+      <li>
+        <a id="menuBtn" [matMenuTriggerFor]="portfolio">
+          <span>{{selectedPortfolioName}} </span>
+          <span *ngIf="selectedPortfolioName === ''">Select Portfolio</span>
+        </a>
+      </li>
+      <li>
+        <a id="menuBtn" [matMenuTriggerFor]="account" *ngIf="!(selectedPortfolioName === '')">
+          <span> {{selectedAccountName}} </span>
+          <span *ngIf="selectedAccountName === '' && !(selectedPortfolioName === '')"> Select Account</span>
+        </a>
+      </li>
+      <li>
+        <a id="menuBtn" [matMenuTriggerFor]="project" *ngIf="!(selectedAccountName === '')" class="active">
+          <span> {{selectedProjectName}} </span>
+          <span *ngIf="selectedProjectName === ''">Select Project</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div id="id01" class="w3-modal modal-sm action-popup">
+  <div class="w3-modal-content w3-card-4" style="width:45% !important;">
+    <form #addModuleForm='ngForm'>
+      <header class="w3-container">
+        <a onclick="document.getElementById('id01').style.display='none'" class="modal-close" (click)="resetForm(myform)">
+          <svg viewBox="0 0 24 24">
+            <path d="M19 6.41l-1.41-1.41-5.59 5.59-5.59-5.59-1.41 1.41 5.59 5.59-5.59 5.59 1.41 1.41 5.59-5.59 5.59 5.59 1.41-1.41-5.59-5.59z"
+            />
+            <path d="M0 0h24v24h-24z" fill="none" />
+          </svg>
+        </a>
+        <h2>New Build</h2>
+      </header>
+      <form #myform="ngForm">
+        <div class="w3-container modal-content" style="padding-top: 6px;padding-bottom: 6px;">
+          <mat-form-field class="input-full-width">
+            <input matInput placeholder="Enter Name" [(ngModel)]="newModule.jenkins_job_name" name='moduleName' required value="" name="buildname">
+          </mat-form-field>
+          <mat-form-field class="input-full-width">
+            <input matInput placeholder="Description" [(ngModel)]="newModule.description" name='moduleDescription' required value="" name="builddescription">
+          </mat-form-field>
+
+        </div>
+        <footer class="w3-container">
+          <button mat-raised-button class="btn mat-raised-button mat-primary" color="primary" [disabled]="myform.invalid"(click)="createModule(); addModuleForm.form.reset();"> Add </button>
+        </footer>
+      </form>
+    </form>
+  </div>
+</div>
+<div id="id02" class="w3-modal modal-sm action-popup">
+  <div class="w3-modal-content w3-card-4" style="width:45% !important;">
+    <form #addModuleForm='ngForm'>
+      <header class="w3-container">
+        <a onclick="document.getElementById('id02').style.display='none'" class="modal-close" (click)="resetForm(myform)">
+          <svg viewBox="0 0 24 24">
+            <path d="M19 6.41l-1.41-1.41-5.59 5.59-5.59-5.59-1.41 1.41 5.59 5.59-5.59 5.59 1.41 1.41 5.59-5.59 5.59 5.59 1.41-1.41-5.59-5.59z"
+            />
+            <path d="M0 0h24v24h-24z" fill="none" />
+          </svg>
+        </a>
+        <h2>Schedule Build</h2>
+      </header>
+      <form #myform="ngForm">
+        <div class="w3-container modal-content" style="padding-top: 6px;padding-bottom: 6px;">
+          <mat-form-field class="input-full-width">
+            <input matInput placeholder="SCM Poll Timer" [(ngModel)]="scmPollTimer" value="" name="scmpoll" id="scmpoll"
+              #scmpoll="ngModel">
+          </mat-form-field>
+          <mat-form-field class="input-full-width">
+            <input matInput placeholder="Periodic Build Timer" [(ngModel)]="periodicBuildTimer" value="" name="periodicbuild" id="periodicbuild"
+              #periodicbuild="ngModel">
+          </mat-form-field>
+        </div>
+        <footer class="w3-container">
+          <button mat-raised-button class="btn mat-raised-button mat-primary" color="primary" onclick="document.getElementById('id02').style.display='none'" [disabled]="myform.invalid"(click)="scheduleModule(); addModuleForm.form.reset();" > Schedule </button>
+        </footer>
+      </form>
+    </form>
+  </div>
+</div>
+
+  <div id="confirmBox01" class="w3-modal modal-sm action-popup">
+    <div class="w3-modal-content w3-animate-zoom">
+      <header class="w3-container">
+        <a onclick="document.getElementById('confirmBox01').style.display='none'" class="modal-close">
+          <svg viewBox="0 0 24 24">
+            <path d="M19 6.41l-1.41-1.41-5.59 5.59-5.59-5.59-1.41 1.41 5.59 5.59-5.59 5.59 1.41 1.41 5.59-5.59 5.59 5.59 1.41-1.41-5.59-5.59z"
+            />
+            <path d="M0 0h24v24h-24z" fill="none" />
+          </svg>
+        </a>
+        <h2>Confirmation Required</h2>
+      </header>
+      <div class="w3-container modal-content customScroll text-center">
+        <p style="margin: 20px auto;"> Are you sure that you want to delete this Build?</p>
+      </div>
+      <footer class="w3-container">
+        <button class="btn mat-raised-button mat-primary mat-raised-cancel-button" color="primary" mat-raised-button onclick="document.getElementById('confirmBox01').style.display='none'">
+          Cancel
+        </button>
+        <button class="btn mat-raised-button mat-primary" color="primary" mat-raised-button (click)="deleteModule()" >
+          Ok
+        </button>
+      </footer>
+    </div>
+  </div>
+
+<mat-sidenav-container id="sidenav-container">
+  <mat-sidenav #sidenav mode="side" id="sidenav" opened>
+    <mat-nav-list>
+      <a mat-list-item>
+        <button mat-button class="comp-list" style="height:50px">
+          <img  src="../../assets/genral_icons/star.png" style="cursor: pointer; position: absolute; height: 18px; top: 18px; width: 18px; left: 18px;"/>
+          <mat-form-field class="myDropDown" *ngIf="placeholder === ''">
+            <mat-select  class="dropalign" [(ngModel)]="selectedModuleName" placeholder="Select Build">
+              <mat-option *ngFor="let module of modules" [value]="module.moduleName" (click)="getBuidHistory(module.moduleName, module.module_Id, module.moduleDescription);
+                  routingFunction('Build Configuration');">
+                {{ module.moduleName }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field class="myDropDown" *ngIf="!(placeholder === '')">
+            <mat-select [(ngModel)]="selectedModuleName" placeholder="{{placeholder}}">
+              <mat-option *ngFor="let module of modules" [value]="module.moduleName" (click)="getBuidHistory(module.moduleName, module.module_Id, module.moduleDescription); routingFunction('Build Configuration');">
+                {{ module.moduleName }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </button>
+      </a>
+      <ng-container *ngFor="let component of screenPermission">
+        <a mat-list-item *ngIf="component.name === 'Create Build'">
+          <button mat-button class="comp-list" onclick="document.getElementById('id01').style.display='block'"
+          [ngStyle]="{'opacity':component.checked ? '0.5' : '1' }"
+          [disabled]="component.checked">
+            <span><img title="New Build" src="../../assets/genral_icons/blank_page.png" style="cursor: pointer; position: absolute; height: 18px; top: 10px; width: 18px; left: 18px;"/></span><span style="margin-left: 40px; position: relative;top: -4px;">New Build</span>
+          </button>
+        </a>
+      </ng-container>
+      <ng-container *ngFor="let component of screenPermission">
+        <a mat-list-item *ngIf="component.name === 'Build Configuration'">
+          <button mat-button class="comp-list" (click)="routingFunction('Build Configuration')" routerLinkActive="activeLink"
+          [ngStyle]="{'opacity':component.checked ? '0.5' : '1' }"
+          [disabled]="component.checked">
+            <span><img title="Build Configuration" src="../../assets/genral_icons/process.png" style="cursor: pointer; position: absolute; height: 18px; top: 10px; width: 18px; left: 18px;"/></span><span style="margin-left: 40px; position: relative;top: -4px;"> Build Configuration</span>
+          </button>
+        </a>
+      </ng-container>
+      <ng-container *ngFor="let component of screenPermission">
+        <a mat-list-item *ngIf="component.name === 'Build Configuration'">
+          <button mat-button class="comp-list" (click)="getScheduleBuild()"
+          [ngStyle]="{'opacity':component.checked ? '0.5' : '1' }"  onclick="document.getElementById('id02').style.display='block'"
+          [disabled]="component.checked">
+            <span><img title="Schedule Build" src="../../assets/genral_icons/alarm.png" style="cursor: pointer; position: absolute; height: 18px; top: 10px; width: 18px; left: 18px;"/></span><span style="margin-left: 40px; position: relative;top: -4px;"> Schedule Build</span>
+          </button>
+        </a>
+      </ng-container>
+      <ng-container *ngFor="let component of screenPermission">
+        <a mat-list-item *ngIf="component.name === 'Environment Readiness'">
+          <button mat-button class="comp-list" (click)="routingFunction('Environment Readiness')" routerLinkActive="activeLink"
+          [ngStyle]="{'opacity':component.checked ? '0.5' : '1' }"
+          [disabled]="component.checked">
+            <span><img title="Environment Readiness" src="../../assets/genral_icons/cloud.png" style="cursor: pointer; position: absolute; height: 18px; top: 10px; width: 18px; left: 18px;"/></span><span style="margin-left: 40px; position: relative;top: -4px;">Environment Readiness</span>
+          </button>
+        </a>
+      </ng-container>
+      <ng-container *ngFor="let component of screenPermission">
+        <a mat-list-item *ngIf="component.name === 'Execute Build'">
+          <button mat-button class="comp-list" (click)="executeModule()" [disabled]="component.checked || isExecutionDisabled"
+          [ngStyle]="{'opacity':component.checked ? '0.5' : '1' }"
+          [disabled]="component.checked">
+            <span><img title="Execute Build" src="../../assets/genral_icons/play.png" style="cursor: pointer; position: absolute; height: 18px; top: 10px; width: 18px; left: 18px;"/></span><span style="margin-left: 40px; position: relative;top: -4px;">Execute Build</span>
+          </button>
+        </a>
+      </ng-container>
+      <ng-container *ngFor="let component of screenPermission">
+        <a mat-list-item *ngIf="component.name === 'Delete Build'">
+          <button mat-button class="comp-list" onclick="document.getElementById('confirmBox01').style.display='block'" [disabled]="isExecutionDisabled || component.checked"
+          [ngStyle]="{'opacity':component.checked ? '0.5' : '1' }">
+            <span><img title="Delete Build" src="../../assets/genral_icons/delete.png" style="cursor: pointer; position: absolute; height: 18px; top: 10px; width: 18px; left: 18px;"/></span><span style="margin-left: 40px; position: relative;top: -4px;">Delete Build</span>
+          </button>
+        </a>
+      </ng-container>
+      <a mat-list-item >
+        <mat-accordion>
+          <mat-expansion-panel expanded="true" hideToggle="true" id="myExpantion">
+            <mat-expansion-panel-header class="comp-list"  style=" margin-bottom: -1px;">
+              <mat-panel-title id="title">
+                <img title="Build History" src="../../assets/genral_icons/clock.png" style="cursor: pointer; height:18px; width:18px; top: 5px; left: 8px; padding: 5px 21px 5px 18px;"/> Build History
+                <div class="loader" *ngIf="showStartingProgress"></div>
+              </mat-panel-title>
+              <!-- show trend button on build history -->
+              <!-- <mat-panel-description>
+                <a (click)="routingFunction('TREND')" style="float:right; padding-right:10%;">Trend</a>
+              </mat-panel-description> -->
+            </mat-expansion-panel-header>
+            <mat-action-row id="myBtnRow" *ngFor="let history of buildHistories; let i = index" (click)="setClickedHistory(i)" [class.active]="i === selectedHistory">
+              <div class="row build-history-list" (click)="setBuildHistory(history)" style="width: 100%;">
+                <div class="col-md-1" style="padding: 0 5px 0 15px;">{{ history.buildNumber }}</div>
+                <div class="col-md-8" style="padding: 0 5px;">{{ history.timestamp }}</div>
+                <div class="col-md-1" style="padding: 0 5px;">
+                  <svg *ngIf="(history.status| lowercase) === 'completed'"  height="10"  width="10">
+                    <circle cx="5"  cy="5"  r="4"  fill="green"  />
+                  </svg>
+                  <svg *ngIf="(history.status| lowercase) === 'failed'"  height="10"  width="10">
+                    <circle cx="5"  cy="5"  r="4"  fill="red"  />
+                  </svg>
+                  <svg *ngIf="(history.status| lowercase) === 'in-progress'"  height="10"  width="10">
+                    <circle cx="5"  cy="5"  r="4"  fill="yellow"  />
+                  </svg>
+                  <svg *ngIf="(history.status| lowercase) === 'on-hold'"  height="10"  width="10">
+                    <circle cx="5"  cy="5"  r="4"  fill="yellow"  />
+                  </svg>
+                  <svg *ngIf="(history.status| lowercase) === 'aborted'"  height="10"  width="10">
+                    <circle cx="5"  cy="5"  r="4"  fill="gray"  />
+                  </svg>
+                </div>
+                <span *ngIf="(history.status| lowercase) === 'in-progress'">
+                  <mat-progress-bar class="historyProgress" mode="query"></mat-progress-bar>
+                  <img class="historyCloseBtn" (click)="abortJob(history.buildHistoryId)" src="../../assets/genral_icons/delete.png" style="cursor: pointer; margin: 2px; vertical-align: sub;" />
+                </span>
+              </div>
+            </mat-action-row>
+          </mat-expansion-panel>
+        </mat-accordion>
+      </a>
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <mat-sidenav-content id="sidenav-content">
+      <div class="sidenav-content customScroll">
+          <app-reports *ngIf="isReportsSelected"></app-reports>
+          <router-outlet></router-outlet>
+      </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+
+<!-- portfoliio menu -->
+<mat-menu #portfolio="matMenu" id="myMenu">
+  <ul *ngFor="let portfolio of portfolios" class="list-unstyled">
+    <button mat-menu-item id="myMenuBtn" (click)="selectPortfolioName(portfolio)"> {{portfolio.portfolio_name}} </button>
+  </ul>
+</mat-menu>
+
+<!-- account menu -->
+<mat-menu #account="matMenu" id="myMenu">
+  <ul *ngFor="let account of accounts" class="list-unstyled">
+    <button mat-menu-item id="myMenuBtn" (click)="selectAccountName(account)"> {{account.accountName}} </button>
+  </ul>
+</mat-menu>
+
+<!-- projects menu -->
+<mat-menu #project="matMenu" id="myMenu">
+  <ul *ngFor="let project of projects" class="list-unstyled">
+    <button mat-menu-item id="myMenuBtn" (click)="selectProjectName(project)"> {{project.projectName}} </button>
+  </ul>
+</mat-menu>
+
+

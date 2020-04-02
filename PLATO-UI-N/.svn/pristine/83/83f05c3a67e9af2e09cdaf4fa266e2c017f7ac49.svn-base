@@ -1,0 +1,49 @@
+#modalContainer {
+    width: 30%;
+}
+
+.example-form {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+}
+
+.example-full-width {
+    width: 100%;
+}
+
+.my_table_bar /deep/ .mat-icon-button {
+    width: 28px !important;
+}
+
+.checkboxAlign {
+    text-align: center;
+}
+
+.checkboxAlign mat-checkbox {}
+
+.headerAlign {
+    text-align: left;
+}
+
+.plato_table td {
+    padding: 4px;
+    font-size: 12px !important;
+}
+
+.plato_table th {
+    padding: 4px;
+    font-size: 14px !important;
+}
+
+.my_table_bar {
+  position: fixed;
+  z-index: 2;
+}
+
+.top_bar_button {
+  position: fixed;
+  right: 10px;
+  float: right;
+  top: 48px;
+}

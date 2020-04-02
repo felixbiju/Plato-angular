@@ -1,0 +1,163 @@
+#myNavbar {
+    background-color: transparent;
+    background-position: center;
+    margin: 0px;
+    /* border-bottom: 1px solid #ddd !important; */
+    border-radius: 0;
+    background-image: none;
+    border: none;
+}
+
+.fixed-top {
+    width: 100%;
+    height: 50px;
+    background: red;
+    position: fixed;
+    top: 0;
+}
+
+#myNavbar .navbar-toggle,
+#myNavbar .navbar-toggle:hover,
+#myNavbar .navbar-toggle:focus,
+#myNavbar .navbar-collapse #myNavbar .navbar-form {
+    border-color: #178acc;
+    background-color: black;
+}
+
+@media only screen and (max-width: 767px) {
+    #myNavbar .navbar-collapse {
+        position: absolute;
+        z-index: 8000;
+        width: 100%;
+        border: 1px solid #000;
+        border-left: none;
+        border-right: none;
+    }
+}
+
+#plato-logo {
+    cursor: pointer;
+    max-height: 35px;
+    /* width: 131.6px; */
+    margin-top: -4.5px;
+}
+
+#customer-logo {
+    max-height: 35px;
+    width: 80px;
+    padding: 0px;
+    margin: 9% 0;
+}
+
+#leftMenu {
+    padding-top: 0.6%;
+    padding-left: 60%;
+}
+
+.menuIcon {
+    color: transparent;
+    background-color: transparent;
+    border: none;
+    line-height: 50px;
+    margin-top: 9px;
+}
+
+#myMenu {
+    padding: 0;
+    width: fit-content;
+}
+
+#menuBtn {
+    margin-right: 20px;
+}
+
+#myMenuBtn1 {
+    padding: 0 auto;
+}
+
+.plato-nav {
+    float: right;
+}
+
+@media only screen and (max-width: 767px) {
+  .plato-nav {
+      margin: 0;
+      display: inline-grid;
+  }
+
+  ::ng-deep .mat-menu-panel {
+      min-width: fit-content !important;
+      margin-top: 35px !important;
+  }
+}
+
+/* ANIMATED X */
+
+.navbar-toggle.x .icon-bar:nth-of-type(1) {
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+    -webkit-transform-origin: 10% 10%;
+    -ms-transform-origin: 10% 10%;
+    transform-origin: 10% 10%;
+}
+
+.navbar-toggle.x .icon-bar:nth-of-type(2) {
+    opacity: 0;
+    filter: alpha(opacity=0);
+}
+
+.navbar-toggle.x .icon-bar:nth-of-type(3) {
+    -webkit-transform: rotate(-45deg);
+    -ms-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+    -webkit-transform-origin: 10% 90%;
+    -ms-transform-origin: 10% 90%;
+    transform-origin: 10% 90%;
+}
+
+/* ANIMATED X COLLAPSED */
+
+.navbar-toggle.x.collapsed .icon-bar:nth-of-type(1) {
+    -webkit-transform: rotate(0);
+    -ms-transform: rotate(0);
+    transform: rotate(0);
+}
+
+.navbar-toggle.x.collapsed .icon-bar:nth-of-type(2) {
+    opacity: 1;
+    filter: alpha(opacity=100);
+}
+
+.navbar-toggle.x.collapsed .icon-bar:nth-of-type(3) {
+    -webkit-transform: rotate(0);
+    -ms-transform: rotate(0);
+    transform: rotate(0);
+}
+
+/* END ANIMATED X */
+
+a:hover {
+    text-decoration: none;
+    color: black;
+}
+
+/* myRoleMenuBtn */
+
+button.active {
+    border: 1px solid rgb(15, 15, 17);
+}
+
+#userInfo {
+    display: inline-block;
+    width: fit-content;
+    float: right;
+    padding: 0 5px;
+    margin-right: 10px;
+}
+
+#userInfo p {
+    text-align: right;
+    color: white;
+    font-size: 13px;
+}

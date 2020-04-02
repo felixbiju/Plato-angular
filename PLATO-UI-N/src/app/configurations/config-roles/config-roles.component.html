@@ -1,0 +1,117 @@
+<div id="createTask" class="w3-modal modal-sm action-popup">
+  <div class="w3-modal-content w3-animate-zoom" id="modalContainer">
+    <header class="w3-container">
+      <a onclick="document.getElementById('createTask').style.display='none'" (click) = "rolename.value = ''" class="modal-close" (click)="resetForm(myform)">
+        <svg viewBox="0 0 24 24">
+          <path d="M19 6.41l-1.41-1.41-5.59 5.59-5.59-5.59-1.41 1.41 5.59 5.59-5.59 5.59 1.41 1.41 5.59-5.59 5.59 5.59 1.41-1.41-5.59-5.59z"
+          />
+          <path d="M0 0h24v24h-24z" fill="none" />
+        </svg>
+      </a>
+      <h2>Create Role</h2>
+    </header>
+
+    <form #myform="ngForm">
+      <div class="w3-container modal-content customScroll text-center">
+          <mat-form-field class="example-full-width" style="margin:30px 0">
+        <input matInput placeholder="Enter Role Name" [(ngModel)]="roleName" value="" required id="rolename" name="rolename" #rolename="ngModel">
+        <div *ngIf="rolename.errors && (rolename.dirty || rolename.touched)" class="alert alert-danger">
+          <div [hidden]="!rolename.errors.required">
+            Role name is required!
+          </div>
+        </div>
+      </mat-form-field>
+    </div>
+      <footer class="w3-container">
+        <button mat-raised-button  class="btn mat-raised-button mat-primary mat-raised-cancel-button" color="primary" onclick="document.getElementById('createTask').style.display='none'" (click) = "rolename.value = ''" (click)="resetForm(myform)">
+          Cancel
+        </button>
+        <button mat-raised-button  class="btn mat-raised-button mat-primary" color="primary" [disabled]="myform.invalid" onclick="document.getElementById('createTask').style.display='none'" (click)="createRole()">
+          Create
+        </button>
+      </footer>
+    </form>
+  </div>
+</div>
+
+<div id="updateTask" class="w3-modal modal-sm action-popup">
+    <div class="w3-modal-content w3-animate-zoom" id="modalContainer">
+      <header class="w3-container">
+        <a onclick="document.getElementById('updateTask').style.display='none'" class="modal-close">
+          <svg viewBox="0 0 24 24">
+            <path d="M19 6.41l-1.41-1.41-5.59 5.59-5.59-5.59-1.41 1.41 5.59 5.59-5.59 5.59 1.41 1.41 5.59-5.59 5.59 5.59 1.41-1.41-5.59-5.59z"
+            />
+            <path d="M0 0h24v24h-24z" fill="none" />
+          </svg>
+        </a>
+        <h2>Update Role</h2>
+      </header>
+      <div class="w3-container modal-content customScroll text-center">
+          <mat-form-field class="example-full-width" style="margin:30px 0">
+          <input matInput placeholder="Enter Role Name" [(ngModel)]="role_name" value="">
+        </mat-form-field>
+      </div>
+      <footer class="w3-container">
+          <button mat-raised-button  class="btn mat-raised-button mat-primary" color="primary" onclick="document.getElementById('updateTask').style.display='none'">
+            Cancel
+          </button>
+          <button mat-raised-button  class="btn mat-raised-button mat-primary" color="primary" onclick="document.getElementById('updateTask').style.display='none'" (click)="updateRole()">
+            Update
+          </button>
+        </footer>
+    </div>
+</div>
+
+<mat-card class="config-card">
+  <mat-card-header>
+    <mat-card-title class="config-card-heading"> Roles Configuration </mat-card-title>
+    <mat-card-actions class="actions">
+      <ng-container *ngFor="let component of screenPermission">
+        <button mat-icon-button
+        matTooltip="Create new Role"
+        onclick="document.getElementById('createTask').style.display='block'"
+        *ngIf="component.name === 'Create Role'"
+        [ngStyle]="{'opacity':component.checked ? '0.5' : '1' }"
+        [disabled]="component.checked">
+          <img title="Create new Role" src="../../assets/genral_icons/plus.png" style="cursor: pointer; margin: 5px; vertical-align: sub;" />
+        </button>
+      </ng-container>
+      <ng-container *ngFor="let component of screenPermission">
+        <button mat-icon-button
+        matTooltip="Edit existing Role"
+        onclick="document.getElementById('updateTask').style.display='block'"
+        *ngIf="component.name === 'Edit Role'"
+        [ngStyle]="{'opacity':!isEditShow || component.checked ? '0.5' : '1' }"
+        [disabled]="!isEditShow || component.checked">
+          <img title="Edit existing Role" src="../../assets/genral_icons/edit.png" style="cursor: pointer; margin: 5px; vertical-align: sub;" />
+        </button>
+      </ng-container>
+      <ng-container *ngFor="let component of screenPermission">
+        <button mat-icon-button
+        matTooltip="Delete existing Role"
+        (click)="deleteRole()"
+        *ngIf="component.name === 'Delete Role'"
+        [ngStyle]="{'opacity':!isDeleteShow || component.checked ? '0.5' : '1' }"
+        [disabled]="!isDeleteShow || component.checked">
+          <img title="Delete existing Role" src="../../assets/genral_icons/bin_sm.png" style="cursor: pointer; margin: 5px; vertical-align: sub;" />
+        </button>
+      </ng-container>
+    </mat-card-actions>
+  </mat-card-header>
+  <mat-card-content>
+    <div class="table-responsive plato_table">
+      <table class="table">
+        <tr id="tableHead">
+          <th id="selectAll" class="centerAlign"> <mat-checkbox [(ngModel)]="selectAll" (click)="isAllSelected()"></mat-checkbox> </th>
+          <th class="leftAlign"> Role Name </th>
+        </tr>
+
+        <tr *ngFor="let role of roles" id="rowNo">
+            <td class="centerAlign"> <mat-checkbox [ngModel]="check2" (click) = 'isChecked(role.roleId,role.roleName)'>  </mat-checkbox> </td>
+          <td class="leftAlign"> {{role.roleName}} </td>
+        </tr>
+      </table>
+    </div>
+  </mat-card-content>
+</mat-card>
+

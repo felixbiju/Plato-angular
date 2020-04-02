@@ -1,0 +1,136 @@
+<div id="reportpopup" class="w3-modal modal-lg">
+  <div class="w3-modal-content w3-animate-zoom" id="modalContainer">
+    <header class="w3-container">
+      <a (click)="closeTableAndModal()" class="modal-close closebutton">
+        <svg viewBox="0 0 24 24">
+          <path d="M19 6.41l-1.41-1.41-5.59 5.59-5.59-5.59-1.41 1.41 5.59 5.59-5.59 5.59 1.41 1.41 5.59-5.59 5.59 5.59 1.41-1.41-5.59-5.59z"
+          />
+          <path d="M0 0h24v24h-24z" fill="none" />
+        </svg>
+      </a>
+      <h2 class="headingfont">Security Testing Report - (IBM Appscan)</h2>
+    </header>
+    <div class="w3-container modal-content">
+      <ng-container *ngFor="let eachtooldata of ToolData">
+        <ng-container *ngFor="let endtoends of eachtooldata.ToolReport ">
+          <ng-container *ngFor="let endtoend of endtoends | tool">
+            <ng-container *ngIf="endtoend.key === 'tabular_data'">
+              <!-- <table class="plato_table" id="{{endtoends.chart_name}}" style="display: none;width: 97%;">
+                <tr>
+                  <th  *ngFor="let endtoendth of endtoend.value[0] |tool ">{{endtoendth.key}}</th>
+                </tr>
+                <tr *ngFor="let data of endtoend.value; let i = index"  >
+                  <td *ngFor="let endtoendtd of endtoend.value[i] |tool " width="10%">{{endtoendtd.value}}</td>
+                </tr>
+            </table> -->
+            <table class="plato_table" id="{{endtoends.chart_name}}" style="display: none;">
+                <tr>
+                  <th  *ngFor="let endtoendth of endtoend.value[0] |tool; let i=index; ">
+                      <ng-container *ngFor="let endtoendth of endtoend.value[0][i] |tool ">{{endtoendth.key}}</ng-container>
+                  </th>
+                </tr>
+                <tr *ngFor="let data of endtoend.value; let j = index"  >
+                  <td *ngFor="let endtoendtdhead of endtoend.value[0] |tool; let k=index; " width="10%">
+                      <ng-container *ngFor="let endtoendth of endtoend.value[j][k] |tool ">{{endtoendth.value}}</ng-container>
+                  </td>
+                </tr>
+            </table>
+          </ng-container>
+        </ng-container>
+        </ng-container>
+      </ng-container>
+    </div>
+    <footer class="w3-container">
+        <!-- <button class="btn mat-raised-button mat-primary" color="primary" mat-raised-button onclick="document.getElementById('confirmDelete01').style.display='none'">
+          Cancel
+        </button> -->
+        <button class="btn mat-raised-button mat-primary" color="primary" mat-raised-button
+        onclick="document.getElementById('reportpopup').style.display='none'" (click)="hidetable()">
+          Close
+        </button>
+      </footer>
+  </div>
+</div>
+
+<!-- stacktrace popup -->
+<div id="stacktraceModal" class="w3-modal modal-lg myE2EModal">
+  <div class="w3-modal-content w3-animate-zoom" id="modalContainer">
+    <header class="w3-container">
+      <a (click)="closeModal('stacktraceModal')" class="modal-close closebutton">
+        <svg viewBox="0 0 24 24">
+          <path d="M19 6.41l-1.41-1.41-5.59 5.59-5.59-5.59-1.41 1.41 5.59 5.59-5.59 5.59 1.41 1.41 5.59-5.59 5.59 5.59 1.41-1.41-5.59-5.59z" />
+          <path d="M0 0h24v24h-24z" fill="none" />
+        </svg>
+      </a>
+      <h2 class="headingfont">{{error_details.tool_name |uppercase}} - StcakTrace</h2>
+    </header>
+    <div class="w3-container modal-content customScroll">
+      <div class="mySatckTraceDiv">
+        <p> <strong>Error Name: </strong> {{error_details?.name}}</p>
+        <p> <strong>Error Type: </strong>
+          {{error_details?.type}}
+          <span *ngIf="error_details?.type === null">null</span>
+        </p>
+        <p> <strong>Error Code: </strong> {{error_details?.code}}</p>
+        <p> <strong>Error Message: </strong> {{error_details?.msg}}</p>
+        <p> <strong>StackTrace: </strong> {{error_details?.stackTrace}}</p>
+      </div>
+    </div>
+    <footer class="w3-container">
+      <button class="btn mat-raised-button mat-primary" color="primary" mat-raised-button onclick="document.getElementById('reportpopup').style.display='none'"
+        (click)="closeModal('stacktraceModal')">
+        Close
+      </button>
+    </footer>
+  </div>
+</div>
+
+<!-- GRAPH -->
+<div class="col-md-12 my-tool-card" *ngFor="let eachtooldata of ToolData">
+  <div class="myheading">
+    <span class="mytitle"> {{eachtooldata.tool_name}}</span>
+    <img class="min-max_button"
+    (click)="hideandshowreport(eachtooldata.tool_name)"
+    src="../../assets/genral_icons/minus_sm.png"
+     />
+  </div>
+  <mat-card *ngIf="eachtooldata?.error_body" class="error-card">
+    <mat-card-header>
+      <mat-card-title>
+        <img alt="error" src="../../../../assets/genral_icons/error.png" class="img-responsive" />
+        Errors during the execution
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <p *ngIf="eachtooldata.error_body?.code !== null"><strong>Error Code:</strong> {{eachtooldata.error_body?.code}}</p>
+      <p *ngIf="eachtooldata.error_body?.name !== null"><strong>Error Name:</strong> {{eachtooldata.error_body?.name}}</p>
+      <p *ngIf="eachtooldata.error_body?.type !== null"><strong>Error Type:</strong> {{eachtooldata.error_body?.type}}</p>
+      <p *ngIf="eachtooldata.error_body?.type === null"><strong>Error Type:</strong> {{'null'}}</p>
+      <p *ngIf="eachtooldata.error_body?.message !== null"><strong>Message:</strong> {{eachtooldata.error_body?.error_message}}</p>
+      <p class="note-para" (click)="openModal('stacktraceModal', eachtooldata)">
+        Click here for complete error details or goto log files / console.
+      </p>
+    </mat-card-content>
+  </mat-card>
+  <div id="{{eachtooldata.tool_name}}" style="display:block">
+    <mat-card
+    *ngFor="let endtoends of eachtooldata.ToolReport "
+    class="row securitycard"
+    onclick="document.getElementById('reportpopup').style.display='block'"
+    (click)="showtable(endtoends.chart_name)">
+      <h6 class="graphfont"> {{endtoends.chart_name}}</h6>
+      <canvas
+      baseChart
+      [data]="endtoends.chart_values"
+      [labels]="endtoends.chart_labels"
+      [chartType]="pieChartType"
+      [colors]="pieChartColors"
+      [legend]="piechartlegend"
+      [options]="piechartoptions"
+      (chartHover)="chartHovered($event)"
+      (chartClick)="chartClicked($event)">
+      </canvas>
+    </mat-card>
+  </div>
+</div>
+

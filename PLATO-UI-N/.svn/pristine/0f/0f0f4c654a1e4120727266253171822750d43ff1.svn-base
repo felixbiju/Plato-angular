@@ -1,0 +1,400 @@
+<div class='breadcrumbs'>
+  <div class='inner'>
+    <ul class='cf'>
+      <li>
+        <a id="menuBtn" [matMenuTriggerFor]="portfolio">
+          <span>{{selectedPortfolioName}} </span>
+          <span *ngIf="selectedPortfolioName === ''">Select Portfolio</span>
+        </a>
+      </li>
+      <li>
+        <a id="menuBtn" [matMenuTriggerFor]="account" *ngIf="!(selectedPortfolioName === '')">
+          <span> {{selectedAccountName}} </span>
+          <span *ngIf="selectedAccountName === '' && !(selectedPortfolioName === '')"> Select Account</span>
+        </a>
+      </li>
+      <li>
+        <a id="menuBtn" [matMenuTriggerFor]="project" *ngIf="!(selectedAccountName === '')" class="active">
+          <span> {{selectedProjectName}} </span>
+          <span *ngIf="selectedProjectName === ''">Select Project</span>
+          <!-- <span *ngIf="selectedProjectName === '' && !(selectedAccountName === '')"> Select Project</span> -->
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<!-- add build modal -->
+<div id="id01" class="w3-modal modal-sm action-popup">
+  <div class="w3-modal-content w3-animate-zoom">
+    <header class="w3-container">
+      <a onclick="document.getElementById('id01').style.display='none'" (click)="resetForm(myform)" class="modal-close">
+        <svg viewBox="0 0 24 24">
+          <path d="M19 6.41l-1.41-1.41-5.59 5.59-5.59-5.59-1.41 1.41 5.59 5.59-5.59 5.59 1.41 1.41 5.59-5.59 5.59 5.59 1.41-1.41-5.59-5.59z"
+          />
+          <path d="M0 0h24v24h-24z" fill="none" />
+        </svg>
+      </a>
+      <h2>Add New Build</h2>
+    </header>
+    <form #myform="ngForm">
+      <div class="w3-container modal-content text-center">
+        <mat-form-field class="input-full-width">
+          <input (click)="enter($event)" (mouseleave)="leave($event,newBuild.jenkins_job_name)" matInput placeholder="Enter Name" [(ngModel)]="newBuild.jenkins_job_name"
+            required value="" name="buildname" id="buildname" #buildname="ngModel">
+          <div *ngIf="buildname.errors && (buildname.dirty || buildname.touched)" class="alert alert-danger">
+            <div [hidden]="!buildname.errors.required">
+              Build name is required!
+            </div>
+          </div>
+        </mat-form-field>
+        <p *ngIf="(showsubjob)">{{showsubjob}} build already exist give another name</p>
+        <mat-form-field class="input-full-width">
+          <input matInput placeholder="Description" [(ngModel)]="newBuild.description" value="" required name="builddescription" id="builddescription"
+            #builddescription="ngModel">
+          <div *ngIf="builddescription.errors && (builddescription.dirty || builddescription.touched)" class="alert alert-danger">
+            <div [hidden]="!builddescription.errors.required">
+              Build description is required!
+            </div>
+          </div>
+        </mat-form-field>
+      </div>
+      <footer class="w3-container">
+        <button class="btn mat-raised-button mat-primary" color="primary" mat-raised-button [disabled]="myform.invalid" (click)="createBuild()">
+          Add
+        </button>
+      </footer>
+    </form>
+  </div>
+</div>
+
+<!-- confirmation modal -->
+<div id="confirmBox01" class="w3-modal modal-sm action-popup">
+  <div class="w3-modal-content w3-animate-zoom">
+    <header class="w3-container">
+      <a onclick="document.getElementById('confirmBox01').style.display='none'" class="modal-close">
+        <svg viewBox="0 0 24 24">
+          <path d="M19 6.41l-1.41-1.41-5.59 5.59-5.59-5.59-1.41 1.41 5.59 5.59-5.59 5.59 1.41 1.41 5.59-5.59 5.59 5.59 1.41-1.41-5.59-5.59z"
+          />
+          <path d="M0 0h24v24h-24z" fill="none" />
+        </svg>
+      </a>
+      <h2>Confirmation Required</h2>
+    </header>
+    <div class="w3-container modal-content customScroll text-center">
+      <p style="margin: 20px auto;"> Are you sure that you want to delete this build?</p>
+    </div>
+    <footer class="w3-container">
+      <button class="btn mat-raised-button mat-primary mat-raised-cancel-button" color="primary" mat-raised-button onclick="document.getElementById('confirmBox01').style.display='none'">
+        Cancel
+      </button>
+      <button class="btn mat-raised-button mat-primary" color="primary" mat-raised-button (click)="deleteBuild()" onclick="document.getElementById('confirmBox01').style.display='none'">
+        Ok
+      </button>
+    </footer>
+  </div>
+</div>
+<div class="container-fluid dashboard customScroll">
+  <div class="row" style="padding: 10px;">
+    <div class="col-md-12" *ngIf="isAcocuntSelected">
+      <div class="col-md-3" style="padding: 2px; margin-bottom: 5px;" (click)="showTotalBuilds()">
+          <mat-card class="count-card" style="background-color: #33b5e5!important;">
+              <mat-card-header>
+                <div mat-card-avatar class="total-count">
+                    <img class="img-responsive count-icon" src="../../assets/genral_icons/total_icon.png">
+                </div>
+                <div class="count-container">
+                  <h1>{{ buildCount.total_modules }}</h1>
+                  <h4>Total Builds</h4>
+                </div>
+              </mat-card-header>
+          </mat-card>
+      </div>
+      <div class="col-md-3" style="padding: 2px;  margin-bottom: 5px;" (click)="showCompletedBuilds()">
+          <mat-card class="count-card" style="background-color: #00C851!important;">
+              <mat-card-header>
+                <div mat-card-avatar class="completed-count">
+                    <img class="img-responsive count-icon" src="../../assets/genral_icons/completed_icon.png">
+                </div>
+                <div class="count-container">
+                  <h1>{{ buildCount.completed }}</h1>
+                  <h4>Completed Builds</h4>
+                </div>
+              </mat-card-header>
+          </mat-card>
+      </div>
+      <div class="col-md-3" style="padding: 2px; margin-bottom: 5px;" (click)="showInProgressBuilds()">
+          <mat-card class="count-card" style="background-color: #ffbb33!important;">
+              <mat-card-header>
+                <div mat-card-avatar class="onhold-count">
+                    <img class="img-responsive count-icon" src="../../assets/genral_icons/onhold_icon.png">
+                </div>
+                <div class="count-container">
+                  <h1>{{ buildCount.inProgress }}</h1>
+                  <h4>In-Progress Builds</h4>
+                </div>
+              </mat-card-header>
+          </mat-card>
+      </div>
+      <div class="col-md-3" style="padding: 2px; margin-bottom: 5px;" (click)="showFailedBuilds()">
+          <mat-card class="count-card" style="background-color: #ff4444!important;">
+              <mat-card-header>
+                <div mat-card-avatar class="failed-count">
+                    <img class="img-responsive count-icon" src="../../assets/genral_icons/failed_icon.png">
+                </div>
+                <div class="count-container">
+                  <h1>{{ buildCount.failed }}</h1>
+                  <h4>Failed Builds</h4>
+                </div>
+              </mat-card-header>
+          </mat-card>
+      </div>
+
+      <!-- list -->
+      <div class="col-md-12" style="padding : 2px;">
+          <mat-card style=" min-height: 70vh; padding: 5px; margin-top: 5px; margin-bottom: 27px;">
+            <table *ngIf="isAcocuntSelected">
+                <tr>
+                  <th >
+                    <img class="addBuildBtn" title="Add New Build" src="../../assets/genral_icons/plus.png"
+                      onclick="document.getElementById('id01').style.display='block'"/>
+                  </th>
+                  <th colspan="2" style="width : 200px;">
+                    <input class="form-control form-control-sm search_input" type="text"
+                    placeholder="Filter by name..."
+                    [(ngModel)]="filterText">
+                  </th>
+                  <th style="text-align: left; width: 250px;">Creation Date</th>
+                  <th style="text-align: left; width: 350px;">Last Execution</th>
+                  <th>Status</th>
+                  <!-- <ng-container *ngIf="tools">
+                      <th *ngFor="let tool of tools" style="text-decoration: none; cursor:pointer;max-width: 60px;word-break: break-all;" id="{{tool}}">{{tool}}</th>
+                  </ng-container> -->
+                <th>Actions</th>
+              </tr>
+              <ng-container *ngFor="let module of (modules |tablefilter: filterText); let i = index; let isOdd=odd; let isEven=even;" >
+                <tr [class.odd]="isOdd" [class.even]="isEven">
+                  <td *ngIf="(module.moduleLastExecution)">
+                    <div id="nav-icon3" [class.open]="dropDown[i]" (click) = "toggleDropDown(module,i)">
+                      <span></span>
+                      <span></span>
+                      <span></span>
+                      <span></span>
+                    </div>
+                  </td>
+
+                  <td *ngIf="(!module.moduleLastExecution)">
+                    <div id="nav-icon3" class="open" style="cursor:auto;">
+                      <span></span>
+                      <span></span>
+                      <span></span>
+                      <span></span>
+                    </div>
+                  </td>
+                  <td style="width: 10px;">
+                      <div *ngIf="(module.moduleStatus| lowercase) === 'completed'"   title="completed"           class="Status" style="background-color: #00C851"></div>
+                      <div *ngIf="(module.moduleStatus| lowercase) === 'failed'"      title="failed"              class="Status" style="background-color: #ff4444"></div>
+                      <div *ngIf="(module.moduleStatus| lowercase) === 'aborted'"     title="aborted"             class="Status" style="background-color: #aaa6a6"></div>
+                      <div *ngIf="(module.moduleStatus| lowercase) === 'in-progress'" title="in-progress"         class="Status" style="background-color: #ffbb33"></div>
+                      <div *ngIf="(module.moduleStatus| lowercase) === 'on-hold'"     title="on-hold"             class="Status" style="background-color: #cccbcb"></div>
+                      <div *ngIf="(!module.moduleStatus)"                             title="Record not-present"  class="Status" style="background-color: #868686"></div>
+                  </td>
+                  <td style="min-width: 100px;" (click)="selectModule($event, module)"
+                  matTooltipPosition="below">
+                    <a>{{ module.moduleName }}</a>
+                  </td>
+                  <td style="text-align: left;">
+                    {{ module?.moduleCreationDate | date:'EEEE, MMMM d, y, h:mm:ss a' }}</td>
+                  <td *ngIf="(module.moduleLastExecution)" style="text-align: left;"><b >{{ module?.moduleLastExecution | dateDiff }}</b> on {{ module?.moduleLastExecution | date:'EEEE, MMMM d, y, h:mm:ss a' }}</td>
+                  <td *ngIf="(!module.moduleLastExecution)" style="text-align: left;">---- Not Executed ----</td>
+                  <td *ngIf="(module?.moduleStatus === 'Completed')" style="text-align: center;">
+                    <div class="status-chip" style="background-color: #00C851;">
+                      {{module?.moduleStatus}}
+                    </div>
+                  </td>
+                  <td *ngIf="(module?.moduleStatus === 'Failed')" style="text-align: center;">
+                    <div class="status-chip" style="background-color: #FF4444;">
+                      {{module?.moduleStatus}}
+                    </div>
+                  </td>
+                  <td *ngIf="(module?.moduleStatus === 'Aborted')" style="text-align: center;">
+                    <div class="status-chip" style="background-color: #aaa6a6;">
+                      {{module?.moduleStatus}}
+                    </div>
+                  </td>
+                  <td *ngIf="(module?.moduleStatus === 'In-Progress')" style="text-align: center;">
+                    <div class="status-chip" style="background-color: #FFBB33;">
+                      {{module?.moduleStatus}}
+                    </div>
+                  </td>
+                  <td *ngIf="(module?.moduleStatus === undefined)" style="text-align: center;">
+                    <div class="status-chip" style="background-color: #aaa6a6;">
+                      {{'--NA--'}}
+                    </div>
+                  </td>
+
+
+                  <!-- <ng-container *ngIf="module.toolsStatus">
+                      <td *ngFor="let status of module.toolsStatus.pertoolStatus">
+                          <div *ngIf="(status |lowercase) === 'passed'"      title="passed"       class="Status" style="margin: 0px auto; background-color: #00C851"></div>
+                          <div *ngIf="(status |lowercase) === 'failed'"      title="failed"       class="Status" style="margin: 0px auto; background-color: #ff4444"></div>
+                          <div *ngIf="(status |lowercase) === 'aborted'"     title="aborted"      class="Status" style="margin: 0px auto; background-color: #aaa6a6"></div>
+                          <div *ngIf="(status |lowercase) === 'in-progress' || (status |lowercase) === 'in_progress'" title="in-progress"  class="Status" style="margin: 0px auto; background-color: #ffbb33"></div>
+                          <div *ngIf="(status |lowercase) === 'no-run'"      title="not-executed" class="Status" style="margin: 0px auto; background-color: #cccbcb"></div>
+                          <div *ngIf="(status |lowercase) === 'not-present'" title="not-present"  class="Status" style="margin: 0px auto; background-color: #cccbcb"></div>
+                          <div *ngIf="(status |lowercase) === ''"            title="Record not-present"  class="Status" style="margin: 0px auto; background-color: #cccbcb"></div>
+                      </td>
+                  </ng-container> -->
+                  <!-- <ng-container *ngIf="!module.toolsStatus">
+                      <td *ngFor="let tool of tools">
+                          <div title="Previous records not present in MongoDB"  class="Status" style="margin: 0px auto; background-color: #868686"></div>
+                      </td>
+                  </ng-container> -->
+                  <td style="text-align: center;">
+                    <ng-container *ngFor="let component of screenPermission">
+                      <button mat-icon-button style="margin: 0 -5px;"
+                      *ngIf="component.name === 'Execute Build'"
+                      [ngStyle]="{'opacity':component.checked ? '0.5' : '1' }"
+                      [disabled]="component.checked">
+                        <img style="width: 24px;" title="Run Build" (click)="executeBuild(module)"  src="../../assets/genral_icons/play.png"/>
+                      </button>
+                      <button mat-icon-button style="margin: 0 -5px;"
+                      *ngIf="component.name === 'Show Report'"
+                      [ngStyle]="{'opacity':component.checked ? '0.5' : '1' }"
+                      [disabled]="component.checked">
+                        <img style="width: 24px;" title="Latest Report" (click)="recentReport(module)" src="../../assets/genral_icons/page_sm.png"/>
+                      </button>
+                      <button mat-icon-button style="margin: 0 -5px;"
+                      *ngIf="component.name === 'Delete Build'"
+                      [ngStyle]="{'opacity':component.checked ? '0.5' : '1' }"
+                      [disabled]="component.checked">
+                        <img style="width: 24px;" title="Delete Build" (click)="setModuleid(module.module_Id)" onclick="document.getElementById('confirmBox01').style.display='block'" src="../../assets/genral_icons/bin_sm.png"/>
+                      </button>
+                    </ng-container>
+                  </td>
+                  <ng-template #blankTD>
+                      <td ></td>
+                  </ng-template>
+                </tr>
+                <tr>
+                  <td colspan="1000" id="{{ module.moduleName }}" class="dropdown"  style="display : none; text-align: center; background: rgb(232,239,242);">
+                      <div class="col-md-12 center-block" style=" padding-left: 0px;  padding-right: 0px; ">
+                        <!-- this will be used when fetching live data -->
+                        <div *ngIf="showLoader" class="loader"></div>
+                        <!-- this will be used when fetching live data -->
+
+                        <!-- trend graph -->
+                        <div class="col-md-12" style="padding-top: 15px; padding-bottom: 15px;" *ngIf="!showLoader">
+                            <mat-card class="card-table" style="padding: 0px;">
+                                <table>
+                                  <tr>
+                                    <th> </th>
+                                    <th> </th>
+                                    <ng-container  *ngFor="let tool of trendChartTools">
+                                        <th style="color: black; font-weight: 600; max-width: 150px; word-break: break-all;">{{tool}}</th>
+                                    </ng-container>
+
+                                  </tr>
+                                  <ng-container *ngFor="let build of trendChartBuilds; let i = index;">
+                                    <tr>
+                                      <td>
+                                          <div id="nav-icon3" [class.open]="level2dropDown[i]" (click) = "toggleLevel2DropDown(build.buildHistoryId, i)">
+                                            <span></span>
+                                            <span></span>
+                                            <span></span>
+                                            <span></span>
+                                          </div>
+                                      </td>
+                                      <td [ngClass]="(build.buildHistoryId === defaultMiniGraph) ? 'col_selected' : 'not_selected'">#{{build.num}}</td>
+                                      <td class="tableTD" *ngFor="let check of build.buildStatus" style="min-width: 75px;">
+                                        <div *ngIf="(check |lowercase) === 'passed'"      title="passed"       class="Status-drilldown" style="margin: 0px auto; background-color: #00C851"></div>
+                                        <div *ngIf="(check |lowercase) === 'failed'"      title="failed"       class="Status-drilldown" style="margin: 0px auto; background-color: #ff4444"></div>
+                                        <div *ngIf="(check |lowercase) === 'aborted'"     title="aborted"      class="Status-drilldown" style="margin: 0px auto; background-color: #aaa6a6"></div>
+                                        <div *ngIf="(check |lowercase) === 'in-progress' || (Status-drilldown |lowercase) === 'in_progress'" title="in-progress"  class="Status-drilldown" style="margin: 0px auto; background-color: #ffbb33"></div>
+                                        <div *ngIf="(check |lowercase) === 'no-run'"      title="not-executed" class="Status-drilldown" style="margin: 0px auto; background-color: #cccbcb"></div>
+                                        <div *ngIf="(check |lowercase) === 'not-present'" title="not-present"  class="Status-drilldown" style="margin: 0px auto; background-color: #cccbcb"></div>
+                                        <div *ngIf="(check |lowercase) === ''"            title="Record not-present"  class="Status-drilldown" style="margin: 0px auto; background-color: #cccbcb"></div>
+                                      </td>
+                                    </tr>
+                                    <tr>
+                                      <td colspan="1000" id="{{build.buildHistoryId}}" [ngClass]="(build.buildHistoryId === defaultMiniGraph) ? 'level2dropdown-open' : 'level2dropdown-close'" class="level2dropdown">
+                                        <ng-container>
+                                          <ng-container *ngFor="let report of lastReport">
+                                            <ng-container *ngIf="(report.chart_values)">
+                                              <div *ngIf="(report.chartType === 'pie')" class="col-md-2">
+                                                  <mat-card class="mini-card-pie">
+                                                      <p>{{ report.tool_name }}</p>
+                                                      <mat-card-content>
+                                                          <canvas *ngIf="(!report.chartColor)" baseChart
+                                                            [data]="report.chart_values"
+                                                            [labels]="report.chart_labels"
+                                                            [chartType]="report.chartType"
+                                                            [colors]="ChartColors"
+                                                            [legend]="false"
+                                                            [options]="chartoptions">
+                                                          </canvas>
+                                                      </mat-card-content>
+                                                  </mat-card>
+                                              </div>
+                                              <div *ngIf="(report.chartType === 'bar')" class="col-md-2">
+                                                  <mat-card class="mini-card-bar">
+                                                      <p>{{ report.tool_name }}</p>
+                                                      <mat-card-content>
+                                                          <canvas *ngIf="(report.chartColor)" baseChart
+                                                            [data]="report.chart_values"
+                                                            [labels]="report.chart_labels"
+                                                            [chartType]="report.chartType"
+                                                            [colors]="report.chartColor"
+                                                            [options]="barChartoptions">
+                                                          </canvas>
+                                                          <canvas *ngIf="(!report.chartColor)" baseChart
+                                                            [data]="report.chart_values"
+                                                            [labels]="report.chart_labels"
+                                                            [chartType]="report.chartType"
+                                                            [colors]="ChartColors"
+                                                            [options]="barChartoptions">
+                                                          </canvas>
+                                                      </mat-card-content>
+                                                  </mat-card>
+                                              </div>
+                                            </ng-container>
+                                          </ng-container>
+                                        </ng-container>
+                                      </td>
+                                    </tr>
+                                  </ng-container>
+                                </table>
+                            </mat-card>
+                        </div>
+                      </div>
+                  </td>
+                </tr>
+              </ng-container>
+            </table>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- portfoliio menu -->
+<mat-menu #portfolio="matMenu" id="myMenu">
+  <ul *ngFor="let portfolio of portfolios" class="list-unstyled">
+    <button mat-menu-item id="myMenuBtn" (click)="selectPortfolioName(portfolio)"> {{portfolio.portfolio_name}} </button>
+  </ul>
+</mat-menu>
+
+<!-- account menu -->
+<mat-menu #account="matMenu" id="myMenu">
+  <ul *ngFor="let account of accounts" class="list-unstyled">
+    <button mat-menu-item id="myMenuBtn" (click)="selectAccountName(account)"> {{account.accountName}} </button>
+  </ul>
+</mat-menu>
+
+<!-- projects menu -->
+<mat-menu #project="matMenu" id="myMenu">
+  <ul *ngFor="let project of projects" class="list-unstyled">
+    <button mat-menu-item id="myMenuBtn" (click)="selectProjectName(project)"> {{project.projectName}} </button>
+  </ul>
+</mat-menu>

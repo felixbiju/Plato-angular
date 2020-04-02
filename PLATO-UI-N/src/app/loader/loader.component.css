@@ -1,0 +1,16 @@
+#spinner {
+  background-color: transparent;
+  background-image: none;
+  margin: 0 auto;
+}
+
+.myLoader mat-progress-bar {
+  display: block;
+  height: 5px;
+  overflow: hidden;
+  position: relative;
+  transform: translateZ(0);
+  transition: opacity 250ms linear;
+  width: 23%;
+  margin: 0px auto;
+}

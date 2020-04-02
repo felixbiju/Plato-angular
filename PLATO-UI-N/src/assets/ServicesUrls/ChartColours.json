@@ -1,0 +1,123 @@
+{"linchartColors":[
+    { 
+      "backgroundColor": "rgba(0, 204, 0,0.1)",
+      "borderColor": "#009900",
+      "pointBackgroundColor": "#006600",
+      "pointBorderColor": "#99ff99",
+      "pointHoverBackgroundColor": "#99ff99",
+      "pointHoverBorderColor":"#009900"
+    },
+    { 
+      "backgroundColor": "rgba(255, 26, 26,0.1)",
+      "borderColor": "#ff1a1a",
+      "pointBackgroundColor": "#cc0000",
+      "pointBorderColor": "#ffb3b3",
+      "pointHoverBackgroundColor": "#ffb3b3",
+      "pointHoverBorderColor":"#ff1a1a"
+    },
+    { 
+      "backgroundColor": "rgba(64, 64, 64,0.1)",
+      "borderColor": "rgba(148,159,177,1)",
+      "pointBackgroundColor": "rgba(148,159,177,1)",
+      "pointBorderColor": "#fff",
+      "pointHoverBackgroundColor": "#fff",
+      "pointHoverBorderColor":"rgba(148,159,177,0.8)"
+    }
+  ],
+  "pieChartColors": [
+    {
+      "backgroundColor": ["rgb(130, 227, 164)","rgb(237, 88, 99)","rgb(156, 204, 221)"],
+      "borderColor":"white"
+    }
+  ],
+  "barChartColors" : [
+    { 
+      "backgroundColor": "rgb(0,200,81)",
+      "borderColor": "rgb(0,200,81)",
+      "pointBackgroundColor": "rgb(0,200,81)",
+      "pointBorderColor": "rgb(0,200,81)",
+      "pointHoverBackgroundColor": "rgb(0,200,81)",
+      "pointHoverBorderColor":"rgb(0,200,81)"
+    },{ 
+      "backgroundColor": "rgb(255,68,68)",
+      "borderColor": "rgb(255,68,68)",
+      "pointBackgroundColor": "rgb(255,68,68)",
+      "pointBorderColor": "rgb(255,68,68)",
+      "pointHoverBackgroundColor": "rgb(255,68,68)",
+      "pointHoverBorderColor":"rgb(255,68,68)"
+    },{ 
+      "backgroundColor": "rgb(51,181,229)",
+      "borderColor": "rgb(51,181,229)",
+      "pointBackgroundColor": "rgb(51,181,229)",
+      "pointBorderColor": "rgb(51,181,229)",
+      "pointHoverBackgroundColor": "rgb(51,181,229)",
+      "pointHoverBorderColor":"rgb(51,181,229)"
+    }
+  ],
+  "trendChartColors": [
+    { 
+      "backgroundColor": "transparent",
+      "borderColor": "#00aeff",
+      "pointBackgroundColor": "#00aeff",
+      "pointBorderColor": "#00aeff",
+      "pointHoverBackgroundColor": "#00aeff",
+      "pointHoverBorderColor":"#00aeff"
+    },
+    { 
+      "backgroundColor": "transparent",
+      "borderColor": "#ff8b4b",
+      "pointBackgroundColor": "#ff8b4b",
+      "pointBorderColor": "#ff8b4b",
+      "pointHoverBackgroundColor": "#ff8b4b",
+      "pointHoverBorderColor":"#ff8b4b"
+    },
+    { 
+      "backgroundColor": "transparent",
+      "borderColor": "#ff7781",
+      "pointBackgroundColor": "#ff7781",
+      "pointBorderColor": "#ff7781",
+      "pointHoverBackgroundColor": "#ff7781",
+      "pointHoverBorderColor":"#ff7781"
+    },
+    { 
+      "backgroundColor": "transparent",
+      "borderColor": "#c595ff",
+      "pointBackgroundColor": "#c595ff",
+      "pointBorderColor": "#c595ff",
+      "pointHoverBackgroundColor": "#c595ff",
+      "pointHoverBorderColor":"#c595ff"
+    },
+    { 
+      "backgroundColor": "transparent",
+      "borderColor": "#7ea4ff",
+      "pointBackgroundColor": "#7ea4ff",
+      "pointBorderColor": "#7ea4ff",
+      "pointHoverBackgroundColor": "#7ea4ff",
+      "pointHoverBorderColor":"#7ea4ff"
+    },
+    { 
+      "backgroundColor": "transparent",
+      "borderColor": "#5c9fff",
+      "pointBackgroundColor": "#5c9fff",
+      "pointBorderColor": "#5c9fff",
+      "pointHoverBackgroundColor": "#5c9fff",
+      "pointHoverBorderColor":"#5c9fff"
+    },
+    { 
+      "backgroundColor": "transparent",
+      "borderColor": "#998aff",
+      "pointBackgroundColor": "#998aff",
+      "pointBorderColor": "#998aff",
+      "pointHoverBackgroundColor": "#998aff",
+      "pointHoverBorderColor":"#998aff"
+    },
+    { 
+      "backgroundColor": "transparent",
+      "borderColor": "#cd6de9",
+      "pointBackgroundColor": "#cd6de9",
+      "pointBorderColor": "#cd6de9",
+      "pointHoverBackgroundColor": "#cd6de9",
+      "pointHoverBorderColor":"#cd6de9"
+    }
+  ]
+}

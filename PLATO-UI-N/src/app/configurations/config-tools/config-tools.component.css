@@ -1,0 +1,307 @@
+#modalContainer {
+    width: 60%;
+}
+
+.customScroll {
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+#modal {
+    background-color: #103E5F !important;
+    color: white;
+}
+
+#reportConfigCard {
+    display: inline-block;
+    margin: 1% 1%;
+    /* min-height: 450px !important; */
+    overflow: auto;
+}
+
+#reportConfigCardHeader {
+    display: -webkit-inline-box;
+    display: unset !important;
+    width: 100%;
+    font-family: "Segoe UI SemiBold", Verdana, sans-serif, Arial;
+    font-size: 15px;
+}
+
+#reportConfigCardContent {
+    text-align: left;
+}
+
+#reportConfigCardFooter {
+    display: inline-flex;
+    margin: 0 auto;
+}
+
+.example-form {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+}
+
+.example-full-width {
+    width: 95%;
+}
+
+.modal-body {
+    max-height: calc(100vh - 310px);
+    overflow-y: auto;
+}
+
+.leftAlign {
+    text-align: left;
+}
+
+.centerAlign {
+    text-align: center;
+}
+
+#checkPointList {
+    cursor: pointer;
+}
+
+#reportConfigCardContent /deep/ .mat-list .mat-list-item .mat-list-item-content {
+    display: unset !important;
+    flex-direction: row;
+    align-items: center;
+    box-sizing: border-box;
+    height: 15px;
+    padding: 0 16px;
+    position: relative;
+}
+
+#checkPointList /deep/ .mat-list-item-content {
+    height: 15px !important;
+    display: block !important;
+    padding: 0px 0;
+    /* line-height: 37px; */
+}
+
+#reportConfigCardContent /deep/ .list-group-item {
+    padding: 5px 15px !important
+}
+
+.plato_table {
+  margin-left: 5px;
+  margin-top: 80px;
+}
+
+.plato_table td {
+    padding: 4px;
+    font-size: 12px !important;
+}
+.plato_table th {
+    padding: 4px;
+    font-size: 14px !important;
+}
+
+#updateCheckPoint .mat-form-field {
+    width: 25%;
+}
+
+#reportConfigCardContent .mat-form-field {
+    width: 28%;
+}
+
+#reportConfigCardHeader /deep/ .mat-icon-button {
+    width: 25px !important;
+}
+
+.card {
+    float: left;
+    width: 23%;
+    padding: .75rem;
+    margin-bottom: 2rem;
+    border: 0;
+    position: relative;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    background-color: #fff;
+    border: 1px solid rgba(0, 0, 0, .125);
+    border-radius: .25rem;
+    height: 275px;
+}
+
+.checkPointCards {
+    width: 100%;
+}
+
+.checkPointCards .list-group {
+    display: inline-grid;
+    width: 100%;
+}
+
+.checkPointCards .list-group .list-group-item {
+    padding: 0px 10px !important;
+    line-height: 40px;
+    height: 40px;
+}
+
+.checkPointCards .list-group .list-group-item mat-icon {
+    vertical-align: middle;
+}
+
+.checkPointCards .list-group .list-group-item span {
+    font-family: "Segoe UI Light", Verdana, sans-serif, Arial;
+    font-size: 15px;
+}
+
+.top_bar {
+    width: 100%;
+    border-bottom: 1px solid #ccc;
+    min-height: 65px;
+    height: auto !important;
+    line-height: 75px;
+    background-color: #f1f1f1;
+    padding: 0px 20px;
+    border-top: 1px solid #ccc;
+    margin-bottom: 10px;
+}
+@media only screen and (max-width: 768px) {
+    .plato_table{
+    float: left;
+    clear: both;
+    margin-top: 20px;
+  }
+}
+
+
+.top_bar .mat-select {
+    font-family: "Segoe UI Light", Verdana, sans-serif, Arial !important;
+    font-size: 15px !important;
+}
+
+/deep/ .mat-select-panel {
+    margin-top: 50px !important;
+}
+
+/deep/ mat-option {
+    border: 1px solid #ccc;
+    margin-top: 1px;
+    border-left: 0;
+    border-right: 0;
+    margin-bottom: 1px;
+    background-color: transparent !important;
+}
+
+/deep/ .mat-form-field {
+    font-family: "Segoe UI Light", Verdana, sans-serif, Arial !important;
+    font-size: 15px !important;
+    margin: 0 10px;
+}
+
+/* #modalContainer1 /deep/ .modal-content {
+    height: 350px;
+    overflow-y: auto;
+    min-height: 350px;
+} */
+
+#modalContainer1 /deep/ .mat-list-option {
+    border: 1px solid #ccc;
+    border-left: none;
+    border-right: none;
+    margin-bottom: 1px;
+}
+
+.search_bar {
+    border: 1px solid rgba(9, 76, 128, 0.56);
+    margin: 0px !important;
+    margin-bottom: 5px !important;
+    padding: 0px;
+}
+
+::placeholder {
+    font-family: 'Segoe UI Light', Verdana, sans-serif, Arial;
+    color: white;
+    opacity: 1;
+    /* Firefox */
+}
+
+:-ms-input-placeholder {
+    /* Internet Explorer 10-11 */
+    font-family: 'Segoe UI Light', Verdana, sans-serif, Arial;
+    color: white;
+    opacity: 1;
+}
+
+:-ms-input-placeholder {
+    /* Microsoft Edge */
+    font-family: 'Segoe UI Light', Verdana, sans-serif, Arial;
+    color: white;
+    opacity: 1;
+}
+
+.search_bar .search_input {
+    background-color: #094c80;
+    border: none;
+    color: white;
+    font-family: 'Segoe UI Light', Verdana, sans-serif, Arial;
+    height: 30px;
+    padding: 5px 10px;
+    font-size: 15px;
+    line-height: 1.5;
+    border-radius: 0px;
+}
+
+/* to make modal bigger in size */
+
+/* .modal-lg {
+    padding: 2% !important;
+}
+
+.modal-lg .modal-content {
+    height: 450px !important;
+} */
+
+.modal-lg .w3-modal-content {
+    width: 100% !important;
+}
+
+.row.myScreenRow1 {
+    display: inline-flex;
+    width: stretch;
+    margin: 0px auto !important;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: 5px;
+}
+
+mat-card.col-sm-3.myCard1 {
+    border-right: 0.2px solid #ccc;
+    border-left: 0.2px solid #ccc;
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    padding: 0px;
+    min-width: fit-content;
+    /* max-width: 200px; */
+}
+
+mat-card-header.myCardHeader1 {
+    padding: 0px;
+    margin: 0px auto;
+    border-bottom: 1px solid #ccc;
+    text-align: center;
+    justify-content: center;
+    background: #f1f1f1;
+}
+
+mat-card-title.myCardTitle1 {
+    font-size: 15px;
+    font-weight: 300;
+    margin: 3px auto;
+    white-space: nowrap;
+}
+
+mat-card-content.myCardContent1 {
+    padding: 10px;
+}
