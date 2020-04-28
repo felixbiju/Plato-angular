@@ -1,5 +1,0 @@
-<div class="text-center myLoader" id="spinner">
-  <h1 style="color:rgb(112, 56, 56);">Please wait...</h1>
-  <mat-progress-bar mode="indeterminate"></mat-progress-bar>
-  <!-- <mat-spinner id="spinner"></mat-spinner> -->
-</div>

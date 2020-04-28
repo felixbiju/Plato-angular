@@ -1,7 +1,0 @@
-<div class="myTabs">
-  <mat-tab-group #tabGroup (selectedTabChange)="tabChanged($event)">
-    <span *ngFor="let tab of formattedTabData |reverseSort: 'order'">
-      <mat-tab label="{{tab.name |uppercase}}"></mat-tab>
-    </span>
-  </mat-tab-group>
-</div>
